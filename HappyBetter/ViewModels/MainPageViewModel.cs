@@ -86,6 +86,8 @@ namespace HappyBetter.ViewModels
                 DatesList.Remove(deleteDateTime);
                 return true;
             }
+
+            return false;
         }
 
 

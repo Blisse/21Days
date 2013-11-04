@@ -72,12 +72,22 @@ namespace HappyBetter
 
         private void ViewEntryMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-
+            var menuItem = sender as MenuItem;
+            if (menuItem != null && menuItem.DataContext is DateTime)
+            {
+                var goToDateTime = (DateTime)menuItem.DataContext;
+                EntryPage.Navigate(goToDateTime);
+            }
         }
 
         private void DeleteEntryMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-
+            var menuItem = sender as MenuItem;
+            if (menuItem != null && menuItem.DataContext is DateTime)
+            {
+                var dateTimeToDelete = (DateTime)menuItem.DataContext;
+                App.ViewModelLocator.MainPage.DeleteFromDatesList(dateTimeToDelete);
+            }
         }
     }
 }
