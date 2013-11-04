@@ -1,0 +1,120 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="HappyBetter.Views.EntryPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True"
+    DataContext="{Binding EntryPage, Source={StaticResource Locator}}">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="0" Margin="12,0,12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <phone:Pivot x:Name="DailyEntryPivot" Grid.Row="2" DataContext="{Binding DailyEntry}">
+                <phone:Pivot.HeaderTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" 
+                                   FontSize="20" FontWeight="Bold"/>
+                    </DataTemplate>
+                </phone:Pivot.HeaderTemplate>
+                <phone:PivotItem Header="Gratitude x 3">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <phone:LongListSelector x:Name="GratitudesEntriesLongListSelector" ItemsSource="{Binding GratitudeEntriesList}">
+                            <phone:LongListSelector.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Background="#333333" Margin="0,5,0,5" DataContext="{Binding}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <CheckBox Grid.Column="0" IsChecked="{Binding Path=Description, Converter={StaticResource ObjectToBooleanConverter}}"/>
+                                        <TextBox Grid.Column="1" Height="Auto" TextWrapping="Wrap" 
+                                                 Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=Explicit}" 
+                                                 TextChanged="TextBoxUpdateBindingSource_OnTextChanged"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </phone:LongListSelector.ItemTemplate>
+                        </phone:LongListSelector>
+                    </Grid>
+                </phone:PivotItem>
+                <phone:PivotItem Header="Positive">
+                    <Grid Background="#333333" Margin="0,5,0,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Height="Auto" TextWrapping="Wrap" 
+                                 Text="{Binding JournalEntry, Mode=TwoWay, UpdateSourceTrigger=Explicit}" 
+                                 TextChanged="TextBoxUpdateBindingSource_OnTextChanged"/>
+                    </Grid>
+                </phone:PivotItem>
+                <phone:PivotItem Header="Meditate">
+                    <Grid Background="#333333" Margin="0,5,0,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <CheckBox Grid.Column="0" IsHitTestVisible="False"
+                                  IsChecked="{Binding Path=MeditationEntry, Converter={StaticResource ObjectToBooleanConverter}}"/>
+                        <TextBox Grid.Column="1" Height="Auto" TextWrapping="Wrap"
+                                 Text="{Binding Path=MeditationEntry, Mode=TwoWay, UpdateSourceTrigger=Explicit}" 
+                                 TextChanged="TextBoxUpdateBindingSource_OnTextChanged"/>
+                    </Grid>
+                </phone:PivotItem>
+                <phone:PivotItem Header="Exercise">
+                    <Grid Background="#333333" Margin="0,5,0,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <CheckBox Grid.Column="0" IsHitTestVisible="False"
+                                  IsChecked="{Binding Path=ExerciseEntry, Converter={StaticResource ObjectToBooleanConverter}}"/>
+                        <TextBox Grid.Column="1" Height="Auto" TextWrapping="Wrap" 
+                                 Text="{Binding ExerciseEntry, Mode=TwoWay, UpdateSourceTrigger=Explicit}" 
+                                 TextChanged="TextBoxUpdateBindingSource_OnTextChanged"/>
+                    </Grid>
+                </phone:PivotItem>
+                <phone:PivotItem Header="Kindness">
+                    <Grid Background="#333333" Margin="0,5,0,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <CheckBox Grid.Column="0" IsHitTestVisible="False"
+                                  IsChecked="{Binding Path=ActOfKindnessEntry, Converter={StaticResource ObjectToBooleanConverter}}"/>
+                        <TextBox Grid.Column="1" Height="Auto" TextWrapping="Wrap" 
+                                 Text="{Binding ActOfKindnessEntry, Mode=TwoWay, UpdateSourceTrigger=Explicit}" 
+                                 TextChanged="TextBoxUpdateBindingSource_OnTextChanged"/>
+                    </Grid>
+                </phone:PivotItem>
+            </phone:Pivot>
+            
+        </Grid>
+    </Grid>
+
+</phone:PhoneApplicationPage>
