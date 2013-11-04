@@ -96,8 +96,13 @@
     <Compile Include="Common\ObservableSetCollection.cs" />
     <Compile Include="Common\ProgrammaticDatePicker.cs" />
     <Compile Include="Common\StorageManager.cs" />
+    <Compile Include="Common\TextStateUtil.cs" />
     <Compile Include="Converters\DateStringToStringConverter.cs" />
     <Compile Include="Converters\ObjectToBooleanConverter.cs" />
+    <Compile Include="Converters\TextToColorConverter.cs" />
+    <Compile Include="CustomControls\ProgressTextBox.xaml.cs">
+      <DependentUpon>ProgressTextBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -128,6 +133,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="CustomControls\ProgressTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -215,7 +224,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CustomControls\" />
     <Folder Include="Exceptions\" />
     <Folder Include="Messages\" />
   </ItemGroup>

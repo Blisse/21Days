@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
-using HappyBetter.Views;
 using Microsoft.Phone.Controls;
 
-namespace HappyBetter
+namespace HappyBetter.Views
 {
     public partial class MainPage : PhoneApplicationPage
     {

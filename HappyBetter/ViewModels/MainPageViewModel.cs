@@ -51,7 +51,7 @@ namespace HappyBetter.ViewModels
 
         public Boolean AddToDatesList(DateTime enterDateTime)
         {
-            var dictionary = DataManager.Instance.GetDailyEntriesData();
+            var dictionary = DataManager.Instance.GetDailyEntriesData() ?? new Dictionary<DateTime, DailyEntry>();
 
             if (dictionary.ContainsKey(enterDateTime))
             {

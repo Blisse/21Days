@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="HappyBetter.MainPage"
+    x:Class="HappyBetter.Views.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -13,7 +13,8 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True"
-    DataContext="{Binding MainPage, Source={StaticResource Locator}}">
+    DataContext="{Binding MainPage, Source={StaticResource Locator}}"
+    Background="{StaticResource ApplicationBackgroundColor}">
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False">
@@ -37,7 +38,6 @@
                 <phone:Pivot.TitleTemplate>
                     <DataTemplate>
                         <TextBlock FontWeight="SemiBold" FontSize="60"
-                           Foreground="{StaticResource ForegroundOrange}"
                            TextWrapping="Wrap" Text="Happy+Better"/>
                     </DataTemplate>
                 </phone:Pivot.TitleTemplate>
@@ -100,7 +100,7 @@
                     </Grid>
                 </phone:PivotItem>
                 <phone:PivotItem Header="what">
-
+                    
                 </phone:PivotItem>
             </phone:Pivot>
         </Grid>
