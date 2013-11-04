@@ -4,7 +4,7 @@
   <Languages xmlns="">
     <Language code="en" />
   </Languages>
-  <App xmlns="" ProductID="{baec25f5-f153-4999-8e4c-703fd20ab26f}" Title="21 Days" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Blisse" Description="21 day routine to happier, better work. Based off of Shawn Achor's TEDX Talk, &quot;The happy secret to better work&quot;." Publisher="Blisse" PublisherID="{663ea81a-a35e-45f5-b7d0-bcf3dac14a85}">
+  <App xmlns="" ProductID="{baec25f5-f153-4999-8e4c-703fd20ab26f}" Title="21 Days" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Blisse" Description="21 day routine to happier, better work. Inspired by Shawn Achor's TEDX Talk, &quot;The happy secret to better work&quot;." Publisher="Blisse" PublisherID="{663ea81a-a35e-45f5-b7d0-bcf3dac14a85}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
