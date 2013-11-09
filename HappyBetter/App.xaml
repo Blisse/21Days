@@ -7,27 +7,52 @@
              d1p1:Ignorable="d" 
              xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-             xmlns:converters="clr-namespace:HappyBetter.Converters">
+             xmlns:converters="clr-namespace:HappyBetter.Converters"
+             xmlns:primitives="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone">
     
     <!--Application Resources-->
     <Application.Resources>
         <local:LocalizedStrings xmlns:local="clr-namespace:HappyBetter" x:Key="LocalizedStrings" />
         <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:HappyBetter.ViewModels" />
 
-        <SolidColorBrush x:Key="ApplicationBackgroundColor" Color="#2A363B"/>
-        <SolidColorBrush x:Key="ForegroundLightGrey" Color="#E9E9E9"/>
-        <SolidColorBrush x:Key="ForegroundGrey" Color="#BCBCBC"/>
+        <Color x:Key="ColorLightGray">#E9E9E9</Color>
+        <Color x:Key="ColorGray">#BCBCBC</Color>
+        <Color x:Key="ColorDarkGray">#424242</Color>
+        <Color x:Key="ColorBlack">#1A1A1A</Color>
+        <Color x:Key="ColorFadedBlack">#333333</Color>
+        <Color x:Key="ColorOrange">#FF9900</Color>
+        <Color x:Key="ColorGreen">#25A860</Color>
+        <Color x:Key="ColorFadedGreen">#C3FF68</Color>
+        <Color x:Key="ColorRed">#B11623</Color>
+        <Color x:Key="ColorFadedRed">#CC5D4C</Color>
+        
+
+        <SolidColorBrush x:Key="ForegroundLightGray" Color="{StaticResource ColorLightGray}"/>
+        <SolidColorBrush x:Key="ForegroundGray" Color="{StaticResource ColorGray}"/>
+        <SolidColorBrush x:Key="ForegroundDarkGray" Color="{StaticResource ColorDarkGray}"/>
+        <SolidColorBrush x:Key="ForegroundOrange" Color="{StaticResource ColorOrange}"/>
+        <SolidColorBrush x:Key="ForegroundGreen" Color="{StaticResource ColorGreen}"/>
+        <SolidColorBrush x:Key="ForegroundRed" Color="{StaticResource ColorRed}"/>
+
+        <SolidColorBrush x:Key="BackgroundRed" Color="{StaticResource ColorFadedRed}"/>
+        <SolidColorBrush x:Key="BackgroundGreen" Color="{StaticResource ColorGreen}"/>
+        <SolidColorBrush x:Key="BackgroundBlack" Color="{StaticResource ColorFadedBlack}"/>
+
+        <SolidColorBrush x:Key="ApplicationBackgroundColor" Color="{StaticResource ColorBlack}"/>
 
 
-
-        <SolidColorBrush x:Key="BackgroundCompleted" Color="#99B898"/>
-        <SolidColorBrush x:Key="BackgroundStarted" Color="#C79691"/>
-
-        <FontFamily x:Key="OpenSansFontFamily">/Assets/Fonts/OpenSans-Regular.ttf#Open Sans</FontFamily>
+        <FontFamily x:Key="OpenSans">/Assets/Fonts/OpenSans-Regular.ttf#Open Sans</FontFamily>
+        <FontFamily x:Key="NexaLight">/Assets/Fonts/Nexa Light.otf#Nexa Light</FontFamily>
+        <FontFamily x:Key="NexaBold">/Assets/Fonts/Nexa Bold.otf#Nexa Bold</FontFamily>
 
         <converters:DateStringToStringConverter x:Key="DateStringToStringConverter"/>
         <converters:ObjectToBooleanConverter x:Key="ObjectToBooleanConverter"/>
-        <converters:TextToColorConverter x:Key="TextToColorConverter"/>
+        <converters:EntryItemTextToBackgroundColorConverter x:Key="EntryItemTextToBackgroundColorConverter"/>
+        <converters:BooleanToEntryHeaderColorConverter x:Key="DailyEntryToEntryHeaderColorConverter"/>
+        <converters:TextCaseConverter x:Key="TextCaseConverter"/>
+        
+        
+        
         
         <Style x:Key="ButtonTiltEffectEnabledStyle" TargetType="Button">
             <Setter Property="Template">
@@ -48,8 +73,8 @@
             <Setter Property="Background" Value="{StaticResource PhoneTextBoxBrush}"/>
             <Setter Property="Foreground" Value="{StaticResource PhoneTextBoxForegroundBrush}"/>
             <Setter Property="BorderBrush" Value="{StaticResource PhoneTextBoxBrush}"/>
-            <Setter Property="SelectionBackground" Value="{StaticResource PhoneAccentBrush}"/>
-            <Setter Property="SelectionForeground" Value="{StaticResource PhoneTextBoxSelectionForegroundBrush}"/>
+            <Setter Property="SelectionBackground" Value="{StaticResource ApplicationBackgroundColor}"/>
+            <Setter Property="SelectionForeground" Value="{StaticResource ForegroundLightGray}"/>
             <Setter Property="BorderThickness" Value="{StaticResource PhoneBorderThickness}"/>
             <Setter Property="Padding" Value="2"/>
             <Setter Property="Template">
@@ -105,10 +130,10 @@
                                     <VisualState x:Name="Focused">
                                         <Storyboard>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="MainBorder">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneTextBoxEditBackgroundBrush}"/>
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Transparent"/>
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="MainBorder">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneTextBoxEditBorderBrush}"/>
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ForegroundLightGray}"/>
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -125,6 +150,73 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+
+        <Style x:Key="LightGrayPivotHeaderStyle" TargetType="primitives:PivotHeaderItem">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="0,0,8,5"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="primitives:PivotHeaderItem">
+                        <Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="SelectionStates">
+                                    <VisualState x:Name="Unselected"/>
+                                    <VisualState x:Name="Selected">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="contentPresenter"/>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.Foreground)" Storyboard.TargetName="contentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ForegroundLightGray}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ColorAnimation Duration="0" To="{StaticResource PhoneAccentColor}" Storyboard.TargetProperty="(Control.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="contentPresenter" d:IsOptimized="True"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentControl x:Name="contentPresenter" FontSize="40" FontFamily="{StaticResource NexaBold}" 
+                                            Foreground="{StaticResource ForegroundDarkGray}" 
+                                            ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                            Content="{TemplateBinding Content}" 
+                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                            Margin="{TemplateBinding Padding}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="LightGrayPivotStyle" TargetType="phone:Pivot">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <Grid/>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="phone:Pivot">
+                        <Grid HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid Background="{TemplateBinding Background}" Grid.RowSpan="3"/>
+                            <ContentControl ContentTemplate="{TemplateBinding TitleTemplate}" Content="{TemplateBinding Title}" HorizontalAlignment="Left" Margin="0,17,0,-7" Style="{StaticResource PivotTitleStyle}"/>
+                            <primitives:PivotHeadersControl x:Name="HeadersListElement" Grid.Row="1" Margin="0,0,0,-25" ItemContainerStyle="{StaticResource LightGrayPivotHeaderStyle}"/>
+                            <ItemsPresenter x:Name="PivotItemPresenter" Margin="{TemplateBinding Padding}" Grid.Row="2"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
     </Application.Resources>
     
   <Application.ApplicationLifetimeObjects>

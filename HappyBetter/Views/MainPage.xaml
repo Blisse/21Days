@@ -13,11 +13,32 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True"
+    shell:SystemTray.ForegroundColor="{StaticResource ColorOrange}"
+    shell:SystemTray.BackgroundColor="{StaticResource ColorBlack}"
     DataContext="{Binding MainPage, Source={StaticResource Locator}}"
     Background="{StaticResource ApplicationBackgroundColor}">
 
+    <phone:PhoneApplicationPage.Resources>
+        <Storyboard x:Name="ShowDatePickerGrid">
+            <DoubleAnimation
+                                    Storyboard.TargetName="HiddenDatePickerGrid"
+                                    Storyboard.TargetProperty="Height"
+                                    From="0.0" To="100.0" Duration="0:0:0.5"
+                                    AutoReverse="False"/>
+        </Storyboard>
+        <Storyboard x:Name="HideDatePickerGrid">
+            <DoubleAnimation
+                                    Storyboard.TargetName="HiddenDatePickerGrid"
+                                    Storyboard.TargetProperty="Height"
+                                    From="100.0" To="0.0" Duration="0:0:0.5"
+                                    AutoReverse="False"/>
+        </Storyboard>
+    </phone:PhoneApplicationPage.Resources>
+
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False">
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False" 
+                              ForegroundColor="{StaticResource ColorLightGray}" 
+                              BackgroundColor="{StaticResource ColorBlack}">
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/add.png" Text="Add Today" Click="AddTodayAppBar_OnClick"/>
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.calendar.png" Text="Add Date" Click="OpenDatePickerAppBar_OnClick"/>
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="Settings"/>
@@ -43,30 +64,14 @@
                 </phone:Pivot.TitleTemplate>
                 <phone:PivotItem Header="dates">
                     <Grid>
-                        <Grid.Resources>
-                            <Storyboard x:Name="ShowDatePickerGrid">
-                                <DoubleAnimation
-                                    Storyboard.TargetName="HiddenDatePickerGrid"
-                                    Storyboard.TargetProperty="Height"
-                                    From="0.0" To="100.0" Duration="0:0:0.5"
-                                    AutoReverse="False"/>
-                            </Storyboard>
-                            <Storyboard x:Name="HideDatePickerGrid">
-                                <DoubleAnimation
-                                    Storyboard.TargetName="HiddenDatePickerGrid"
-                                    Storyboard.TargetProperty="Height"
-                                    From="100.0" To="0.0" Duration="0:0:0.5"
-                                    AutoReverse="False"/>
-                            </Storyboard>
-                        </Grid.Resources>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
                             <ScrollViewer>
-                                <ItemsControl ItemsSource="{Binding DatesList}" >
-                                    <ItemsControl.ItemTemplate>
+                                <phone:LongListSelector ItemsSource="{Binding DatesList, Mode=OneWay, UpdateSourceTrigger=Default}" >
+                                    <phone:LongListSelector.ItemTemplate>
                                         <DataTemplate>
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
@@ -84,13 +89,13 @@
                                                 </toolkit:ContextMenuService.ContextMenu>
                                             </Grid>
                                         </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
+                                    </phone:LongListSelector.ItemTemplate>
+                                </phone:LongListSelector>
                             </ScrollViewer>
                         </Grid>
                         <Grid Grid.Row="1" x:Name="HiddenDatePickerGrid" Height="0">
                             <Button VerticalAlignment="Center" Style="{StaticResource ButtonTiltEffectEnabledStyle}" Click="AddDate_OnClick">
-                                <Grid Background="{StaticResource ForegroundGrey}" Margin="13,13,0,13" HorizontalAlignment="Left">
+                                <Grid Background="{StaticResource ForegroundGray}" Margin="13,13,0,13" HorizontalAlignment="Left">
                                     <TextBlock Text="Add Entry for a Date"
                                                Foreground="{StaticResource ApplicationBackgroundColor}"
                                                HorizontalAlignment="Center"/>

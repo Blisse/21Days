@@ -94,7 +94,7 @@ namespace HappyBetter.ViewModels
         /// <summary>
         /// The <see cref="DatesList" /> property's name.
         /// </summary>
-        public const string DatesListPropertyName = "DatesListPropertyKey";
+        public const string DatesListPropertyName = "DatesList";
 
         private ObservableCollection<DateTime> _datesList = new ObservableCollection<DateTime>();
 

@@ -98,8 +98,10 @@
     <Compile Include="Common\StorageManager.cs" />
     <Compile Include="Common\TextStateUtil.cs" />
     <Compile Include="Converters\DateStringToStringConverter.cs" />
+    <Compile Include="Converters\BooleanToEntryHeaderColorConverter.cs" />
     <Compile Include="Converters\ObjectToBooleanConverter.cs" />
-    <Compile Include="Converters\TextToColorConverter.cs" />
+    <Compile Include="Converters\TextCaseConverter.cs" />
+    <Compile Include="Converters\EntryItemTextToBackgroundColorConverter.cs" />
     <Compile Include="CustomControls\ProgressTextBox.xaml.cs">
       <DependentUpon>ProgressTextBox.xaml</DependentUpon>
     </Compile>
@@ -151,7 +153,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Fonts\OpenSans-Regular.ttf" />
+    <Content Include="Assets\Fonts\Nexa Bold.otf" />
+    <Content Include="Assets\Fonts\Nexa Light.otf" />
+    <Content Include="Assets\Fonts\OpenSans-Regular.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">

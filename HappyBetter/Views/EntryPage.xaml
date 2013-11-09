@@ -14,6 +14,8 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True"
+    shell:SystemTray.ForegroundColor="{StaticResource ColorOrange}"
+    shell:SystemTray.BackgroundColor="{StaticResource ColorBlack}"
     DataContext="{Binding EntryPage, Source={StaticResource Locator}}"
     Background="{StaticResource ApplicationBackgroundColor}">
 
@@ -22,31 +24,35 @@
     </phone:PhoneApplicationPage.Resources>
     
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False">
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False" 
+                              ForegroundColor="{StaticResource ColorLightGray}" 
+                              BackgroundColor="{StaticResource ColorBlack}">
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="Settings"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
     
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="{StaticResource ApplicationBackgroundColor}">
+    <Grid x:Name="LayoutRoot" Background="{StaticResource ApplicationBackgroundColor}" 
+          DataContext="{Binding DailyEntry}">
         
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="0" Margin="12,0,12,0">
+        <Grid x:Name="ContentPanel" Grid.Row="0" Margin="20">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <phone:Pivot x:Name="DailyEntryPivot" Grid.Row="2" DataContext="{Binding DailyEntry}">
-                <phone:Pivot.HeaderTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding}" 
-                                   FontSize="40" FontWeight="Bold"/>
-                    </DataTemplate>
-                </phone:Pivot.HeaderTemplate>
-                <phone:PivotItem Header="Gratitude x 3">
-                    <Grid>
+            <TextBlock Grid.Row="0" x:Name="EntryDateTimeKeyTextBlock" DataContext="{Binding EntryDateTimeKey, Converter={StaticResource DateStringToStringConverter}, ConverterParameter=D}"
+                       Text="{Binding Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"
+                       FontFamily="{StaticResource NexaBold}" FontSize="28"/>
+
+            <phone:Pivot x:Name="EntryPagePivot" Grid.Row="1" Style="{StaticResource LightGrayPivotStyle}"
+                         SelectionChanged="EntryPagePivot_OnSelectionChanged">
+                <phone:PivotItem>
+                    <phone:PivotItem.Header>
+                        <TextBlock DataContext="Gratitude x 3" Text="{Binding Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"></TextBlock>
+                    </phone:PivotItem.Header>
+                    <Grid HorizontalAlignment="Stretch">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
@@ -57,7 +63,7 @@
                                                 ItemsSource="{Binding GratitudeEntriesList}">
                             <phone:LongListSelector.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid Background="{Binding Path=Description, Converter={StaticResource TextToColorConverter}}" Margin="0,5,0,5" DataContext="{Binding}">
+                                    <Grid Background="{Binding Path=Description, Converter={StaticResource EntryItemTextToBackgroundColorConverter}}" DataContext="{Binding}">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="*"/>
@@ -65,7 +71,7 @@
 
                                         <CheckBox Grid.Column="0" IsHitTestVisible="False"
                                                   IsChecked="{Binding Path=Description, Converter={StaticResource ObjectToBooleanConverter}}"/>
-                                        <TextBox Grid.Column="1" Height="Auto" TextWrapping="Wrap" 
+                                        <TextBox Grid.Column="1" Height="Auto" TextWrapping="Wrap" Style="{StaticResource ThemedTextBoxStyle}"
                                                  Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=Explicit}" 
                                                  TextChanged="TextBoxUpdateBindingSource_OnTextChanged"/>
                                     </Grid>
@@ -74,8 +80,11 @@
                         </phone:LongListSelector>
                     </Grid>
                 </phone:PivotItem>
-                <phone:PivotItem Header="Positive">
-                    <Grid Background="{Binding Path=JournalEntry, Converter={StaticResource TextToColorConverter}}" Margin="0,5,0,5">
+                <phone:PivotItem>
+                    <phone:PivotItem.Header>
+                        <TextBlock DataContext="Positive" Text="{Binding Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
+                    </phone:PivotItem.Header>
+                    <Grid Background="{Binding JournalEntry, Converter={StaticResource EntryItemTextToBackgroundColorConverter}}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
@@ -85,8 +94,11 @@
                                  TextChanged="TextBoxUpdateBindingSource_OnTextChanged"/>
                     </Grid>
                 </phone:PivotItem>
-                <phone:PivotItem Header="Meditate">
-                    <Grid Background="{Binding Path=MeditationEntry, Converter={StaticResource TextToColorConverter}}" Margin="0,5,0,5">
+                <phone:PivotItem>
+                    <phone:PivotItem.Header>
+                        <TextBlock DataContext="Meditate" Text="{Binding Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
+                    </phone:PivotItem.Header>
+                    <Grid Background="{Binding Path=MeditationEntry, Converter={StaticResource EntryItemTextToBackgroundColorConverter}}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
@@ -99,8 +111,11 @@
                                  TextChanged="TextBoxUpdateBindingSource_OnTextChanged"/>
                     </Grid>
                 </phone:PivotItem>
-                <phone:PivotItem Header="Exercise">
-                    <Grid Background="{Binding Path=ExerciseEntry, Converter={StaticResource TextToColorConverter}}" Margin="0,5,0,5">
+                <phone:PivotItem>
+                    <phone:PivotItem.Header>
+                        <TextBlock DataContext="Exercise" Text="{Binding Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
+                    </phone:PivotItem.Header>
+                    <Grid Background="{Binding Path=ExerciseEntry, Converter={StaticResource EntryItemTextToBackgroundColorConverter}}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
@@ -113,8 +128,11 @@
                                  TextChanged="TextBoxUpdateBindingSource_OnTextChanged"/>
                     </Grid>
                 </phone:PivotItem>
-                <phone:PivotItem Header="Kindness">
-                    <Grid Background="{Binding Path=ActOfKindnessEntry, Converter={StaticResource TextToColorConverter}}" Margin="0,5,0,5">
+                <phone:PivotItem>
+                    <phone:PivotItem.Header>
+                        <TextBlock DataContext="Kindness" Text="{Binding Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
+                    </phone:PivotItem.Header>
+                    <Grid Background="{Binding Path=ActOfKindnessEntry, Converter={StaticResource EntryItemTextToBackgroundColorConverter}}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>

@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Windows;
 using GalaSoft.MvvmLight;
 
 namespace HappyBetter.Models
@@ -94,6 +97,26 @@ namespace HappyBetter.Models
                 _actOfKindnessEntry = value;
                 RaisePropertyChanged("ActOfKindnessEntry");
             }
+        }
+
+        public Boolean IsCompleted 
+        {
+            get
+            {
+                return IsDone(GratitudeEntriesList) && IsDone(JournalEntry) && IsDone(ExerciseEntry) && IsDone(MeditationEntry) &&
+                       IsDone(ActOfKindnessEntry);
+            }
+        }
+
+        public Boolean IsDone(ObservableCollection<GratitudeEntry> entries)
+        {
+            return GratitudeEntriesList.Count >= 3 &&
+                                      GratitudeEntriesList.Count(x => IsDone(x.Description)) >= 3;
+        }
+
+        public Boolean IsDone(String item)
+        {
+            return !String.IsNullOrWhiteSpace(item);
         }
     }
 
