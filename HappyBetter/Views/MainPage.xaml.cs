@@ -29,20 +29,6 @@ namespace HappyBetter.Views
             App.ViewModelLocator.MainPage.IsLoading = false;
         }
 
-        private void OpenDateDataButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            var b = sender as Button;
-            if (b != null)
-            {
-                var dc = b.DataContext;
-                if (dc is DateTime)
-                {
-                    var goToDateTime = (DateTime)dc;
-                    EntryPage.Navigate(goToDateTime);
-                }
-            }
-        }
-
         private void AddTodayAppBar_OnClick(object sender, EventArgs e)
         {
             App.ViewModelLocator.MainPage.IsLoading = true;
@@ -84,6 +70,20 @@ namespace HappyBetter.Views
             {
                 var dateTimeToDelete = (DateTime)menuItem.DataContext;
                 App.ViewModelLocator.MainPage.DeleteFromDatesList(dateTimeToDelete);
+            }
+        }
+
+        private void OpenEntryButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            if (button != null)
+            {
+                var entry = button.DataContext;
+                if (entry is DateTime)
+                {
+                    var goToDateTime = (DateTime)entry;
+                    EntryPage.Navigate(goToDateTime);
+                }
             }
         }
     }

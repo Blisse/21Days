@@ -14,7 +14,7 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True"
-    shell:SystemTray.ForegroundColor="{StaticResource ColorOrange}"
+    shell:SystemTray.ForegroundColor="{StaticResource ColorWhite}"
     shell:SystemTray.BackgroundColor="{StaticResource ColorBlack}"
     DataContext="{Binding EntryPage, Source={StaticResource Locator}}"
     Background="{StaticResource ApplicationBackgroundColor}">
