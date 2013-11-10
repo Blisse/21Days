@@ -70,6 +70,15 @@ namespace HappyBetter.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exercise you&apos;ve done today.
+        /// </summary>
+        public static string EntryExerciseInstructions {
+            get {
+                return ResourceManager.GetString("EntryExerciseInstructions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 3 x Gratitudes.
         /// </summary>
         public static string EntryGratitudeHeader {
@@ -79,7 +88,7 @@ namespace HappyBetter.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Three new things you&apos;re grateful for today.
+        ///   Looks up a localized string similar to Three new things you&apos;re grateful for.
         /// </summary>
         public static string EntryGratitudeInstructions {
             get {
@@ -97,6 +106,15 @@ namespace HappyBetter.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A positive experience you&apos;ve had.
+        /// </summary>
+        public static string EntryJournalInstructions {
+            get {
+                return ResourceManager.GetString("EntryJournalInstructions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Meditation.
         /// </summary>
         public static string EntryMeditationHeader {
@@ -106,11 +124,29 @@ namespace HappyBetter.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A couple minutes of relaxation.
+        /// </summary>
+        public static string EntryMeditationInstructions {
+            get {
+                return ResourceManager.GetString("EntryMeditationInstructions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Random Act of Kindness.
         /// </summary>
         public static string EntryRAOKHeader {
             get {
                 return ResourceManager.GetString("EntryRAOKHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Something happy for someone else.
+        /// </summary>
+        public static string EntryRAOKInstructions {
+            get {
+                return ResourceManager.GetString("EntryRAOKInstructions", resourceCulture);
             }
         }
         

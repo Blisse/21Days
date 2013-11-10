@@ -140,7 +140,19 @@
   <data name="EntryJournalHeader" xml:space="preserve">
     <value>Journal</value>
   </data>
+  <data name="EntryExerciseInstructions" xml:space="preserve">
+    <value>Exercise you've done today</value>
+  </data>
   <data name="EntryGratitudeInstructions" xml:space="preserve">
-    <value>Three new things you're grateful for today</value>
+    <value>Three new things you're grateful for</value>
+  </data>
+  <data name="EntryJournalInstructions" xml:space="preserve">
+    <value>A positive experience you've had</value>
+  </data>
+  <data name="EntryMeditationInstructions" xml:space="preserve">
+    <value>A couple minutes of relaxation</value>
+  </data>
+  <data name="EntryRAOKInstructions" xml:space="preserve">
+    <value>Something happy for someone else</value>
   </data>
 </root>
