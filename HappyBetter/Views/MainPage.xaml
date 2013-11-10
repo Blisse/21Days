@@ -21,17 +21,17 @@
     <phone:PhoneApplicationPage.Resources>
         <Storyboard x:Name="ShowDatePickerGrid">
             <DoubleAnimation
-                                    Storyboard.TargetName="HiddenDatePickerGrid"
-                                    Storyboard.TargetProperty="Height"
-                                    From="0.0" To="100.0" Duration="0:0:0.5"
-                                    AutoReverse="False"/>
+                Storyboard.TargetName="HiddenDatePickerGrid"
+                Storyboard.TargetProperty="Height"
+                From="0.0" To="100.0" Duration="0:0:0.5"
+                AutoReverse="False"/>
         </Storyboard>
         <Storyboard x:Name="HideDatePickerGrid">
             <DoubleAnimation
-                                    Storyboard.TargetName="HiddenDatePickerGrid"
-                                    Storyboard.TargetProperty="Height"
-                                    From="100.0" To="0.0" Duration="0:0:0.5"
-                                    AutoReverse="False"/>
+                Storyboard.TargetName="HiddenDatePickerGrid"
+                Storyboard.TargetProperty="Height"
+                From="100.0" To="0.0" Duration="0:0:0.5"
+                AutoReverse="False"/>
         </Storyboard>
     </phone:PhoneApplicationPage.Resources>
 
@@ -52,17 +52,22 @@
         <Grid x:Name="ContentPanel" Grid.Row="0" Margin="12,0,12,0">
 
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            
+            <TextBlock FontFamily="{StaticResource NexaBold}" FontSize="72" Margin="-1,0,0,-24">
+                <Run Text="{Binding LocalizedResources.MainTitleBegin, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"
+                       Foreground="{StaticResource ForegroundWhite}"/><!--
+                --><Run Text="{Binding LocalizedResources.MainTitleEnd, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"
+                       Foreground="{StaticResource ForegroundBlue}"/>
+            </TextBlock>
 
-            <phone:Pivot Grid.Row="0" SelectionChanged="MainPagePivot_OnSelectionChanged">
-                <phone:Pivot.TitleTemplate>
-                    <DataTemplate>
-                        <TextBlock FontWeight="SemiBold" FontSize="60"
-                           TextWrapping="Wrap" Text="Happy+Better"/>
-                    </DataTemplate>
-                </phone:Pivot.TitleTemplate>
-                <phone:PivotItem Header="dates">
+            <phone:Pivot Grid.Row="1" Style="{StaticResource LightGrayPivotStyle}">
+                <phone:PivotItem Style="{StaticResource PivotItemStyle}">
+                    <phone:PivotItem.Header>
+                        <TextBlock Text="{Binding LocalizedResources.MainDatesHeader, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
+                    </phone:PivotItem.Header>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -73,7 +78,7 @@
                                 <phone:LongListSelector ItemsSource="{Binding DatesList, Mode=OneWay, UpdateSourceTrigger=Default}" >
                                     <phone:LongListSelector.ItemTemplate>
                                         <DataTemplate>
-                                            <Grid>
+                                            <Grid Background="{Binding Converter={StaticResource MainPageDateTimeToBackgroundColorConverter}}" Margin="0,0,0,4">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="*"/>
                                                     <ColumnDefinition Width="Auto"/>
@@ -104,8 +109,15 @@
                         </Grid>
                     </Grid>
                 </phone:PivotItem>
-                <phone:PivotItem Header="what">
-                    
+                <phone:PivotItem Style="{StaticResource PivotItemStyle}">
+                    <phone:PivotItem.Header>
+                        <TextBlock Text="{Binding LocalizedResources.MainStatusHeader, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
+                    </phone:PivotItem.Header>
+                </phone:PivotItem>
+                <phone:PivotItem Style="{StaticResource PivotItemStyle}">
+                    <phone:PivotItem.Header>
+                        <TextBlock Text="{Binding LocalizedResources.MainInfoHeader, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
+                    </phone:PivotItem.Header>
                 </phone:PivotItem>
             </phone:Pivot>
         </Grid>

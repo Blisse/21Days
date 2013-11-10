@@ -39,10 +39,6 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="0,5,0,10"/>
         </Style>
-        
-        <Style x:Key="EntryPivotItemStyle" TargetType="phone:PivotItem">
-            <Setter Property="Margin" Value="0,28,0,0"/>
-        </Style>
     </phone:PhoneApplicationPage.Resources>
     
     
@@ -63,7 +59,7 @@
 
             <phone:Pivot x:Name="EntryPagePivot" Grid.Row="1" Style="{StaticResource LightGrayPivotStyle}"
                          SelectionChanged="EntryPagePivot_OnSelectionChanged">
-                <phone:PivotItem Style="{StaticResource EntryPivotItemStyle}">
+                <phone:PivotItem Style="{StaticResource PivotItemStyle}">
                     <phone:PivotItem.Header>
                         <TextBlock Text="{Binding LocalizedResources.EntryGratitudeHeader, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
                     </phone:PivotItem.Header>
@@ -96,7 +92,7 @@
                         </phone:LongListSelector>
                     </Grid>
                 </phone:PivotItem>
-                <phone:PivotItem Style="{StaticResource EntryPivotItemStyle}">
+                <phone:PivotItem Style="{StaticResource PivotItemStyle}">
                     <phone:PivotItem.Header>
                         <TextBlock Text="{Binding LocalizedResources.EntryJournalHeader, Source={StaticResource LocalizedStrings},  Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
                     </phone:PivotItem.Header>
@@ -119,7 +115,7 @@
                         </Grid>
                     </Grid>
                 </phone:PivotItem>
-                <phone:PivotItem Style="{StaticResource EntryPivotItemStyle}">
+                <phone:PivotItem Style="{StaticResource PivotItemStyle}">
                     <phone:PivotItem.Header>
                         <TextBlock Text="{Binding LocalizedResources.EntryMeditationHeader, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
                     </phone:PivotItem.Header>
@@ -145,7 +141,7 @@
                         </Grid>
                     </Grid>
                 </phone:PivotItem>
-                <phone:PivotItem Style="{StaticResource EntryPivotItemStyle}">
+                <phone:PivotItem Style="{StaticResource PivotItemStyle}">
                     <phone:PivotItem.Header>
                         <TextBlock Text="{Binding LocalizedResources.EntryExerciseHeader, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
                     </phone:PivotItem.Header>
@@ -171,7 +167,7 @@
                         </Grid>
                     </Grid>
                 </phone:PivotItem>
-                <phone:PivotItem Style="{StaticResource EntryPivotItemStyle}">
+                <phone:PivotItem Style="{StaticResource PivotItemStyle}">
                     <phone:PivotItem.Header>
                         <TextBlock Text="{Binding LocalizedResources.EntryRAOKHeader, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
                     </phone:PivotItem.Header>

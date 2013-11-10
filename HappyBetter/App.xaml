@@ -56,6 +56,7 @@
         <converters:ObjectToBooleanConverter x:Key="ObjectToBooleanConverter"/>
         <converters:EntryItemTextToBackgroundColorConverter x:Key="EntryItemTextToBackgroundColorConverter"/>
         <converters:BooleanToEntryHeaderColorConverter x:Key="DailyEntryToEntryHeaderColorConverter"/>
+        <converters:MainPageDateTimeToBackgroundColorConverter x:Key="MainPageDateTimeToBackgroundColorConverter" />
         <converters:TextCaseConverter x:Key="TextCaseConverter"/>
         
         
@@ -360,6 +361,11 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+        </Style>
+
+
+        <Style x:Key="PivotItemStyle" TargetType="phone:PivotItem">
+            <Setter Property="Margin" Value="0,28,0,0"/>
         </Style>
 
 

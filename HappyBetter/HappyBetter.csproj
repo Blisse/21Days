@@ -99,6 +99,7 @@
     <Compile Include="Common\TextStateUtil.cs" />
     <Compile Include="Converters\DateStringToStringConverter.cs" />
     <Compile Include="Converters\BooleanToEntryHeaderColorConverter.cs" />
+    <Compile Include="Converters\MainPageDateTimeToBackgroundColorConverter.cs" />
     <Compile Include="Converters\ObjectToBooleanConverter.cs" />
     <Compile Include="Converters\TextCaseConverter.cs" />
     <Compile Include="Converters\EntryItemTextToBackgroundColorConverter.cs" />

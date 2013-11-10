@@ -155,4 +155,19 @@
   <data name="EntryRAOKInstructions" xml:space="preserve">
     <value>Something happy for someone else</value>
   </data>
+  <data name="MainDatesHeader" xml:space="preserve">
+    <value>Dates</value>
+  </data>
+  <data name="MainInfoHeader" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="MainStatusHeader" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="MainTitleBegin" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="MainTitleEnd" xml:space="preserve">
+    <value>Days</value>
+  </data>
 </root>

@@ -151,6 +151,51 @@ namespace HappyBetter.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dates.
+        /// </summary>
+        public static string MainDatesHeader {
+            get {
+                return ResourceManager.GetString("MainDatesHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Info.
+        /// </summary>
+        public static string MainInfoHeader {
+            get {
+                return ResourceManager.GetString("MainInfoHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string MainStatusHeader {
+            get {
+                return ResourceManager.GetString("MainStatusHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 21.
+        /// </summary>
+        public static string MainTitleBegin {
+            get {
+                return ResourceManager.GetString("MainTitleBegin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Days.
+        /// </summary>
+        public static string MainTitleEnd {
+            get {
+                return ResourceManager.GetString("MainTitleEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LeftToRight.
         /// </summary>
         public static string ResourceFlowDirection {
