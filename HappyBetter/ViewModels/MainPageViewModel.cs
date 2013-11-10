@@ -100,7 +100,18 @@ namespace HappyBetter.ViewModels
         }
 
         public EventHandler<DateTime> AddAlreadyAddedDate;
-        public Dictionary<DateTime, DailyEntry> Dictionary { get; set; }
+
+        private Dictionary<DateTime, DailyEntry> _dictionary;
+
+        public Dictionary<DateTime, DailyEntry> Dictionary
+        {
+            get { return _dictionary; }
+            set
+            {
+                _dictionary = value;
+                RaisePropertyChanged(String.Empty);
+            }
+        }
 
         /// <summary>
         /// The <see cref="DatesList" /> property's name.
@@ -132,5 +143,82 @@ namespace HappyBetter.ViewModels
                 RaisePropertyChanged(DatesListPropertyName);
             }
         }
+
+
+        public int NumberOfEntries
+        {
+            get { return Dictionary.Count; }
+        }
+
+        public int NumberOfCompletedEntries
+        {
+            get { return Dictionary.Count(x => x.Value.IsCompleted); }
+        }
+
+        public int NumberOfConsecutiveEntries
+        {
+            get
+            {
+                var dates = Dictionary.Select(x => x.Value.EntryDateTimeKey).OrderBy(x => x).ToList();
+                if (!dates.Any())
+                {
+                    return 0;
+                }
+
+                var currentConsecutiveStreak = 1;
+                var maxConsecutive = 1;
+                for (var i = 1; i < dates.Count(); i++)
+                {
+                    if ((dates[i] - dates[i - 1]).TotalDays <= 1.1)
+                    {
+                        currentConsecutiveStreak++;
+                    }
+                    else
+                    {
+                        currentConsecutiveStreak = 1;
+                    }
+
+                    if (currentConsecutiveStreak >= maxConsecutive)
+                    {
+                        maxConsecutive = currentConsecutiveStreak;
+                    }
+                }
+                return maxConsecutive;
+            }
+        }
+
+        public int NumberOfConsecutiveCompletedEntries
+        {
+            get
+            {
+                var dates = Dictionary.Where(x => x.Value.IsCompleted).Select(x => x.Value.EntryDateTimeKey).OrderBy(x => x).ToList();
+                if (!dates.Any())
+                {
+                    return 0;
+                }
+
+                var currentConsecutiveStreak = 1;
+                var maxConsecutive = 1;
+                for (var i = 1; i < dates.Count(); i++)
+                {
+                    if ((dates[i] - dates[i - 1]).TotalDays <= 1.1)
+                    {
+                        currentConsecutiveStreak++;
+                    }
+                    else
+                    {
+                        currentConsecutiveStreak = 1;
+                    }
+
+                    if (currentConsecutiveStreak >= maxConsecutive)
+                    {
+                        maxConsecutive = currentConsecutiveStreak;
+                    }
+                }
+                return maxConsecutive;
+            }
+        }
+
+
     }
 }

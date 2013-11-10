@@ -218,6 +218,29 @@
                     <phone:PivotItem.Header>
                         <TextBlock Text="{Binding LocalizedResources.MainStatusHeader, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
                     </phone:PivotItem.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Text="Number of Entries"/>
+                        <TextBlock Grid.Row="1" Text="{Binding NumberOfEntries}"/>
+                        <TextBlock Grid.Row="2" Text="Number of Compled Entries"/>
+                        <TextBlock Grid.Row="3" Text="{Binding NumberOfCompletedEntries}"/>
+                        <TextBlock Grid.Row="4" Text="Number of Consec Entries"/>
+                        <TextBlock Grid.Row="5" Text="{Binding NumberOfConsecutiveEntries}"/>
+                        <TextBlock Grid.Row="6" Text="Number of Consec Complete Entries"/>
+                        <TextBlock Grid.Row="7" Text="{Binding NumberOfConsecutiveCompletedEntries}"/>
+                    </Grid>
                 </phone:PivotItem>
                 <phone:PivotItem Style="{StaticResource PivotItemStyle}">
                     <phone:PivotItem.Header>
