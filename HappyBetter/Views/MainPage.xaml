@@ -37,7 +37,7 @@
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False" 
-                              ForegroundColor="{StaticResource ColorLightGray}" 
+                              ForegroundColor="{StaticResource ColorWhite}" 
                               BackgroundColor="{StaticResource ColorBlack}">
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/add.png" Text="Add Today" Click="AddTodayAppBar_OnClick"/>
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.calendar.png" Text="Add Date" Click="OpenDatePickerAppBar_OnClick"/>

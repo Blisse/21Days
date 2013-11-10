@@ -15,30 +15,37 @@
         <local:LocalizedStrings xmlns:local="clr-namespace:HappyBetter" x:Key="LocalizedStrings" />
         <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:HappyBetter.ViewModels" />
 
-        <Color x:Key="ColorLightGray">#E9E9E9</Color>
+        <Color x:Key="ColorWhite">#E9E9E9</Color>
         <Color x:Key="ColorGray">#BCBCBC</Color>
         <Color x:Key="ColorDarkGray">#424242</Color>
         <Color x:Key="ColorBlack">#1A1A1A</Color>
         <Color x:Key="ColorFadedBlack">#333333</Color>
         <Color x:Key="ColorOrange">#FF9900</Color>
+        <Color x:Key="ColorBlue">#3299BB</Color>
         <Color x:Key="ColorGreen">#25A860</Color>
         <Color x:Key="ColorFadedGreen">#C3FF68</Color>
-        <Color x:Key="ColorRed">#B11623</Color>
+        <Color x:Key="ColorRed">#BA3030</Color>
         <Color x:Key="ColorFadedRed">#CC5D4C</Color>
         
-
-        <SolidColorBrush x:Key="ForegroundLightGray" Color="{StaticResource ColorLightGray}"/>
+        <!--Foreground Brushes-->
+        <SolidColorBrush x:Key="ForegroundWhite" Color="{StaticResource ColorWhite}"/>
         <SolidColorBrush x:Key="ForegroundGray" Color="{StaticResource ColorGray}"/>
         <SolidColorBrush x:Key="ForegroundDarkGray" Color="{StaticResource ColorDarkGray}"/>
+        <SolidColorBrush x:Key="ForegroundBlack" Color="{StaticResource ColorBlack}"/>
         <SolidColorBrush x:Key="ForegroundOrange" Color="{StaticResource ColorOrange}"/>
+        <SolidColorBrush x:Key="ForegroundBlue" Color="{StaticResource ColorBlue}"/>
         <SolidColorBrush x:Key="ForegroundGreen" Color="{StaticResource ColorGreen}"/>
         <SolidColorBrush x:Key="ForegroundRed" Color="{StaticResource ColorRed}"/>
 
-        <SolidColorBrush x:Key="BackgroundRed" Color="{StaticResource ColorFadedRed}"/>
-        <SolidColorBrush x:Key="BackgroundGreen" Color="{StaticResource ColorGreen}"/>
+        <!--Background Brushes-->
+        <SolidColorBrush x:Key="BackgroundWhite" Color="{StaticResource ColorWhite}"/>
         <SolidColorBrush x:Key="BackgroundBlack" Color="{StaticResource ColorFadedBlack}"/>
+        <SolidColorBrush x:Key="BackgroundBlue" Color="{StaticResource ColorBlue}"/>
+        <SolidColorBrush x:Key="BackgroundGreen" Color="{StaticResource ColorGreen}"/>
+        <SolidColorBrush x:Key="BackgroundRed" Color="{StaticResource ColorFadedRed}"/>
 
         <SolidColorBrush x:Key="ApplicationBackgroundColor" Color="{StaticResource ColorBlack}"/>
+
 
 
         <FontFamily x:Key="OpenSans">/Assets/Fonts/OpenSans-Regular.ttf#Open Sans</FontFamily>
@@ -68,15 +75,14 @@
         </Style>
         
         <Style x:Key="ThemedTextBoxStyle" TargetType="TextBox">
-            <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}"/>
+            <Setter Property="FontFamily" Value="{StaticResource OpenSans}"/>
             <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMediumLarge}"/>
-            <Setter Property="Background" Value="{StaticResource PhoneTextBoxBrush}"/>
-            <Setter Property="Foreground" Value="{StaticResource PhoneTextBoxForegroundBrush}"/>
+            <Setter Property="Background" Value="{StaticResource BackgroundWhite}"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundBlack}"/>
             <Setter Property="BorderBrush" Value="{StaticResource PhoneTextBoxBrush}"/>
-            <Setter Property="SelectionBackground" Value="{StaticResource ApplicationBackgroundColor}"/>
-            <Setter Property="SelectionForeground" Value="{StaticResource ForegroundLightGray}"/>
             <Setter Property="BorderThickness" Value="{StaticResource PhoneBorderThickness}"/>
-            <Setter Property="Padding" Value="2"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="AcceptsReturn" Value="True"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
@@ -130,10 +136,10 @@
                                     <VisualState x:Name="Focused">
                                         <Storyboard>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="MainBorder">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Transparent"/>
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BackgroundWhite}"/>
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="MainBorder">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ForegroundLightGray}"/>
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ForegroundWhite}"/>
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -143,7 +149,7 @@
                             <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="{StaticResource PhoneTouchTargetOverhang}"/>
                             <Border x:Name="ReadonlyBorder" BorderBrush="{StaticResource PhoneDisabledBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="Transparent" Margin="{StaticResource PhoneTouchTargetOverhang}" Visibility="Collapsed"/>
                             <Border BorderBrush="Transparent" BorderThickness="{TemplateBinding BorderThickness}" Background="Transparent" Margin="{StaticResource PhoneTouchTargetOverhang}">
-                                <ContentControl x:Name="ContentElement" BorderThickness="0" HorizontalContentAlignment="Stretch" Margin="{StaticResource PhoneTextBoxInnerMargin}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="Stretch"/>
+                                <ContentControl x:Name="ContentElement" BorderThickness="0" HorizontalContentAlignment="Stretch" Margin="0" Padding="{TemplateBinding Padding}" VerticalContentAlignment="Stretch"/>
                             </Border>
                         </Grid>
                     </ControlTemplate>
@@ -167,14 +173,14 @@
                                         <Storyboard>
                                             <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="contentPresenter"/>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.Foreground)" Storyboard.TargetName="contentPresenter">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ForegroundLightGray}"/>
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ForegroundWhite}"/>
                                             </ObjectAnimationUsingKeyFrames>
                                             <ColorAnimation Duration="0" To="{StaticResource PhoneAccentColor}" Storyboard.TargetProperty="(Control.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="contentPresenter" d:IsOptimized="True"/>
                                         </Storyboard>
                                     </VisualState>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            <ContentControl x:Name="contentPresenter" FontSize="40" FontFamily="{StaticResource NexaBold}" 
+                            <ContentControl x:Name="contentPresenter" FontSize="48" FontFamily="{StaticResource NexaBold}" 
                                             Foreground="{StaticResource ForegroundDarkGray}" 
                                             ContentTemplate="{TemplateBinding ContentTemplate}" 
                                             Content="{TemplateBinding Content}" 

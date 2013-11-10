@@ -61,146 +61,56 @@ namespace HappyBetter.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Be a better, happier you!.
+        ///   Looks up a localized string similar to Exercise.
         /// </summary>
-        public static string AboutConclusion {
+        public static string EntryExerciseHeader {
             get {
-                return ResourceManager.GetString("AboutConclusion", resourceCulture);
+                return ResourceManager.GetString("EntryExerciseHeader", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to I have no affiliation with TED or Shawn Achor..
+        ///   Looks up a localized string similar to 3 x Gratitudes.
         /// </summary>
-        public static string AboutDisclaimer {
+        public static string EntryGratitudeHeader {
             get {
-                return ResourceManager.GetString("AboutDisclaimer", resourceCulture);
+                return ResourceManager.GetString("EntryGratitudeHeader", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This application is based off of Shawn Achor&apos;s TEDx Talk, &quot;The happy secret to better work&quot;, which you can find right below..
+        ///   Looks up a localized string similar to Three new things you&apos;re grateful for today.
         /// </summary>
-        public static string AboutHeader {
+        public static string EntryGratitudeInstructions {
             get {
-                return ResourceManager.GetString("AboutHeader", resourceCulture);
+                return ResourceManager.GetString("EntryGratitudeInstructions", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Random Acts of Kindness.
+        ///   Looks up a localized string similar to Journal.
         /// </summary>
-        public static string ActivityFive {
+        public static string EntryJournalHeader {
             get {
-                return ResourceManager.GetString("ActivityFive", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Write an email or directly praise or thank one person in your social support network..
-        /// </summary>
-        public static string ActivityFiveDescription {
-            get {
-                return ResourceManager.GetString("ActivityFiveDescription", resourceCulture);
+                return ResourceManager.GetString("EntryJournalHeader", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Meditation.
         /// </summary>
-        public static string ActivityFour {
+        public static string EntryMeditationHeader {
             get {
-                return ResourceManager.GetString("ActivityFour", resourceCulture);
+                return ResourceManager.GetString("EntryMeditationHeader", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Meditation allows your brain to get over the cultural ADHD that we&apos;ve been creating by doing multiple things at once..
+        ///   Looks up a localized string similar to Random Act of Kindness.
         /// </summary>
-        public static string ActivityFourDescription {
+        public static string EntryRAOKHeader {
             get {
-                return ResourceManager.GetString("ActivityFourDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to These are the 5 activities identified in creating lasting, positive change. Done for 21 days in a row, you can train your brain to reverse the formula for happiness and success, and create ripples of positivity..
-        /// </summary>
-        public static string ActivityIntroduction {
-            get {
-                return ResourceManager.GetString("ActivityIntroduction", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 3 Gratitudes.
-        /// </summary>
-        public static string ActivityOne {
-            get {
-                return ResourceManager.GetString("ActivityOne", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Write down 3 new things you are grateful for..
-        /// </summary>
-        public static string ActivityOneDescription {
-            get {
-                return ResourceManager.GetString("ActivityOneDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Exercise.
-        /// </summary>
-        public static string ActivityThree {
-            get {
-                return ResourceManager.GetString("ActivityThree", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Exercise teaches your brain that your behavior matters..
-        /// </summary>
-        public static string ActivityThreeDescription {
-            get {
-                return ResourceManager.GetString("ActivityThreeDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Journaling.
-        /// </summary>
-        public static string ActivityTwo {
-            get {
-                return ResourceManager.GetString("ActivityTwo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Journalling about one positive you&apos;ve had over the past 24 hours allows you to relive it..
-        /// </summary>
-        public static string ActivityTwoDescription {
-            get {
-                return ResourceManager.GetString("ActivityTwoDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to add.
-        /// </summary>
-        public static string AppBarButtonText {
-            get {
-                return ResourceManager.GetString("AppBarButtonText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Menu Item.
-        /// </summary>
-        public static string AppBarMenuItemText {
-            get {
-                return ResourceManager.GetString("AppBarMenuItemText", resourceCulture);
+                return ResourceManager.GetString("EntryRAOKHeader", resourceCulture);
             }
         }
         

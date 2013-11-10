@@ -25,7 +25,7 @@ namespace HappyBetter.Converters
                 }
             }
 
-            return Application.Current.Resources["ForegroundLightGray"];
+            return Application.Current.Resources["ForegroundWhite"];
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -125,52 +125,22 @@
     <value>en-US</value>
     <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
   </data>
-  <data name="AppBarButtonText" xml:space="preserve">
-    <value>add</value>
+  <data name="EntryRAOKHeader" xml:space="preserve">
+    <value>Random Act of Kindness</value>
   </data>
-  <data name="AppBarMenuItemText" xml:space="preserve">
-    <value>Menu Item</value>
-  </data>
-  <data name="AboutDisclaimer" xml:space="preserve">
-    <value>I have no affiliation with TED or Shawn Achor.</value>
-  </data>
-  <data name="AboutHeader" xml:space="preserve">
-    <value>This application is based off of Shawn Achor's TEDx Talk, "The happy secret to better work", which you can find right below.</value>
-  </data>
-  <data name="ActivityFive" xml:space="preserve">
-    <value>Random Acts of Kindness</value>
-  </data>
-  <data name="ActivityFiveDescription" xml:space="preserve">
-    <value>Write an email or directly praise or thank one person in your social support network.</value>
-  </data>
-  <data name="ActivityFour" xml:space="preserve">
+  <data name="EntryMeditationHeader" xml:space="preserve">
     <value>Meditation</value>
   </data>
-  <data name="ActivityFourDescription" xml:space="preserve">
-    <value>Meditation allows your brain to get over the cultural ADHD that we've been creating by doing multiple things at once.</value>
+  <data name="EntryGratitudeHeader" xml:space="preserve">
+    <value>3 x Gratitudes</value>
   </data>
-  <data name="ActivityIntroduction" xml:space="preserve">
-    <value>These are the 5 activities identified in creating lasting, positive change. Done for 21 days in a row, you can train your brain to reverse the formula for happiness and success, and create ripples of positivity.</value>
-  </data>
-  <data name="ActivityOne" xml:space="preserve">
-    <value>3 Gratitudes</value>
-  </data>
-  <data name="ActivityOneDescription" xml:space="preserve">
-    <value>Write down 3 new things you are grateful for.</value>
-  </data>
-  <data name="ActivityThree" xml:space="preserve">
+  <data name="EntryExerciseHeader" xml:space="preserve">
     <value>Exercise</value>
   </data>
-  <data name="ActivityThreeDescription" xml:space="preserve">
-    <value>Exercise teaches your brain that your behavior matters.</value>
+  <data name="EntryJournalHeader" xml:space="preserve">
+    <value>Journal</value>
   </data>
-  <data name="ActivityTwo" xml:space="preserve">
-    <value>Journaling</value>
-  </data>
-  <data name="ActivityTwoDescription" xml:space="preserve">
-    <value>Journalling about one positive you've had over the past 24 hours allows you to relive it.</value>
-  </data>
-  <data name="AboutConclusion" xml:space="preserve">
-    <value>Be a better, happier you!</value>
+  <data name="EntryGratitudeInstructions" xml:space="preserve">
+    <value>Three new things you're grateful for today</value>
   </data>
 </root>

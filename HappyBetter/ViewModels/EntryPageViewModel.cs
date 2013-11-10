@@ -88,6 +88,11 @@ namespace HappyBetter.ViewModels
             DailyEntry.GratitudeEntriesList.ElementAt(index).Description = description;
         }
 
+        public void AddGratitudeEntry()
+        {
+            DailyEntry.GratitudeEntriesList.Add(new GratitudeEntry());
+        }
+
         public void SaveEntry()
         {
             var dictionary = DataManager.Instance.GetDailyEntriesData();

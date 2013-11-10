@@ -20,16 +20,25 @@
     Background="{StaticResource ApplicationBackgroundColor}">
 
     <phone:PhoneApplicationPage.Resources>
-        <shell:ApplicationBarIconButton x:Name="AddAppBarButton" IconUri="/Assets/AppBar/add.png" Text="Add GratitudeEntry"/>
-    </phone:PhoneApplicationPage.Resources>
-    
-    <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False" 
-                              ForegroundColor="{StaticResource ColorLightGray}" 
+        <shell:ApplicationBar x:Key="NormalAppBar" IsVisible="True" IsMenuEnabled="False" 
+                              ForegroundColor="{StaticResource ColorWhite}" 
                               BackgroundColor="{StaticResource ColorBlack}">
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="Settings"/>
         </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>
+        
+        <shell:ApplicationBar x:Key="GratitudesApplicationBar" IsVisible="True" IsMenuEnabled="False" 
+                              ForegroundColor="{StaticResource ColorWhite}" 
+                              BackgroundColor="{StaticResource ColorBlack}">
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="Settings"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/add.png" Text="Add Experience"/>
+        </shell:ApplicationBar>
+        
+        <Style x:Key="EntryInstructionsStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource OpenSans}"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundGray}"/>
+        </Style>
+    </phone:PhoneApplicationPage.Resources>
+    
     
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="{StaticResource ApplicationBackgroundColor}" 
@@ -50,15 +59,15 @@
                          SelectionChanged="EntryPagePivot_OnSelectionChanged">
                 <phone:PivotItem>
                     <phone:PivotItem.Header>
-                        <TextBlock DataContext="Gratitude x 3" Text="{Binding Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"></TextBlock>
+                        <TextBlock Text="{Binding LocalizedResources.EntryGratitudeHeader, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
                     </phone:PivotItem.Header>
                     <Grid HorizontalAlignment="Stretch">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        
-                        <TextBlock Grid.Row="0"/>
+
+                        <TextBlock Grid.Row="0" Text="{Binding LocalizedResources.EntryGratitudeInstructions, Source={StaticResource LocalizedStrings}}" Style="{StaticResource EntryInstructionsStyle}"/>
                         <phone:LongListSelector Grid.Row="1" x:Name="GratitudesEntriesLongListSelector" 
                                                 ItemsSource="{Binding GratitudeEntriesList}">
                             <phone:LongListSelector.ItemTemplate>
@@ -82,21 +91,21 @@
                 </phone:PivotItem>
                 <phone:PivotItem>
                     <phone:PivotItem.Header>
-                        <TextBlock DataContext="Positive" Text="{Binding Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
+                        <TextBlock Text="{Binding LocalizedResources.EntryJournalHeader, Source={StaticResource LocalizedStrings},  Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
                     </phone:PivotItem.Header>
                     <Grid Background="{Binding JournalEntry, Converter={StaticResource EntryItemTextToBackgroundColorConverter}}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBox Height="Auto" TextWrapping="Wrap" 
+                        <TextBox Height="Auto" TextWrapping="Wrap" Style="{StaticResource ThemedTextBoxStyle}"
                                  Text="{Binding JournalEntry, Mode=TwoWay, UpdateSourceTrigger=Explicit}" 
                                  TextChanged="TextBoxUpdateBindingSource_OnTextChanged"/>
                     </Grid>
                 </phone:PivotItem>
                 <phone:PivotItem>
                     <phone:PivotItem.Header>
-                        <TextBlock DataContext="Meditate" Text="{Binding Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
+                        <TextBlock Text="{Binding LocalizedResources.EntryMeditationHeader, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
                     </phone:PivotItem.Header>
                     <Grid Background="{Binding Path=MeditationEntry, Converter={StaticResource EntryItemTextToBackgroundColorConverter}}">
                         <Grid.ColumnDefinitions>
@@ -106,14 +115,14 @@
 
                         <CheckBox Grid.Column="0" IsHitTestVisible="False"
                                   IsChecked="{Binding Path=MeditationEntry, Converter={StaticResource ObjectToBooleanConverter}}"/>
-                        <TextBox Grid.Column="1" Height="Auto" TextWrapping="Wrap"
+                        <TextBox Grid.Column="1" Height="Auto" TextWrapping="Wrap" Style="{StaticResource ThemedTextBoxStyle}"
                                  Text="{Binding Path=MeditationEntry, Mode=TwoWay, UpdateSourceTrigger=Explicit}" 
                                  TextChanged="TextBoxUpdateBindingSource_OnTextChanged"/>
                     </Grid>
                 </phone:PivotItem>
                 <phone:PivotItem>
                     <phone:PivotItem.Header>
-                        <TextBlock DataContext="Exercise" Text="{Binding Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
+                        <TextBlock Text="{Binding LocalizedResources.EntryExerciseHeader, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
                     </phone:PivotItem.Header>
                     <Grid Background="{Binding Path=ExerciseEntry, Converter={StaticResource EntryItemTextToBackgroundColorConverter}}">
                         <Grid.ColumnDefinitions>
@@ -123,14 +132,14 @@
 
                         <CheckBox Grid.Column="0" IsHitTestVisible="False"
                                   IsChecked="{Binding Path=ExerciseEntry, Converter={StaticResource ObjectToBooleanConverter}}"/>
-                        <TextBox Grid.Column="1" Height="Auto" TextWrapping="Wrap" 
+                        <TextBox Grid.Column="1" Height="Auto" TextWrapping="Wrap" Style="{StaticResource ThemedTextBoxStyle}"
                                  Text="{Binding ExerciseEntry, Mode=TwoWay, UpdateSourceTrigger=Explicit}" 
                                  TextChanged="TextBoxUpdateBindingSource_OnTextChanged"/>
                     </Grid>
                 </phone:PivotItem>
                 <phone:PivotItem>
                     <phone:PivotItem.Header>
-                        <TextBlock DataContext="Kindness" Text="{Binding Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
+                        <TextBlock Text="{Binding LocalizedResources.EntryRAOKHeader, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
                     </phone:PivotItem.Header>
                     <Grid Background="{Binding Path=ActOfKindnessEntry, Converter={StaticResource EntryItemTextToBackgroundColorConverter}}">
                         <Grid.ColumnDefinitions>
@@ -140,7 +149,7 @@
 
                         <CheckBox Grid.Column="0" IsHitTestVisible="False"
                                   IsChecked="{Binding Path=ActOfKindnessEntry, Converter={StaticResource ObjectToBooleanConverter}}"/>
-                        <TextBox Grid.Column="1" Height="Auto" TextWrapping="Wrap" 
+                        <TextBox Grid.Column="1" Style="{StaticResource ThemedTextBoxStyle}"
                                  Text="{Binding ActOfKindnessEntry, Mode=TwoWay, UpdateSourceTrigger=Explicit}" 
                                  TextChanged="TextBoxUpdateBindingSource_OnTextChanged"/>
                     </Grid>

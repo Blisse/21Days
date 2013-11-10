@@ -7,6 +7,7 @@ using System.Windows.Navigation;
 using HappyBetter.Converters;
 using HappyBetter.Models;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
 
 namespace HappyBetter.Views
 {
@@ -117,7 +118,7 @@ namespace HappyBetter.Views
             }
             else
             {
-                header.Foreground = (SolidColorBrush)Application.Current.Resources["ForegroundLightGray"];
+                header.Foreground = (SolidColorBrush)Application.Current.Resources["ForegroundWhite"];
                 header.Opacity = 1;
             }
         }
@@ -134,6 +135,16 @@ namespace HappyBetter.Views
 
             if (pivot != null)
             {
+                var currentIndex = pivot.SelectedIndex;
+                if (pivot.SelectedIndex == 0)
+                {
+                    ApplicationBar = Resources["GratitudesApplicationBar"] as ApplicationBar;
+                }
+                else
+                {
+                    ApplicationBar = Resources["NormalAppBar"] as ApplicationBar;
+                }
+
                 if (e.RemovedItems != null && e.RemovedItems.Count > 0 && e.RemovedItems[0] as PivotItem != null)
                 {
                     var lastPivotItem = e.RemovedItems[0] as PivotItem;
@@ -143,7 +154,6 @@ namespace HappyBetter.Views
                         SetInactiveEntryPivotItemHeaderColour(header);
                     }
                 }
-
 
                 if (e.AddedItems != null && e.AddedItems.Count > 0 && e.AddedItems[0] as PivotItem != null)
                 {
@@ -155,12 +165,16 @@ namespace HappyBetter.Views
                         SetInactiveEntryPivotItemHeaderColour(header);
                         if (currentPivotItem == pivot.SelectedItem)
                         {
-                            SetActiveEntryPivotItemHeaderColour(header, pivot.SelectedIndex);
+                            SetActiveEntryPivotItemHeaderColour(header, currentIndex);
                         }
                     }
                 }
+
+
             }
 
+
         }
+
     }
 }
