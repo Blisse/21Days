@@ -16,7 +16,7 @@ namespace HappyBetter.Converters
             if (value is DateTime)
             {
                 var entryKey = (DateTime) value;
-                var dict = App.ViewModelLocator.EntryPage.Dictionary;
+                var dict = App.ViewModelLocator.MainPage.Dictionary;
                 if (dict != null && dict.ContainsKey(entryKey))
                 {
                     var entry = dict[entryKey];

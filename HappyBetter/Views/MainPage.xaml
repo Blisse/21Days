@@ -33,6 +33,29 @@
                 From="100.0" To="0.0" Duration="0:0:0.5"
                 AutoReverse="False"/>
         </Storyboard>
+        
+        <ControlTemplate x:Key="DatePickerControlTemplate1" TargetType="toolkit:DatePicker">
+            <StackPanel>
+                <ContentControl
+        			Content="{TemplateBinding Header}"
+        			ContentTemplate="{TemplateBinding HeaderTemplate}"
+        			Foreground="{StaticResource PhoneSubtleBrush}"
+        			HorizontalContentAlignment="Stretch"
+                    VerticalAlignment="Center"
+        			Margin="12,0,12,0"/>
+                <Button
+        			x:Name="DateTimeButton"
+        			Content="{TemplateBinding ValueString}"
+        			Background="{TemplateBinding Background}"
+        			BorderBrush="Transparent"
+        			BorderThickness="0"
+        			FontFamily="{StaticResource OpenSans}"
+        			Foreground="{TemplateBinding Foreground}"
+        			Height="72"
+        			HorizontalContentAlignment="Stretch"/>
+            </StackPanel>
+        </ControlTemplate>
+        
     </phone:PhoneApplicationPage.Resources>
 
     <phone:PhoneApplicationPage.ApplicationBar>
@@ -55,7 +78,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            
+
             <TextBlock FontFamily="{StaticResource NexaBold}" FontSize="88" Margin="-1,0,0,-24">
                 <Run Text="{Binding LocalizedResources.MainTitleBegin, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"
                        Foreground="{StaticResource ForegroundWhite}"/><!--
@@ -78,7 +101,7 @@
                                 <phone:LongListSelector ItemsSource="{Binding DatesList, Mode=OneWay, UpdateSourceTrigger=Default}" >
                                     <phone:LongListSelector.ItemTemplate>
                                         <DataTemplate>
-                                            <Button Style="{StaticResource ButtonTiltEffectEnabledStyle}" Margin="0,0,0,25" Click="OpenEntryButton_OnClick"
+                                            <Button Style="{StaticResource ButtonTiltEffectEnabledStyle}" Margin="0,0,0,20" Click="OpenEntryButton_OnClick"
                                                     Height="75">
                                                 <Grid Background="{Binding Converter={StaticResource MainPageDateTimeToBackgroundColorConverter}}">
                                                     <TextBlock DataContext="{Binding Converter={StaticResource DateStringToStringConverter}, ConverterParameter=D}"
@@ -100,11 +123,17 @@
                             </ScrollViewer>
                         </Grid>
                         <Grid Grid.Row="1" x:Name="HiddenDatePickerGrid" Height="0">
-                            <Button VerticalAlignment="Center" Style="{StaticResource ButtonTiltEffectEnabledStyle}" Click="AddDate_OnClick">
-                                <Grid Background="{StaticResource ForegroundGray}" Margin="13,13,0,13" HorizontalAlignment="Left">
-                                    <TextBlock Text="Add Entry for a Date"
-                                               Foreground="{StaticResource ApplicationBackgroundColor}"
-                                               HorizontalAlignment="Center"/>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <toolkit:DatePicker Grid.Column="0" Template="{StaticResource DatePickerControlTemplate1}"/>
+                            <Button Grid.Column="1" Style="{StaticResource ButtonTiltEffectEnabledStyle}" Click="AddDate_OnClick" Height="50">
+                                <Grid Background="{StaticResource BackgroundBlue}">
+                                    <TextBlock FontFamily="{StaticResource OpenSans}" FontSize="24"
+                                               VerticalAlignment="Center" Margin="10,5,10,5">
+                                        <Run Text="Add Date"/>
+                                    </TextBlock>
                                 </Grid>
                             </Button>
                         </Grid>

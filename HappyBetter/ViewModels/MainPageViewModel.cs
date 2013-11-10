@@ -39,11 +39,11 @@ namespace HappyBetter.ViewModels
 
         public void GetData()
         {
-            var dictionary = DataManager.Instance.GetDailyEntriesData() ?? new Dictionary<DateTime, DailyEntry>();
+            Dictionary = DataManager.Instance.GetDailyEntriesData() ?? new Dictionary<DateTime, DailyEntry>();
 
-            DatesList = new ObservableCollection<DateTime>(dictionary.Select(x => x.Key));
+            DatesList = new ObservableCollection<DateTime>(Dictionary.Select(x => x.Key));
 
-            if (dictionary.Count == 0)
+            if (Dictionary.Count == 0)
             {
                 AddToDatesList(DateTime.Now);
             }
@@ -51,17 +51,17 @@ namespace HappyBetter.ViewModels
 
         public Boolean AddToDatesList(DateTime enterDateTime)
         {
-            var dictionary = DataManager.Instance.GetDailyEntriesData() ?? new Dictionary<DateTime, DailyEntry>();
+            Dictionary = DataManager.Instance.GetDailyEntriesData() ?? new Dictionary<DateTime, DailyEntry>();
 
-            if (dictionary.ContainsKey(enterDateTime))
+            if (Dictionary.ContainsKey(enterDateTime))
             {
                 return false;
             }
 
             var dailyEntry = new DailyEntry(enterDateTime);
-            dictionary.Add(enterDateTime, dailyEntry);
+            Dictionary.Add(enterDateTime, dailyEntry);
 
-            if (DataManager.Instance.SaveDailyEntriesData(dictionary))
+            if (DataManager.Instance.SaveDailyEntriesData(Dictionary))
             {
                 DatesList.Add(enterDateTime);
                 return true;
@@ -72,16 +72,16 @@ namespace HappyBetter.ViewModels
 
         public Boolean DeleteFromDatesList(DateTime deleteDateTime)
         {
-            var dictionary = DataManager.Instance.GetDailyEntriesData();
+            Dictionary = DataManager.Instance.GetDailyEntriesData();
 
-            if (dictionary == null || !dictionary.ContainsKey(deleteDateTime))
+            if (Dictionary == null || !Dictionary.ContainsKey(deleteDateTime))
             {
                 return false;
             }
 
-            dictionary.Remove(deleteDateTime);
+            Dictionary.Remove(deleteDateTime);
 
-            if (DataManager.Instance.SaveDailyEntriesData(dictionary))
+            if (DataManager.Instance.SaveDailyEntriesData(Dictionary))
             {
                 DatesList.Remove(deleteDateTime);
                 return true;
@@ -90,6 +90,7 @@ namespace HappyBetter.ViewModels
             return false;
         }
 
+        public Dictionary<DateTime, DailyEntry> Dictionary { get; set; }
 
         /// <summary>
         /// The <see cref="DatesList" /> property's name.
