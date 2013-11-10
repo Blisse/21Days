@@ -20,18 +20,6 @@
     Background="{StaticResource ApplicationBackgroundColor}">
 
     <phone:PhoneApplicationPage.Resources>
-        <shell:ApplicationBar x:Key="NormalAppBar" IsVisible="True" IsMenuEnabled="False" 
-                              ForegroundColor="{StaticResource ColorWhite}" 
-                              BackgroundColor="{StaticResource ColorBlack}">
-            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="Settings"/>
-        </shell:ApplicationBar>
-        
-        <shell:ApplicationBar x:Key="GratitudesApplicationBar" IsVisible="True" IsMenuEnabled="False" 
-                              ForegroundColor="{StaticResource ColorWhite}" 
-                              BackgroundColor="{StaticResource ColorBlack}">
-            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="Settings"/>
-            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/add.png" Text="Add Experience"/>
-        </shell:ApplicationBar>
         
         <Style x:Key="EntryInstructionsStyle" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="{StaticResource OpenSans}"/>
@@ -41,6 +29,14 @@
         </Style>
     </phone:PhoneApplicationPage.Resources>
     
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False" 
+                              ForegroundColor="{StaticResource ColorFadedBlack}" 
+                              BackgroundColor="{StaticResource ColorGray}">
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="Settings"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/add.png" Text="Add Experience"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
     
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="{StaticResource ApplicationBackgroundColor}" 

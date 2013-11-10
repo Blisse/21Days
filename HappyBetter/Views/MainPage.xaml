@@ -11,30 +11,79 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
+    Background="{StaticResource ApplicationBackgroundColor}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True"
     shell:SystemTray.ForegroundColor="{StaticResource ColorBlue}"
     shell:SystemTray.BackgroundColor="{StaticResource ColorBlack}"
-    DataContext="{Binding MainPage, Source={StaticResource Locator}}"
-    Background="{StaticResource ApplicationBackgroundColor}">
+    DataContext="{Binding MainPage, Source={StaticResource Locator}}">
 
     <phone:PhoneApplicationPage.Resources>
         <Storyboard x:Name="ShowDatePickerGrid">
             <DoubleAnimation
                 Storyboard.TargetName="HiddenDatePickerGrid"
                 Storyboard.TargetProperty="Height"
-                From="0.0" To="100.0" Duration="0:0:0.5"
+                From="0.0" To="80.0" Duration="0:0:0.3"
                 AutoReverse="False"/>
         </Storyboard>
         <Storyboard x:Name="HideDatePickerGrid">
             <DoubleAnimation
                 Storyboard.TargetName="HiddenDatePickerGrid"
                 Storyboard.TargetProperty="Height"
-                From="100.0" To="0.0" Duration="0:0:0.5"
+                From="80.0" To="0.0" Duration="0:0:0.3"
                 AutoReverse="False"/>
         </Storyboard>
-        
-        <ControlTemplate x:Key="DatePickerControlTemplate1" TargetType="toolkit:DatePicker">
+        <Style x:Key="ThemedButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="{StaticResource ForegroundWhite}"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundWhite}"/>
+            <Setter Property="BorderThickness" Value="{StaticResource PhoneBorderThickness}"/>
+            <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiBold}"/>
+            <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMedium}"/>
+            <Setter Property="Padding" Value="10,5,10,6"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="Transparent">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver"/>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentContainer">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ForegroundWhite}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="ButtonBackground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BackgroundBlue}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentContainer">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="ButtonBackground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="ButtonBackground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Transparent"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="ButtonBackground" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="0" Margin="{StaticResource PhoneTouchTargetOverhang}">
+                                <ContentControl x:Name="ContentContainer" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <ControlTemplate x:Key="CleanDatePickerControlTemplate" TargetType="toolkit:DatePicker">
             <StackPanel>
                 <ContentControl
         			Content="{TemplateBinding Header}"
@@ -44,29 +93,49 @@
                     VerticalAlignment="Center"
         			Margin="12,0,12,0"/>
                 <Button
-        			x:Name="DateTimeButton"
+        			x:Name="DateTimeButton" 
         			Content="{TemplateBinding ValueString}"
         			Background="{TemplateBinding Background}"
-        			BorderBrush="Transparent"
-        			BorderThickness="0"
+        			BorderBrush="{StaticResource ForegroundGray}"
+        			BorderThickness="4"
         			FontFamily="{StaticResource OpenSans}"
         			Foreground="{TemplateBinding Foreground}"
-        			Height="72"
-        			HorizontalContentAlignment="Stretch"/>
+        			Height="75"
+        			HorizontalContentAlignment="Stretch"
+                    Style="{StaticResource ThemedButtonStyle}"/>
             </StackPanel>
         </ControlTemplate>
-        
-    </phone:PhoneApplicationPage.Resources>
 
-    <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False" 
-                              ForegroundColor="{StaticResource ColorWhite}" 
-                              BackgroundColor="{StaticResource ColorBlack}">
+        <shell:ApplicationBar x:Key="DatesApplicationBar" IsVisible="True" IsMenuEnabled="False" 
+                              ForegroundColor="{StaticResource ColorFadedBlack}" 
+                              BackgroundColor="{StaticResource ColorGray}">
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/add.png" Text="Add Today" Click="AddTodayAppBar_OnClick"/>
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.calendar.png" Text="Add Date" Click="OpenDatePickerAppBar_OnClick"/>
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="Settings"/>
         </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>
+
+        <shell:ApplicationBar x:Key="DatesNoTodayApplicationBar" IsVisible="True" IsMenuEnabled="False" 
+                              ForegroundColor="{StaticResource ColorFadedBlack}" 
+                              BackgroundColor="{StaticResource ColorGray}">
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.calendar.png" Text="Add Date" Click="OpenDatePickerAppBar_OnClick"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="Settings"/>
+        </shell:ApplicationBar>
+
+        <shell:ApplicationBar x:Key="StatusApplicationBar" IsVisible="True" IsMenuEnabled="False" 
+                              ForegroundColor="{StaticResource ColorFadedBlack}" 
+                              BackgroundColor="{StaticResource ColorGray}">
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="Settings"/>
+        </shell:ApplicationBar>
+
+        <shell:ApplicationBar x:Key="InfoApplicationBar" IsVisible="True" IsMenuEnabled="False" 
+                              ForegroundColor="{StaticResource ColorFadedBlack}" 
+                              BackgroundColor="{StaticResource ColorGray}">
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="Settings"/>
+        </shell:ApplicationBar>
+        
+
+    </phone:PhoneApplicationPage.Resources>
+
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="{StaticResource ApplicationBackgroundColor}">
@@ -78,7 +147,6 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-
             <TextBlock FontFamily="{StaticResource NexaBold}" FontSize="88" Margin="-1,0,0,-24">
                 <Run Text="{Binding LocalizedResources.MainTitleBegin, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"
                        Foreground="{StaticResource ForegroundWhite}"/><!--
@@ -86,7 +154,7 @@
                        Foreground="{StaticResource ForegroundBlue}"/>
             </TextBlock>
 
-            <phone:Pivot Grid.Row="1" Style="{StaticResource LightGrayPivotStyle}">
+            <phone:Pivot Grid.Row="1" Style="{StaticResource LightGrayPivotStyle}" SelectionChanged="MainPagePivot_OnSelectionChanged">
                 <phone:PivotItem Style="{StaticResource PivotItemStyle}">
                     <phone:PivotItem.Header>
                         <TextBlock Text="{Binding LocalizedResources.MainDatesHeader, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
@@ -96,6 +164,7 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
+
                         <Grid Grid.Row="0">
                             <ScrollViewer>
                                 <phone:LongListSelector ItemsSource="{Binding DatesList, Mode=OneWay, UpdateSourceTrigger=Default}" >
@@ -122,20 +191,26 @@
                                 </phone:LongListSelector>
                             </ScrollViewer>
                         </Grid>
-                        <Grid Grid.Row="1" x:Name="HiddenDatePickerGrid" Height="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <toolkit:DatePicker Grid.Column="0" Template="{StaticResource DatePickerControlTemplate1}"/>
-                            <Button Grid.Column="1" Style="{StaticResource ButtonTiltEffectEnabledStyle}" Click="AddDate_OnClick" Height="50">
-                                <Grid Background="{StaticResource BackgroundBlue}">
-                                    <TextBlock FontFamily="{StaticResource OpenSans}" FontSize="24"
+                        <Grid Grid.Row="1" x:Name="HiddenDatePickerGrid" Height="0" Background="{StaticResource BackgroundGray}">
+                            <Grid HorizontalAlignment="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <toolkit:DatePicker x:Name="HiddenDatePicker" Grid.Column="0" Template="{StaticResource CleanDatePickerControlTemplate}"
+                                                VerticalAlignment="Center"/>
+                                <Button Grid.Column="1" Style="{StaticResource ButtonTiltEffectEnabledStyle}" Click="AddDate_OnClick" 
+                                    Height="50" VerticalAlignment="Center"
+                                    Margin="0,0,12,0">
+                                    <Grid Background="{StaticResource ForegroundGray}">
+                                        <TextBlock FontFamily="{StaticResource OpenSans}" FontSize="24"
+                                               Foreground="{StaticResource ForegroundBlack}"
                                                VerticalAlignment="Center" Margin="10,5,10,5">
-                                        <Run Text="Add Date"/>
-                                    </TextBlock>
-                                </Grid>
-                            </Button>
+                                            <Run Text="Add Date"/>
+                                        </TextBlock>
+                                    </Grid>
+                                </Button>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </phone:PivotItem>

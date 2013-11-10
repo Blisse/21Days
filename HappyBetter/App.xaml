@@ -40,6 +40,7 @@
         <!--Background Brushes-->
         <SolidColorBrush x:Key="BackgroundWhite" Color="{StaticResource ColorWhite}"/>
         <SolidColorBrush x:Key="BackgroundBlack" Color="{StaticResource ColorFadedBlack}"/>
+        <SolidColorBrush x:Key="BackgroundGray" Color="{StaticResource ColorDarkGray}"/>
         <SolidColorBrush x:Key="BackgroundBlue" Color="{StaticResource ColorBlue}"/>
         <SolidColorBrush x:Key="BackgroundGreen" Color="{StaticResource ColorGreen}"/>
         <SolidColorBrush x:Key="BackgroundRed" Color="{StaticResource ColorFadedRed}"/>

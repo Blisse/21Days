@@ -135,14 +135,7 @@ namespace HappyBetter.Views
             if (pivot != null)
             {
                 var currentIndex = pivot.SelectedIndex;
-                if (pivot.SelectedIndex == 0)
-                {
-                    ApplicationBar = Resources["GratitudesApplicationBar"] as ApplicationBar;
-                }
-                else
-                {
-                    ApplicationBar = Resources["NormalAppBar"] as ApplicationBar;
-                }
+                ApplicationBar.IsVisible = pivot.SelectedIndex == 0;
 
                 if (e.RemovedItems != null && e.RemovedItems.Count > 0 && e.RemovedItems[0] as PivotItem != null)
                 {

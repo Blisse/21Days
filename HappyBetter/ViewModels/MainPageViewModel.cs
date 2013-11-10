@@ -45,7 +45,7 @@ namespace HappyBetter.ViewModels
 
             if (Dictionary.Count == 0)
             {
-                AddToDatesList(DateTime.Now);
+                AddToDatesList(DateTime.Now.Date);
             }
         }
 
@@ -55,6 +55,7 @@ namespace HappyBetter.ViewModels
 
             if (Dictionary.ContainsKey(enterDateTime))
             {
+                RaiseAddAlreadyAddedDate(this, enterDateTime);
                 return false;
             }
 
@@ -90,6 +91,15 @@ namespace HappyBetter.ViewModels
             return false;
         }
 
+        private void RaiseAddAlreadyAddedDate(object sender, DateTime dateTime)
+        {
+            if (AddAlreadyAddedDate != null)
+            {
+                AddAlreadyAddedDate(sender, dateTime);
+            }
+        }
+
+        public EventHandler<DateTime> AddAlreadyAddedDate;
         public Dictionary<DateTime, DailyEntry> Dictionary { get; set; }
 
         /// <summary>
