@@ -158,9 +158,6 @@
   <data name="MainDatesHeader" xml:space="preserve">
     <value>Dates</value>
   </data>
-  <data name="MainInfoHeader" xml:space="preserve">
-    <value>Info</value>
-  </data>
   <data name="MainStatusHeader" xml:space="preserve">
     <value>Status</value>
   </data>
@@ -177,12 +174,21 @@
     <value>Consecutive Days Completed</value>
   </data>
   <data name="MainStatusHeaderNumberOfConsecutiveEntries" xml:space="preserve">
-    <value>Consecutive Days With Entries</value>
+    <value>Consecutive Days with Entries</value>
   </data>
   <data name="MainStatusHeaderNumberOfEntries" xml:space="preserve">
     <value>Entries</value>
   </data>
   <data name="MainStatusHeaderDoneForToday" xml:space="preserve">
     <value>Done For Today</value>
+  </data>
+  <data name="MainAboutHeader" xml:space="preserve">
+    <value>About This App</value>
+  </data>
+  <data name="MainHowHeader" xml:space="preserve">
+    <value>How It Works</value>
+  </data>
+  <data name="MainWhatHeader" xml:space="preserve">
+    <value>What To Do</value>
   </data>
 </root>

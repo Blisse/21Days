@@ -127,7 +127,14 @@
                               BackgroundColor="{StaticResource ColorGray}">
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="Settings"/>
         </shell:ApplicationBar>
-        
+
+        <Style x:Key="InfoDescriptionStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontFamily" Value="{StaticResource OpenSans}"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundGray}"/>
+            <Setter Property="Margin" Value="0,0,0,16"/>
+        </Style>
     </phone:PhoneApplicationPage.Resources>
 
 
@@ -275,8 +282,92 @@
                 </phone:PivotItem>
                 <phone:PivotItem Style="{StaticResource PivotItemStyle}">
                     <phone:PivotItem.Header>
-                        <TextBlock Text="{Binding LocalizedResources.MainInfoHeader, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
+                        <TextBlock Text="{Binding LocalizedResources.MainAboutHeader, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
                     </phone:PivotItem.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="This app was inspired by Shawn Achor's TEDx Talk, 'The happy secret to better work'." Style="{StaticResource InfoDescriptionStyle}"/>
+                        <TextBlock Grid.Row="1" Text="We believe that we should work to be happy, but could that be backwards? Psychologist Shawn Achor argues that actually happiness inspires productivity, and by following his simple steps for just 21 days, you can benefit from the 'happiness advantage'." Style="{StaticResource InfoDescriptionStyle}"/>
+                        <TextBlock Grid.Row="2" Text="This app can help in chronicling the 21 day plan to boost your brain's positivity and help you work more successfully." Style="{StaticResource InfoDescriptionStyle}"/>
+                        <TextBlock Grid.Row="3" Text="You can watch Shawn Achor's video here:" Style="{StaticResource InfoDescriptionStyle}"/>
+
+                        <Grid Grid.Row="4" Margin="0,0,0,16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" Style="{StaticResource ButtonTiltEffectEnabledStyle}" Click="WatchLocally_OnClick"
+                                    Height="50" VerticalAlignment="Center"
+                                Margin="12,0,6,0">
+                                <Grid Background="{StaticResource BackgroundWhite}">
+                                    <TextBlock FontFamily="{StaticResource OpenSans}" FontSize="22"
+                                            Foreground="{StaticResource ForegroundDarkGray}"
+                                            VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
+                                        <Run Text="Watch Locally"/>
+                                    </TextBlock>
+                                </Grid>
+                            </Button>
+                            <Button Grid.Column="1" Style="{StaticResource ButtonTiltEffectEnabledStyle}" Click="WatchYoutube_OnClick"
+                                    Height="50" VerticalAlignment="Center"
+                                Margin="6,0,12,0">
+                                <Grid Background="{StaticResource BackgroundBlue}">
+                                    <TextBlock FontFamily="{StaticResource OpenSans}" FontSize="22"
+                                            Foreground="{StaticResource ForegroundWhite}"
+                                            VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
+                                        <Run Text="Watch on Youtube"/>
+                                    </TextBlock>
+                                </Grid>
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </phone:PivotItem>
+                <phone:PivotItem Style="{StaticResource PivotItemStyle}">
+                    <phone:PivotItem.Header>
+                        <TextBlock Text="{Binding LocalizedResources.MainHowHeader, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
+                </phone:PivotItem.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                            
+                        <TextBlock Grid.Row="0" Text="Reverse the formula for happiness and success." Style="{StaticResource InfoDescriptionStyle}"/>
+                        <TextBlock Grid.Row="1" Text="If you can raise someone's level of happiness, that someone's brain can experience a 'happiness advantage'." Style="{StaticResource InfoDescriptionStyle}"/>
+                        <TextBlock Grid.Row="2" Text="The brain at positive performs significantly better than at negative, neutral or stressed. If we can find a way to become more positive in the present, we can work more successfully." Style="{StaticResource InfoDescriptionStyle}"/>
+                        <TextBlock Grid.Row="3" Text="With these short exercises, we can rewire your brain to work more optimistically and more successfully." Style="{StaticResource InfoDescriptionStyle}"/>
+                    </Grid>
+                </phone:PivotItem>
+                <phone:PivotItem Style="{StaticResource PivotItemStyle}">
+                    <phone:PivotItem.Header>
+                        <TextBlock Text="{Binding LocalizedResources.MainWhatHeader, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
+                    </phone:PivotItem.Header>
+                    <ScrollViewer Height="505">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Text="For 21 days in a row, take some time each day to follow these 5 steps, and journal them in this app." Style="{StaticResource InfoDescriptionStyle}"/>
+                            <TextBlock Grid.Row="1" Text="Writing down 3 new things we're grateful for each day helps the brain retain a pattern of scanning the world not for the negatives, but for the positives." Style="{StaticResource InfoDescriptionStyle}"/>
+                            <TextBlock Grid.Row="2" Text="Journalling about one positive experience we've had over the last 24 hours lets our brain relive it." Style="{StaticResource InfoDescriptionStyle}"/>
+                            <TextBlock Grid.Row="3" Text="Exercise teaches your brain that your behavior matters." Style="{StaticResource InfoDescriptionStyle}"/>
+                            <TextBlock Grid.Row="4" Text="Meditation allows your brain to get over the cultural ADHD we've created by trying to do multiple things at once and allows our brain to focus on the task at hand." Style="{StaticResource InfoDescriptionStyle}"/>
+                            <TextBlock Grid.Row="5" Text="Random and conscious acts of kindness tell us we can impact the world, and make the world around us a happier place." Style="{StaticResource InfoDescriptionStyle}"/>
+                        </Grid>
+                    </ScrollViewer>
                 </phone:PivotItem>
             </phone:Pivot>
         </Grid>

@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using Windows.System;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Microsoft.Phone.Tasks;
+using MyToolkit.Multimedia;
 
 namespace HappyBetter.Views
 {
@@ -16,8 +20,20 @@ namespace HappyBetter.Views
             InitializeComponent();
         }
 
+        protected override void OnBackKeyPress(CancelEventArgs e)
+        {
+            if (YouTube.CancelPlay())
+            {
+                // used to abort current youtube download
+                e.Cancel = true;
+            }
+            base.OnBackKeyPress(e);
+        }
+
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            YouTube.CancelPlay();
             base.OnNavigatedTo(e);
             App.ViewModelLocator.MainPage.AddAlreadyAddedDate += OnAddAlreadyAddedDate;
             App.ViewModelLocator.MainPage.DatesList.CollectionChanged += DatesListOnCollectionChanged;
@@ -133,6 +149,30 @@ namespace HappyBetter.Views
                     ApplicationBar = Resources["InfoApplicationBar"] as ApplicationBar;
                     break;
             }
+        }
+
+        private void WatchLocally_OnClick(object sender, RoutedEventArgs e)
+        {
+            var mediaPlayerLauncher = new MediaPlayerLauncher
+            {
+                Media = new Uri(Uri.EscapeUriString(@"Assets/Videos/ShawnAchor.mp4"), UriKind.Relative),
+                Location = MediaLocationType.Install,
+                Controls = MediaPlaybackControls.All,
+                Orientation = MediaPlayerOrientation.Landscape
+            };
+
+            mediaPlayerLauncher.Show();
+        }
+
+        private void WatchYoutube_OnClick(object sender, RoutedEventArgs e)
+        {
+            YouTube.Play("fLJsdqxnZb0", false, YouTubeQuality.Quality720P, (ex) =>
+            {
+                if (ex != null)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            });
         }
     }
 }

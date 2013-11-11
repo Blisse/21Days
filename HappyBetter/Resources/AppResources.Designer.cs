@@ -151,6 +151,15 @@ namespace HappyBetter.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About This App.
+        /// </summary>
+        public static string MainAboutHeader {
+            get {
+                return ResourceManager.GetString("MainAboutHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dates.
         /// </summary>
         public static string MainDatesHeader {
@@ -160,11 +169,11 @@ namespace HappyBetter.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Info.
+        ///   Looks up a localized string similar to How It Works.
         /// </summary>
-        public static string MainInfoHeader {
+        public static string MainHowHeader {
             get {
-                return ResourceManager.GetString("MainInfoHeader", resourceCulture);
+                return ResourceManager.GetString("MainHowHeader", resourceCulture);
             }
         }
         
@@ -205,7 +214,7 @@ namespace HappyBetter.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Consecutive Days With Entries.
+        ///   Looks up a localized string similar to Consecutive Days with Entries.
         /// </summary>
         public static string MainStatusHeaderNumberOfConsecutiveEntries {
             get {
@@ -237,6 +246,15 @@ namespace HappyBetter.Resources {
         public static string MainTitleEnd {
             get {
                 return ResourceManager.GetString("MainTitleEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What To Do.
+        /// </summary>
+        public static string MainWhatHeader {
+            get {
+                return ResourceManager.GetString("MainWhatHeader", resourceCulture);
             }
         }
         
