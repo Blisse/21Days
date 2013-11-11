@@ -101,7 +101,10 @@ namespace HappyBetter.Views
 
         private void MainPagePivot_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            HideDatePickerGrid.Begin();
+            if (HiddenDatePickerGrid.Height > 79.0)
+            {
+                HideDatePickerGrid.Begin();
+            }
 
             if (sender as Pivot != null)
             {
