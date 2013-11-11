@@ -37,12 +37,10 @@
         
         <Style x:Key="ThemedButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderBrush" Value="{StaticResource ForegroundWhite}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource ForegroundGray}"/>
             <Setter Property="Foreground" Value="{StaticResource ForegroundWhite}"/>
-            <Setter Property="BorderThickness" Value="{StaticResource PhoneBorderThickness}"/>
-            <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiBold}"/>
-            <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMedium}"/>
-            <Setter Property="Padding" Value="10,5,10,6"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="Padding" Value="10,5,10,5"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -54,10 +52,10 @@
                                     <VisualState x:Name="Pressed">
                                         <Storyboard>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentContainer">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ForegroundWhite}"/>
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ForegroundDarkGray}"/>
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="ButtonBackground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BackgroundBlue}"/>
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ForegroundGray}"/>
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -90,18 +88,13 @@
                 <ContentControl
         			Content="{TemplateBinding Header}"
         			ContentTemplate="{TemplateBinding HeaderTemplate}"
-        			Foreground="{StaticResource PhoneSubtleBrush}"
         			HorizontalContentAlignment="Stretch"
                     VerticalAlignment="Center"
         			Margin="12,0,12,0"/>
                 <Button
         			x:Name="DateTimeButton" 
         			Content="{TemplateBinding ValueString}"
-        			Background="{TemplateBinding Background}"
-        			BorderBrush="{StaticResource ForegroundGray}"
-        			BorderThickness="4"
         			FontFamily="{StaticResource OpenSans}"
-        			Foreground="{TemplateBinding Foreground}"
         			Height="75"
         			HorizontalContentAlignment="Stretch"
                     Style="{StaticResource ThemedButtonStyle}"/>
@@ -192,7 +185,7 @@
                                 </phone:LongListSelector>
                             </ScrollViewer>
                         </Grid>
-                        <Grid Grid.Row="1" x:Name="HiddenDatePickerGrid" Height="0" Background="{StaticResource BackgroundGray}">
+                        <Grid Grid.Row="1" x:Name="HiddenDatePickerGrid" Height="0" Background="{StaticResource BackgroundBlack}">
                             <Grid HorizontalAlignment="Center">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -203,9 +196,9 @@
                                 <Button Grid.Column="1" Style="{StaticResource ButtonTiltEffectEnabledStyle}" Click="AddDate_OnClick" 
                                     Height="50" VerticalAlignment="Center"
                                     Margin="0,0,12,0">
-                                    <Grid Background="{StaticResource ForegroundGray}">
+                                    <Grid Background="{StaticResource BackgroundBlue}">
                                         <TextBlock FontFamily="{StaticResource OpenSans}" FontSize="24"
-                                               Foreground="{StaticResource ForegroundBlack}"
+                                               Foreground="{StaticResource ForegroundWhite}"
                                                VerticalAlignment="Center" Margin="10,5,10,5">
                                             <Run Text="Add Date"/>
                                         </TextBlock>
