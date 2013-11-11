@@ -34,7 +34,7 @@ namespace HappyBetter.Models
 
         public Dictionary<DateTime, DailyEntry> GetDailyEntriesData()
         {
-            return App.StorageManager.GetValueOrDefault<Dictionary<DateTime, DailyEntry>>(StorageKeys.DailyEntriesDataStorageKey, null);
+            return App.StorageManager.GetValueOrDefault(StorageKeys.DailyEntriesDataStorageKey, new Dictionary<DateTime, DailyEntry>());
         }
 
         public Boolean ClearDailyEntriesData()

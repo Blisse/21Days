@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -19,15 +20,9 @@ namespace HappyBetter.Views
         {
             base.OnNavigatedTo(e);
             App.ViewModelLocator.MainPage.AddAlreadyAddedDate += OnAddAlreadyAddedDate;
-            App.ViewModelLocator.MainPage.IsLoading = true;
-            App.ViewModelLocator.MainPage.GetData();
-            App.ViewModelLocator.MainPage.IsLoading = false;
-        }
+            App.ViewModelLocator.MainPage.DatesList.CollectionChanged += DatesListOnCollectionChanged;
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            base.OnNavigatedFrom(e);
-            App.ViewModelLocator.MainPage.AddAlreadyAddedDate -= OnAddAlreadyAddedDate;
+            App.ViewModelLocator.MainPage.GetData();
         }
 
         private void OnAddAlreadyAddedDate(object sender, DateTime dateTime)
@@ -35,25 +30,29 @@ namespace HappyBetter.Views
             Dispatcher.BeginInvoke(() => CustomMessageBoxes.DateAlreadyExistsMessageBox.Show(dateTime));
         }
 
+        private void DatesListOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        {
+            Dispatcher.BeginInvoke(() => UpdateApplicationBar(MainPagePivot));
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            App.ViewModelLocator.MainPage.AddAlreadyAddedDate -= OnAddAlreadyAddedDate;
+            App.ViewModelLocator.MainPage.DatesList.CollectionChanged -= DatesListOnCollectionChanged;
+        }
+
         private void AddDate_OnClick(object sender, RoutedEventArgs e)
         {
-            App.ViewModelLocator.MainPage.IsLoading = true;
             if (HiddenDatePicker != null && HiddenDatePicker.Value != null)
             {
                 App.ViewModelLocator.MainPage.AddToDatesList((DateTime)HiddenDatePicker.Value);
             }
-            App.ViewModelLocator.MainPage.IsLoading = false;
-
-            MainPagePivot_OnSelectionChanged(this, null);
         }
 
         private void AddTodayAppBar_OnClick(object sender, EventArgs e)
         {
-            App.ViewModelLocator.MainPage.IsLoading = true;
             App.ViewModelLocator.MainPage.AddToDatesList(DateTime.Now.Date);
-            App.ViewModelLocator.MainPage.IsLoading = false;
-
-            MainPagePivot_OnSelectionChanged(this, null);
         }
 
         private void OpenDatePickerAppBar_OnClick(object sender, EventArgs e)
@@ -73,8 +72,7 @@ namespace HappyBetter.Views
             var menuItem = sender as MenuItem;
             if (menuItem != null && menuItem.DataContext is DateTime)
             {
-                var goToDateTime = (DateTime)menuItem.DataContext;
-                EntryPage.Navigate(goToDateTime);
+                EntryPage.Navigate((DateTime)menuItem.DataContext);
             }
         }
 
@@ -83,11 +81,8 @@ namespace HappyBetter.Views
             var menuItem = sender as MenuItem;
             if (menuItem != null && menuItem.DataContext is DateTime)
             {
-                var dateTimeToDelete = (DateTime)menuItem.DataContext;
-                App.ViewModelLocator.MainPage.DeleteFromDatesList(dateTimeToDelete);
+                App.ViewModelLocator.MainPage.DeleteFromDatesList((DateTime)menuItem.DataContext);
             }
-
-            MainPagePivot_OnSelectionChanged(this, null);
         }
 
         private void OpenEntryButton_OnClick(object sender, RoutedEventArgs e)
@@ -106,32 +101,34 @@ namespace HappyBetter.Views
 
         private void MainPagePivot_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (HiddenDatePickerGrid.Height > 1.0)
-            {
-                HideDatePickerGrid.Begin();
-            }
+            HideDatePickerGrid.Begin();
 
-            if (MainPagePivot != null)
+            if (sender as Pivot != null)
             {
-                switch (MainPagePivot.SelectedIndex)
-                {
-                    case 0:
-                        if (App.ViewModelLocator.MainPage.DatesList.Contains(DateTime.Now.Date))
-                        {
-                            ApplicationBar = Resources["DatesNoTodayApplicationBar"] as ApplicationBar;
-                        }
-                        else
-                        {
-                            ApplicationBar = Resources["DatesApplicationBar"] as ApplicationBar;
-                        }
-                        break;
-                    case 1:
-                        ApplicationBar = Resources["StatusApplicationBar"] as ApplicationBar;
-                        break;
-                    case 2:
-                        ApplicationBar = Resources["InfoApplicationBar"] as ApplicationBar;
-                        break;
-                }
+                UpdateApplicationBar(sender as Pivot);
+            }
+        }
+
+        private void UpdateApplicationBar(Pivot pivot)
+        {
+            switch (pivot.SelectedIndex)
+            {
+                case 0:
+                    if (App.ViewModelLocator.MainPage.DatesList.Contains(DateTime.Now.Date))
+                    {
+                        ApplicationBar = Resources["DatesNoTodayApplicationBar"] as ApplicationBar;
+                    }
+                    else
+                    {
+                        ApplicationBar = Resources["DatesApplicationBar"] as ApplicationBar;
+                    }
+                    break;
+                case 1:
+                    ApplicationBar = Resources["StatusApplicationBar"] as ApplicationBar;
+                    break;
+                case 2:
+                    ApplicationBar = Resources["InfoApplicationBar"] as ApplicationBar;
+                    break;
             }
         }
     }

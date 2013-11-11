@@ -26,6 +26,7 @@
                 From="0.0" To="80.0" Duration="0:0:0.3"
                 AutoReverse="False"/>
         </Storyboard>
+        
         <Storyboard x:Name="HideDatePickerGrid">
             <DoubleAnimation
                 Storyboard.TargetName="HiddenDatePickerGrid"
@@ -33,6 +34,7 @@
                 From="80.0" To="0.0" Duration="0:0:0.3"
                 AutoReverse="False"/>
         </Storyboard>
+        
         <Style x:Key="ThemedButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="{StaticResource ForegroundWhite}"/>
@@ -133,7 +135,6 @@
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="Settings"/>
         </shell:ApplicationBar>
         
-
     </phone:PhoneApplicationPage.Resources>
 
 

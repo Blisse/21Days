@@ -35,59 +35,96 @@ namespace HappyBetter.ViewModels
             }
         }
 
+        #region Public Methods
+
         public void GetData()
         {
-            Dictionary = DataManager.Instance.GetDailyEntriesData() ?? new Dictionary<DateTime, DailyEntry>();
+            IsLoading = true;
 
-            DatesList = new ObservableCollection<DateTime>(Dictionary.Select(x => x.Key));
+            Dictionary = DataManager.Instance.GetDailyEntriesData();
+            UpdateDatesList(Dictionary);
 
-            if (Dictionary.Count == 0)
-            {
-                AddToDatesList(DateTime.Now.Date);
-            }
+            IsLoading = false;
         }
 
         public Boolean AddToDatesList(DateTime enterDateTime)
         {
-            Dictionary = DataManager.Instance.GetDailyEntriesData() ?? new Dictionary<DateTime, DailyEntry>();
+            IsLoading = true;
+            Dictionary = DataManager.Instance.GetDailyEntriesData();
 
             if (Dictionary.ContainsKey(enterDateTime))
             {
-                RaiseAddAlreadyAddedDate(this, enterDateTime);
+                if (AddAlreadyAddedDate != null)
+                {
+                    AddAlreadyAddedDate(this, enterDateTime);
+                }
+
+                IsLoading = false;
                 return false;
             }
 
             var dailyEntry = new DailyEntry(enterDateTime);
             Dictionary.Add(enterDateTime, dailyEntry);
+            UpdateDatesList(Dictionary);
 
             if (DataManager.Instance.SaveDailyEntriesData(Dictionary))
             {
-                DatesList.Add(enterDateTime);
-                var tmp = DatesList.ToList();
-                tmp.Sort((x, y) => x.CompareTo(y));
-                DatesList = new ObservableCollection<DateTime>(tmp);
-                RaisePropertyChanged(String.Empty);
+                if (ErrorOccurred != null)
+                {
+                    ErrorOccurred(this, null);
+                }
 
-                return true;
+                IsLoading = false;
+                return false;
             }
 
-            return false;
+            IsLoading = false;
+            return true;
         }
 
         public Boolean DeleteFromDatesList(DateTime deleteDateTime)
         {
+            IsLoading = true;
             Dictionary = DataManager.Instance.GetDailyEntriesData();
 
-            if (Dictionary == null || !Dictionary.ContainsKey(deleteDateTime))
+            if (!Dictionary.ContainsKey(deleteDateTime))
             {
+                if (DeleteNotExistingDate != null)
+                {
+                    DeleteNotExistingDate(this, deleteDateTime);
+                }
+
+                IsLoading = false;
                 return false;
             }
 
             Dictionary.Remove(deleteDateTime);
+            UpdateDatesList(Dictionary);
 
             if (DataManager.Instance.SaveDailyEntriesData(Dictionary))
             {
-                DatesList.Remove(deleteDateTime);
+                if (ErrorOccurred != null)
+                {
+                    ErrorOccurred(this, null);
+                }
+
+                IsLoading = false;
+                return false;
+            }
+
+            IsLoading = false;
+            return true;
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private Boolean UpdateDatesList(Dictionary<DateTime, DailyEntry> dailyEntries)
+        {
+            if (dailyEntries != null)
+            {
+                DatesList = new ObservableCollection<DateTime>(dailyEntries.Select(x => x.Key).OrderBy(o => o));
                 RaisePropertyChanged(String.Empty);
                 return true;
             }
@@ -95,15 +132,9 @@ namespace HappyBetter.ViewModels
             return false;
         }
 
-        private void RaiseAddAlreadyAddedDate(object sender, DateTime dateTime)
-        {
-            if (AddAlreadyAddedDate != null)
-            {
-                AddAlreadyAddedDate(sender, dateTime);
-            }
-        }
+        #endregion
 
-        public EventHandler<DateTime> AddAlreadyAddedDate;
+        #region Properties
 
         private Dictionary<DateTime, DailyEntry> _dictionary; 
         public Dictionary<DateTime, DailyEntry> Dictionary
@@ -235,5 +266,15 @@ namespace HappyBetter.ViewModels
                 return false;
             }
         }
+
+        #endregion
+
+        #region EventHandlers
+
+        public EventHandler<DateTime> AddAlreadyAddedDate;
+        public EventHandler<DateTime> DeleteNotExistingDate;
+        public EventHandler ErrorOccurred;
+
+        #endregion
     }
 }
