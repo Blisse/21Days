@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using HappyBetter.Models;
 
 namespace HappyBetter.ViewModels
@@ -65,6 +63,11 @@ namespace HappyBetter.ViewModels
             if (DataManager.Instance.SaveDailyEntriesData(Dictionary))
             {
                 DatesList.Add(enterDateTime);
+                var tmp = DatesList.ToList();
+                tmp.Sort((x, y) => x.CompareTo(y));
+                DatesList = new ObservableCollection<DateTime>(tmp);
+                RaisePropertyChanged(String.Empty);
+
                 return true;
             }
 
@@ -85,6 +88,7 @@ namespace HappyBetter.ViewModels
             if (DataManager.Instance.SaveDailyEntriesData(Dictionary))
             {
                 DatesList.Remove(deleteDateTime);
+                RaisePropertyChanged(String.Empty);
                 return true;
             }
 
@@ -101,8 +105,7 @@ namespace HappyBetter.ViewModels
 
         public EventHandler<DateTime> AddAlreadyAddedDate;
 
-        private Dictionary<DateTime, DailyEntry> _dictionary;
-
+        private Dictionary<DateTime, DailyEntry> _dictionary; 
         public Dictionary<DateTime, DailyEntry> Dictionary
         {
             get { return _dictionary; }
@@ -117,7 +120,6 @@ namespace HappyBetter.ViewModels
         /// The <see cref="DatesList" /> property's name.
         /// </summary>
         public const string DatesListPropertyName = "DatesList";
-
         private ObservableCollection<DateTime> _datesList = new ObservableCollection<DateTime>();
 
         /// <summary>
@@ -138,9 +140,9 @@ namespace HappyBetter.ViewModels
                     return;
                 }
 
-                RaisePropertyChanging(DatesListPropertyName);
+                RaisePropertyChanging(String.Empty);
                 _datesList = value;
-                RaisePropertyChanged(DatesListPropertyName);
+                RaisePropertyChanged(String.Empty);
             }
         }
 

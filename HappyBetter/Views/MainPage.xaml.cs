@@ -43,6 +43,8 @@ namespace HappyBetter.Views
                 App.ViewModelLocator.MainPage.AddToDatesList((DateTime)HiddenDatePicker.Value);
             }
             App.ViewModelLocator.MainPage.IsLoading = false;
+
+            MainPagePivot_OnSelectionChanged(this, null);
         }
 
         private void AddTodayAppBar_OnClick(object sender, EventArgs e)
@@ -50,6 +52,8 @@ namespace HappyBetter.Views
             App.ViewModelLocator.MainPage.IsLoading = true;
             App.ViewModelLocator.MainPage.AddToDatesList(DateTime.Now.Date);
             App.ViewModelLocator.MainPage.IsLoading = false;
+
+            MainPagePivot_OnSelectionChanged(this, null);
         }
 
         private void OpenDatePickerAppBar_OnClick(object sender, EventArgs e)
@@ -82,6 +86,8 @@ namespace HappyBetter.Views
                 var dateTimeToDelete = (DateTime)menuItem.DataContext;
                 App.ViewModelLocator.MainPage.DeleteFromDatesList(dateTimeToDelete);
             }
+
+            MainPagePivot_OnSelectionChanged(this, null);
         }
 
         private void OpenEntryButton_OnClick(object sender, RoutedEventArgs e)
@@ -100,24 +106,23 @@ namespace HappyBetter.Views
 
         private void MainPagePivot_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var pivot = sender as Pivot;
-
-            if (pivot != null)
+            if (HiddenDatePickerGrid.Height > 1.0)
             {
-                if (HiddenDatePickerGrid.Height > 1.0)
-                {
-                    HideDatePickerGrid.Begin();
-                }
-                switch (pivot.SelectedIndex)
+                HideDatePickerGrid.Begin();
+            }
+
+            if (MainPagePivot != null)
+            {
+                switch (MainPagePivot.SelectedIndex)
                 {
                     case 0:
                         if (App.ViewModelLocator.MainPage.DatesList.Contains(DateTime.Now.Date))
                         {
-                            ApplicationBar = Resources["DatesApplicationBar"] as ApplicationBar;
+                            ApplicationBar = Resources["DatesNoTodayApplicationBar"] as ApplicationBar;
                         }
                         else
                         {
-                            ApplicationBar = Resources["DatesNoTodayApplicationBar"] as ApplicationBar;
+                            ApplicationBar = Resources["DatesApplicationBar"] as ApplicationBar;
                         }
                         break;
                     case 1:

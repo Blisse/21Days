@@ -154,7 +154,7 @@
                        Foreground="{StaticResource ForegroundBlue}"/>
             </TextBlock>
 
-            <phone:Pivot Grid.Row="1" Style="{StaticResource LightGrayPivotStyle}" SelectionChanged="MainPagePivot_OnSelectionChanged">
+            <phone:Pivot x:Name="MainPagePivot" Grid.Row="1" Style="{StaticResource LightGrayPivotStyle}" SelectionChanged="MainPagePivot_OnSelectionChanged">
                 <phone:PivotItem Style="{StaticResource PivotItemStyle}">
                     <phone:PivotItem.Header>
                         <TextBlock Text="{Binding LocalizedResources.MainDatesHeader, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
