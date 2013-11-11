@@ -219,27 +219,64 @@
                         <TextBlock Text="{Binding LocalizedResources.MainStatusHeader, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
                     </phone:PivotItem.Header>
                     <Grid>
+                        <Grid.Resources>
+                            <Style x:Key="DescriptionStyle" TargetType="TextBlock">
+                                <Setter Property="FontFamily" Value="{StaticResource OpenSans}"/>
+                                <Setter Property="FontSize" Value="20"/>
+                                <Setter Property="Foreground" Value="{StaticResource ForegroundGray}"/>
+                            </Style>
+                            <Style x:Key="DataStyle" TargetType="TextBlock">
+                                <Setter Property="FontFamily" Value="{StaticResource NexaBold}"/>
+                                <Setter Property="FontSize" Value="48"/>
+                            </Style>
+                        </Grid.Resources>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <!--5-->
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <!--10-->
                         </Grid.RowDefinitions>
 
-                        <TextBlock Grid.Row="0" Text="Number of Entries"/>
-                        <TextBlock Grid.Row="1" Text="{Binding NumberOfEntries}"/>
-                        <TextBlock Grid.Row="2" Text="Number of Compled Entries"/>
-                        <TextBlock Grid.Row="3" Text="{Binding NumberOfCompletedEntries}"/>
-                        <TextBlock Grid.Row="4" Text="Number of Consec Entries"/>
-                        <TextBlock Grid.Row="5" Text="{Binding NumberOfConsecutiveEntries}"/>
-                        <TextBlock Grid.Row="6" Text="Number of Consec Complete Entries"/>
-                        <TextBlock Grid.Row="7" Text="{Binding NumberOfConsecutiveCompletedEntries}"/>
+                        <TextBlock Grid.Row="0" Text="{Binding LocalizedResources.MainStatusHeaderDoneForToday, Source={StaticResource LocalizedStrings}}" 
+                                   Style="{StaticResource DescriptionStyle}"/>
+                        <TextBlock Grid.Row="1" Style="{StaticResource DataStyle}" DataContext="{Binding IsTodayCompleted, Converter={StaticResource StatusIsTodayCompletedBooleanToStringConverter}}" Foreground="{Binding Converter={StaticResource StatusIsTodayCompletedToForegroundColorConverter}}">
+                            <Run Text="{Binding Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
+                        </TextBlock>
+
+                        <TextBlock Grid.Row="2" Text="{Binding LocalizedResources.MainStatusHeaderNumberOfEntries, Source={StaticResource LocalizedStrings}}" 
+                                   Style="{StaticResource DescriptionStyle}"/>
+                        <TextBlock Grid.Row="3" Style="{StaticResource DataStyle}">
+                            <Run Text="{Binding NumberOfEntries}"/>
+                        </TextBlock>
+                        
+                        <TextBlock Grid.Row="4" Text="{Binding LocalizedResources.MainStatusHeaderNumberOfCompletedEntries, Source={StaticResource LocalizedStrings}}" 
+                                   Style="{StaticResource DescriptionStyle}"/>
+                        <TextBlock Grid.Row="5" Style="{StaticResource DataStyle}">
+                            <Run Text="{Binding NumberOfCompletedEntries}" Foreground="{Binding NumberOfCompletedEntries, Converter={StaticResource StatusNumberOfEntriesToForegroundColorConverter}}"/><!--
+                            --><Run Text="/" Foreground="{StaticResource ForegroundDarkGray}"/><!--
+                            --><Run Text="{Binding NumberOfEntries}" Foreground="{StaticResource ForegroundDarkGray}"/>
+                        </TextBlock>
+                        
+                        <TextBlock Grid.Row="6" Text="{Binding LocalizedResources.MainStatusHeaderNumberOfConsecutiveEntries, Source={StaticResource LocalizedStrings}}" 
+                                   Style="{StaticResource DescriptionStyle}"/>
+                        <TextBlock Grid.Row="7" Style="{StaticResource DataStyle}">
+                            <Run Text="{Binding NumberOfConsecutiveEntries}"/>
+                        </TextBlock>
+                        
+                        <TextBlock Grid.Row="8" Text="{Binding LocalizedResources.MainStatusHeaderNumberOfConsecutiveCompletedEntries, Source={StaticResource LocalizedStrings}}" 
+                                   Style="{StaticResource DescriptionStyle}"/>
+                        <TextBlock Grid.Row="9" Style="{StaticResource DataStyle}">
+                            <Run Text="{Binding NumberOfConsecutiveCompletedEntries}" Foreground="{Binding NumberOfConsecutiveCompletedEntries, Converter={StaticResource StatusConsecCompletedToForegroundColorConverter}}"/><!--
+                            --><Run Text="/21" Foreground="{StaticResource ForegroundDarkGray}"/>
+                        </TextBlock>
                     </Grid>
                 </phone:PivotItem>
                 <phone:PivotItem Style="{StaticResource PivotItemStyle}">

@@ -219,6 +219,19 @@ namespace HappyBetter.ViewModels
             }
         }
 
-
+        public Boolean IsTodayCompleted
+        {
+            get
+            {
+                if (Dictionary.ContainsKey(DateTime.Now.Date))
+                {
+                    if (Dictionary[DateTime.Now.Date].IsCompleted)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
     }
 }

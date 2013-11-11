@@ -178,6 +178,51 @@ namespace HappyBetter.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Done For Today.
+        /// </summary>
+        public static string MainStatusHeaderDoneForToday {
+            get {
+                return ResourceManager.GetString("MainStatusHeaderDoneForToday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Completed Entries.
+        /// </summary>
+        public static string MainStatusHeaderNumberOfCompletedEntries {
+            get {
+                return ResourceManager.GetString("MainStatusHeaderNumberOfCompletedEntries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Consecutive Days Completed.
+        /// </summary>
+        public static string MainStatusHeaderNumberOfConsecutiveCompletedEntries {
+            get {
+                return ResourceManager.GetString("MainStatusHeaderNumberOfConsecutiveCompletedEntries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Consecutive Days With Entries.
+        /// </summary>
+        public static string MainStatusHeaderNumberOfConsecutiveEntries {
+            get {
+                return ResourceManager.GetString("MainStatusHeaderNumberOfConsecutiveEntries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entries.
+        /// </summary>
+        public static string MainStatusHeaderNumberOfEntries {
+            get {
+                return ResourceManager.GetString("MainStatusHeaderNumberOfEntries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 21.
         /// </summary>
         public static string MainTitleBegin {

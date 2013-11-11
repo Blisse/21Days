@@ -170,4 +170,19 @@
   <data name="MainTitleEnd" xml:space="preserve">
     <value>Days</value>
   </data>
+  <data name="MainStatusHeaderNumberOfCompletedEntries" xml:space="preserve">
+    <value>Completed Entries</value>
+  </data>
+  <data name="MainStatusHeaderNumberOfConsecutiveCompletedEntries" xml:space="preserve">
+    <value>Consecutive Days Completed</value>
+  </data>
+  <data name="MainStatusHeaderNumberOfConsecutiveEntries" xml:space="preserve">
+    <value>Consecutive Days With Entries</value>
+  </data>
+  <data name="MainStatusHeaderNumberOfEntries" xml:space="preserve">
+    <value>Entries</value>
+  </data>
+  <data name="MainStatusHeaderDoneForToday" xml:space="preserve">
+    <value>Done For Today</value>
+  </data>
 </root>

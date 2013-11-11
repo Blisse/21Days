@@ -58,6 +58,10 @@
         <converters:EntryItemTextToBackgroundColorConverter x:Key="EntryItemTextToBackgroundColorConverter"/>
         <converters:BooleanToEntryHeaderColorConverter x:Key="DailyEntryToEntryHeaderColorConverter"/>
         <converters:MainPageDateTimeToBackgroundColorConverter x:Key="MainPageDateTimeToBackgroundColorConverter" />
+        <converters:StatusIsTodayCompletedBooleanToStringConverter x:Key="StatusIsTodayCompletedBooleanToStringConverter" />
+        <converters:StatusIsTodayCompletedToForegroundColorConverter x:Key="StatusIsTodayCompletedToForegroundColorConverter" />
+        <converters:StatusConsecCompletedToForegroundColorConverter x:Key="StatusConsecCompletedToForegroundColorConverter" />
+        <converters:StatusNumberOfEntriesToForegroundColorConverter x:Key="StatusNumberOfEntriesToForegroundColorConverter" />
         <converters:TextCaseConverter x:Key="TextCaseConverter"/>
         
         

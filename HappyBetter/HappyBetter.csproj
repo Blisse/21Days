@@ -99,6 +99,7 @@
     <Compile Include="Converters\BooleanToEntryHeaderColorConverter.cs" />
     <Compile Include="Converters\MainPageDateTimeToBackgroundColorConverter.cs" />
     <Compile Include="Converters\ObjectToBooleanConverter.cs" />
+    <Compile Include="Converters\StatusConverters.cs" />
     <Compile Include="Converters\TextCaseConverter.cs" />
     <Compile Include="Converters\EntryItemTextToBackgroundColorConverter.cs" />
     <Compile Include="CustomControls\ProgressTextBox.xaml.cs">
