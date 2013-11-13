@@ -5,6 +5,7 @@ using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using HappyBetter.Models;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
@@ -17,9 +18,25 @@ namespace HappyBetter.Views
             InitializeComponent();
         }
 
-        private void ClearCachedData_OnClick(object sender, RoutedEventArgs e)
+        public static void Navigate()
         {
-            throw new NotImplementedException();
+            App.RootFrame.Navigate(new Uri("/Views/SettingsPage.xaml", UriKind.Relative));
+        }
+
+        private void ClearAllData_OnClick(object sender, RoutedEventArgs e)
+        {
+            var result =
+                MessageBox.Show(
+                    "Are you sure you want to delete all the data in this app? This action cannot be undone.", "Confirm Delete",
+                    MessageBoxButton.OKCancel);
+
+            switch (result)
+            {
+                case MessageBoxResult.OK:
+                    App.StorageManager.DeleteKey(StorageKeys.DailyEntriesDataStorageKey);
+                    break;
+            }
+            
         }
     }
 }

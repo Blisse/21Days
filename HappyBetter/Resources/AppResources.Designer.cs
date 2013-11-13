@@ -275,5 +275,23 @@ namespace HappyBetter.Resources {
                 return ResourceManager.GetString("ResourceLanguage", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete All Data.
+        /// </summary>
+        public static string SettingsClearAllData {
+            get {
+                return ResourceManager.GetString("SettingsClearAllData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string SettingsTitle {
+            get {
+                return ResourceManager.GetString("SettingsTitle", resourceCulture);
+            }
+        }
     }
 }

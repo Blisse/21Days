@@ -39,6 +39,7 @@ namespace HappyBetter.ViewModels
 
         public Dictionary<DateTime, DailyEntry> Dictionary { get; set; }
 
+        private DailyEntry SavedDailyEntry { get; set; }
 
         /// <summary>
         /// The <see cref="DailyEntry" /> property's name.
@@ -81,7 +82,7 @@ namespace HappyBetter.ViewModels
 
             if (Dictionary != null && Dictionary.ContainsKey(currentDataDateTimeKey))
             {
-                DailyEntry = Dictionary[currentDataDateTimeKey];
+                DailyEntry = Dictionary[currentDataDateTimeKey].Clone();
             }
         }
 
@@ -100,7 +101,7 @@ namespace HappyBetter.ViewModels
             Dictionary = DataManager.Instance.GetDailyEntriesData();
             if (Dictionary != null && DailyEntry != null && Dictionary.ContainsKey(DailyEntry.EntryDateTimeKey))
             {
-                Dictionary[DailyEntry.EntryDateTimeKey] = DailyEntry;
+                Dictionary[DailyEntry.EntryDateTimeKey] = DailyEntry.Clone();
                 DataManager.Instance.SaveDailyEntriesData(Dictionary);
             }
         }

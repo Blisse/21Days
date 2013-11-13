@@ -126,6 +126,11 @@ namespace HappyBetter.ViewModels
             {
                 DatesList = new ObservableCollection<DateTime>(dailyEntries.Select(x => x.Key).OrderBy(o => o));
                 RaisePropertyChanged(String.Empty);
+
+                if (DatesListChanged != null)
+                {
+                    DatesListChanged(this, null);
+                }
                 return true;
             }
 
@@ -274,6 +279,7 @@ namespace HappyBetter.ViewModels
         public EventHandler<DateTime> AddAlreadyAddedDate;
         public EventHandler<DateTime> DeleteNotExistingDate;
         public EventHandler ErrorOccurred;
+        public EventHandler DatesListChanged;
 
         #endregion
     }

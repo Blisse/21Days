@@ -106,34 +106,34 @@
                               BackgroundColor="{StaticResource ColorGray}">
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/add.png" Text="Add Today" Click="AddTodayAppBar_OnClick"/>
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.calendar.png" Text="Add Date" Click="OpenDatePickerAppBar_OnClick"/>
-            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="Settings"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="Settings" Click="OpenSettingsAppBar_OnClick"/>
         </shell:ApplicationBar>
 
         <shell:ApplicationBar x:Key="DatesNoTodayApplicationBar" IsVisible="True" IsMenuEnabled="False" 
                               ForegroundColor="{StaticResource ColorFadedBlack}" 
                               BackgroundColor="{StaticResource ColorGray}">
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.calendar.png" Text="Add Date" Click="OpenDatePickerAppBar_OnClick"/>
-            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="Settings"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="Settings" Click="OpenSettingsAppBar_OnClick"/>
         </shell:ApplicationBar>
 
-        <shell:ApplicationBar x:Key="StatusApplicationBar" IsVisible="True" IsMenuEnabled="False" 
+        <shell:ApplicationBar x:Key="NormalApplicationBar" IsVisible="True" IsMenuEnabled="False" 
                               ForegroundColor="{StaticResource ColorFadedBlack}" 
                               BackgroundColor="{StaticResource ColorGray}">
-            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="Settings"/>
-        </shell:ApplicationBar>
-
-        <shell:ApplicationBar x:Key="InfoApplicationBar" IsVisible="True" IsMenuEnabled="False" 
-                              ForegroundColor="{StaticResource ColorFadedBlack}" 
-                              BackgroundColor="{StaticResource ColorGray}">
-            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="Settings"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="Settings" Click="OpenSettingsAppBar_OnClick"/>
         </shell:ApplicationBar>
 
         <Style x:Key="InfoDescriptionStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontFamily" Value="{StaticResource OpenSans}"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="Foreground" Value="{StaticResource ForegroundGray}"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="Margin" Value="0,0,0,16"/>
+        </Style>
+
+        <Style x:Key="InfoBoldedStyle" TargetType="Run">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundBlue}"/>
         </Style>
     </phone:PhoneApplicationPage.Resources>
 
@@ -229,6 +229,7 @@
                             <Style x:Key="DataStyle" TargetType="TextBlock">
                                 <Setter Property="FontFamily" Value="{StaticResource NexaBold}"/>
                                 <Setter Property="FontSize" Value="48"/>
+                                <Setter Property="Foreground" Value="{StaticResource ForegroundWhite}"/>
                             </Style>
                         </Grid.Resources>
                         <Grid.RowDefinitions>
@@ -293,7 +294,11 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Row="0" Text="This app was inspired by Shawn Achor's TEDx Talk, 'The happy secret to better work'." Style="{StaticResource InfoDescriptionStyle}"/>
-                        <TextBlock Grid.Row="1" Text="We believe that we should work to be happy, but could that be backwards? Psychologist Shawn Achor argues that actually happiness inspires productivity, and by following his simple steps for just 21 days, you can benefit from the 'happiness advantage'." Style="{StaticResource InfoDescriptionStyle}"/>
+                        <TextBlock Grid.Row="1" Style="{StaticResource InfoDescriptionStyle}">
+                            <Run Text="We believe that we should work to be happy, but could that be backwards? Psychologist Shawn Achor argues that actually happiness inspires productivity, and by following his simple steps for just 21 days, you can benefit from the "/><!--
+                            --><Run Text="'happiness advantage'" Foreground="{StaticResource ForegroundBlue}"/><!--
+                            --><Run Text="."/>
+                        </TextBlock>
                         <TextBlock Grid.Row="2" Text="This app can help in chronicling the 21 day plan to boost your brain's positivity and help you work more successfully." Style="{StaticResource InfoDescriptionStyle}"/>
                         <TextBlock Grid.Row="3" Text="You can watch Shawn Achor's video here:" Style="{StaticResource InfoDescriptionStyle}"/>
 
@@ -309,7 +314,7 @@
                                     <TextBlock FontFamily="{StaticResource OpenSans}" FontSize="22"
                                             Foreground="{StaticResource ForegroundDarkGray}"
                                             VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
-                                        <Run Text="Watch Locally"/>
+                                        <Run Text="Watch Offline"/>
                                     </TextBlock>
                                 </Grid>
                             </Button>
@@ -338,10 +343,18 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                            
+
                         <TextBlock Grid.Row="0" Text="Reverse the formula for happiness and success." Style="{StaticResource InfoDescriptionStyle}"/>
-                        <TextBlock Grid.Row="1" Text="If you can raise someone's level of happiness, that someone's brain can experience a 'happiness advantage'." Style="{StaticResource InfoDescriptionStyle}"/>
-                        <TextBlock Grid.Row="2" Text="The brain at positive performs significantly better than at negative, neutral or stressed. If we can find a way to become more positive in the present, we can work more successfully." Style="{StaticResource InfoDescriptionStyle}"/>
+                        <TextBlock Grid.Row="1"  Style="{StaticResource InfoDescriptionStyle}">
+                                    <Run Text="If you can raise someone's level of happiness, that someone's brain can experience a '"/><!--
+                                    --><Run Text="happiness advantage" Foreground="{StaticResource ForegroundBlue}"/><!--
+                                    --><Run Text="'."/>
+                        </TextBlock>
+                        <TextBlock Grid.Row="2"  Style="{StaticResource InfoDescriptionStyle}">
+                                    <Run Text="The brain at positive performs significantly better than at negative, neutral or stressed. If we can find a way to become "/><!--
+                                    --><Run Text="more positive" Foreground="{StaticResource ForegroundBlue}"/><!--
+                                    --><Run Text=" in the present, we can work more successfully."/>
+                        </TextBlock>
                         <TextBlock Grid.Row="3" Text="With these short exercises, we can rewire your brain to work more optimistically and more successfully." Style="{StaticResource InfoDescriptionStyle}"/>
                     </Grid>
                 </phone:PivotItem>
@@ -351,6 +364,16 @@
                     </phone:PivotItem.Header>
                     <ScrollViewer Height="505">
                         <Grid>
+                            <Grid.Resources>
+                                <Style x:Key="WhatHeaderNumberStyle" TargetType="TextBlock">
+                                    <Setter Property="FontFamily" Value="{StaticResource NexaBold}"/>
+                                    <Setter Property="FontSize" Value="48"/>
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                    <Setter Property="VerticalAlignment" Value="Top"/>
+                                    <Setter Property="Margin" Value="0,0,10,0"/>
+                                    <Setter Property="Foreground" Value="{StaticResource ForegroundWhite}"/>
+                                </Style>
+                            </Grid.Resources>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
@@ -360,12 +383,66 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <TextBlock Grid.Row="0" Text="For 21 days in a row, take some time each day to follow these 5 steps, and journal them in this app." Style="{StaticResource InfoDescriptionStyle}"/>
-                            <TextBlock Grid.Row="1" Text="Writing down 3 new things we're grateful for each day helps the brain retain a pattern of scanning the world not for the negatives, but for the positives." Style="{StaticResource InfoDescriptionStyle}"/>
-                            <TextBlock Grid.Row="2" Text="Journalling about one positive experience we've had over the last 24 hours lets our brain relive it." Style="{StaticResource InfoDescriptionStyle}"/>
-                            <TextBlock Grid.Row="3" Text="Exercise teaches your brain that your behavior matters." Style="{StaticResource InfoDescriptionStyle}"/>
-                            <TextBlock Grid.Row="4" Text="Meditation allows your brain to get over the cultural ADHD we've created by trying to do multiple things at once and allows our brain to focus on the task at hand." Style="{StaticResource InfoDescriptionStyle}"/>
-                            <TextBlock Grid.Row="5" Text="Random and conscious acts of kindness tell us we can impact the world, and make the world around us a happier place." Style="{StaticResource InfoDescriptionStyle}"/>
+                            <TextBlock Grid.Row="0" Text="For 21 days in a row, take some time each day to follow these 5 steps, and document them in this app. If you enjoy it, keep going!" Style="{StaticResource InfoDescriptionStyle}"/>
+
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="42"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="1" Style="{StaticResource WhatHeaderNumberStyle}"/>
+                                <TextBlock Grid.Column="1"  Style="{StaticResource InfoDescriptionStyle}">
+                                    <Run Text="Writing down "/><!--
+                                    --><Run Text="3 new things we're grateful for" Foreground="{StaticResource ForegroundBlue}"/><!--
+                                    --><Run Text=" each day helps the brain retain a pattern of scanning the world not for the negatives, but for the positives."/>
+                                </TextBlock>
+                            </Grid>
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="42"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="2" Style="{StaticResource WhatHeaderNumberStyle}"/>
+                                <TextBlock Grid.Column="1"  Style="{StaticResource InfoDescriptionStyle}">
+                                    <Run Text="Journalling about one positive experience" Foreground="{StaticResource ForegroundBlue}"/><!--
+                                    --><Run Text=" we've had over the last 24 hours lets our brain relive it."/>
+                                </TextBlock>
+                                <TextBlock Grid.Column="1" Text=" " Style="{StaticResource InfoDescriptionStyle}"/>
+                            </Grid>
+                            <Grid Grid.Row="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="42"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="3" Style="{StaticResource WhatHeaderNumberStyle}"/>
+                                <TextBlock Grid.Column="1"  Style="{StaticResource InfoDescriptionStyle}">
+                                    <Run Text="Exercise" Foreground="{StaticResource ForegroundBlue}"/><!--
+                                    --><Run Text=" teaches our brains that our behavior matters."/>
+                                </TextBlock>
+                            </Grid>
+                            <Grid Grid.Row="4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="42"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="4" Style="{StaticResource WhatHeaderNumberStyle}"/>
+                                <TextBlock Grid.Column="1"  Style="{StaticResource InfoDescriptionStyle}">
+                                    <Run Text="Meditation" Foreground="{StaticResource ForegroundBlue}"/><!--
+                                    --><Run Text=" allows our brains to get over the cultural ADHD we've created by trying to do multiple things at once and allows our brain to focus on the task at hand."/>
+                                </TextBlock>
+                            </Grid>
+                            <Grid Grid.Row="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="42"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="5" Style="{StaticResource WhatHeaderNumberStyle}"/>
+                                <TextBlock Grid.Column="1"  Style="{StaticResource InfoDescriptionStyle}">
+                                    <Run Text="Random and conscious acts of kindness" Foreground="{StaticResource ForegroundBlue}"/><!--
+                                    --><Run Text=" tell us we can impact the world, and make the world around us a happier place."/>
+                                </TextBlock>
+                            </Grid>
+
                         </Grid>
                     </ScrollViewer>
                 </phone:PivotItem>

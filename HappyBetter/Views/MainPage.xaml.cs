@@ -36,9 +36,14 @@ namespace HappyBetter.Views
             YouTube.CancelPlay();
             base.OnNavigatedTo(e);
             App.ViewModelLocator.MainPage.AddAlreadyAddedDate += OnAddAlreadyAddedDate;
-            App.ViewModelLocator.MainPage.DatesList.CollectionChanged += DatesListOnCollectionChanged;
+            App.ViewModelLocator.MainPage.DatesListChanged += DatesListOnCollectionChanged;
 
             App.ViewModelLocator.MainPage.GetData();
+        }
+
+        public static Boolean Navigate()
+        {
+            return App.RootFrame.Navigate(new Uri("/Views/MainPage.xaml", UriKind.Relative));
         }
 
         private void OnAddAlreadyAddedDate(object sender, DateTime dateTime)
@@ -46,7 +51,7 @@ namespace HappyBetter.Views
             Dispatcher.BeginInvoke(() => CustomMessageBoxes.DateAlreadyExistsMessageBox.Show(dateTime));
         }
 
-        private void DatesListOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        private void DatesListOnCollectionChanged(object sender, EventArgs e)
         {
             Dispatcher.BeginInvoke(() => UpdateApplicationBar(MainPagePivot));
         }
@@ -143,10 +148,10 @@ namespace HappyBetter.Views
                     }
                     break;
                 case 1:
-                    ApplicationBar = Resources["StatusApplicationBar"] as ApplicationBar;
-                    break;
                 case 2:
-                    ApplicationBar = Resources["InfoApplicationBar"] as ApplicationBar;
+                case 3:
+                case 4:
+                    ApplicationBar = Resources["NormalApplicationBar"] as ApplicationBar;
                     break;
             }
         }
@@ -173,6 +178,11 @@ namespace HappyBetter.Views
                     MessageBox.Show(ex.Message);
                 }
             });
+        }
+
+        private void OpenSettingsAppBar_OnClick(object sender, EventArgs e)
+        {
+            SettingsPage.Navigate();
         }
     }
 }

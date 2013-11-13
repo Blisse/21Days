@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -117,6 +119,32 @@ namespace HappyBetter.Models
         public Boolean IsDone(String item)
         {
             return !String.IsNullOrWhiteSpace(item);
+        }
+
+        public DailyEntry Clone()
+        {
+            var dailyEntry = new DailyEntry()
+            {
+                ActOfKindnessEntry = String.Copy(this.ActOfKindnessEntry ?? String.Empty),
+                EntryDateTimeKey = this.EntryDateTimeKey,
+                ExerciseEntry = String.Copy(this.ExerciseEntry ?? String.Empty),
+                GratitudeEntriesList = new ObservableCollection<GratitudeEntry>(this.GratitudeEntriesList ?? new Collection<GratitudeEntry>()),
+                JournalEntry = String.Copy(this.JournalEntry ?? String.Empty),
+                LastEditedDate = this.LastEditedDate,
+                MeditationEntry = String.Copy(this.MeditationEntry ?? String.Empty)
+            };
+            dailyEntry.GratitudeEntriesList = new ObservableCollection<GratitudeEntry>();
+            if (this.GratitudeEntriesList != null)
+            {
+                foreach (var gratitudeEntry in this.GratitudeEntriesList)
+                {
+                    dailyEntry.GratitudeEntriesList.Add(new GratitudeEntry()
+                    {
+                        Description = String.Copy(gratitudeEntry.Description ?? String.Empty)
+                    });
+                }
+            }
+            return dailyEntry;
         }
     }
 

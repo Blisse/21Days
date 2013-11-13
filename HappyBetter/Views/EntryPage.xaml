@@ -27,16 +27,23 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="0,5,0,10"/>
         </Style>
-    </phone:PhoneApplicationPage.Resources>
-    
-    <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False" 
+
+        <shell:ApplicationBar x:Key="NormalApplicationBar"  IsVisible="True" IsMenuEnabled="False" 
                               ForegroundColor="{StaticResource ColorFadedBlack}" 
                               BackgroundColor="{StaticResource ColorGray}">
-            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="Settings"/>
-            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/add.png" Text="Add Experience"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/back.png" Text="Discard" Click="DiscardAppBar_OnClick"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/save.png" Text="Save" Click="SaveAppBar_OnClick"/>
         </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>
+        
+        <shell:ApplicationBar x:Key="GratitudesApplicationBar" IsVisible="True" IsMenuEnabled="False" 
+                              ForegroundColor="{StaticResource ColorFadedBlack}" 
+                              BackgroundColor="{StaticResource ColorGray}">
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/back.png" Text="Discard" Click="DiscardAppBar_OnClick"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/save.png" Text="Save" Click="SaveAppBar_OnClick"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/add.png" Text="Add Thanks" Click="AppThanksAppBar_OnClick"/>
+        </shell:ApplicationBar>
+        
+    </phone:PhoneApplicationPage.Resources>
     
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="{StaticResource ApplicationBackgroundColor}" 
@@ -79,7 +86,7 @@
 
                                         <CheckBox Grid.Column="0" IsHitTestVisible="False" Style="{StaticResource EntryPivotCheckBoxStyle}"
                                                   IsChecked="{Binding Path=Description, Converter={StaticResource ObjectToBooleanConverter}}"/>
-                                        <TextBox Grid.Column="1" Height="Auto" TextWrapping="Wrap" Style="{StaticResource ThemedTextBoxStyle}"
+                                        <TextBox Grid.Column="1" Height="Auto" Style="{StaticResource ThemedTextBoxStyle}"
                                                  Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=Explicit}" 
                                                  TextChanged="TextBoxUpdateBindingSource_OnTextChanged"/>
                                     </Grid>

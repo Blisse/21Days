@@ -191,4 +191,10 @@
   <data name="MainWhatHeader" xml:space="preserve">
     <value>What To Do</value>
   </data>
+  <data name="SettingsClearAllData" xml:space="preserve">
+    <value>Delete All Data</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>Settings</value>
+  </data>
 </root>

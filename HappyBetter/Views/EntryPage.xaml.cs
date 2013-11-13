@@ -14,6 +14,8 @@ namespace HappyBetter.Views
     {
         private static DateTime? _dataDateTimeKey;
         private EventHandler<DailyEntry> _entryUpdated;
+        private Boolean _discardChanges;
+        
 
         public EntryPage()
         {
@@ -30,6 +32,8 @@ namespace HappyBetter.Views
                 App.ViewModelLocator.EntryPage.GetData(_dataDateTimeKey.Value);
                 App.ViewModelLocator.EntryPage.IsLoading = false;
             }
+            _discardChanges = false;
+
             _entryUpdated(this, App.ViewModelLocator.EntryPage.DailyEntry);
         }
 
@@ -38,7 +42,10 @@ namespace HappyBetter.Views
             base.OnNavigatedFrom(e);
             _entryUpdated -= EntryUpdated;
             _dataDateTimeKey = null;
-            App.ViewModelLocator.EntryPage.SaveEntry();
+            if (!_discardChanges)
+            {
+                App.ViewModelLocator.EntryPage.SaveEntry();   
+            }
         }
 
         public static Boolean Navigate(DateTime dataDateTimeKey)
@@ -135,7 +142,6 @@ namespace HappyBetter.Views
             if (pivot != null)
             {
                 var currentIndex = pivot.SelectedIndex;
-                ApplicationBar.IsVisible = pivot.SelectedIndex == 0;
 
                 if (e.RemovedItems != null && e.RemovedItems.Count > 0 && e.RemovedItems[0] as PivotItem != null)
                 {
@@ -162,11 +168,44 @@ namespace HappyBetter.Views
                     }
                 }
 
-
+                UpdateApplicationBar(pivot);
             }
-
-
         }
 
+        private const String NormalAppBarKey = "NormalApplicationBar";
+        private const String GratitudesAppBarKey = "GratitudesApplicationBar";
+
+        private void UpdateApplicationBar(Pivot pivot)
+        {
+            switch (pivot.SelectedIndex)
+            {
+                case 0:
+                    ApplicationBar = Resources[GratitudesAppBarKey] as ApplicationBar;
+                    break;
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                    ApplicationBar = Resources[NormalAppBarKey] as ApplicationBar;
+                    break;
+            }
+        }
+
+        private void AppThanksAppBar_OnClick(object sender, EventArgs e)
+        {
+            App.ViewModelLocator.EntryPage.AddGratitudeEntry();
+        }
+
+        private void SaveAppBar_OnClick(object sender, EventArgs e)
+        {
+            App.ViewModelLocator.EntryPage.SaveEntry();
+        }
+
+        private void DiscardAppBar_OnClick(object sender, EventArgs e)
+        {
+            _discardChanges = true;
+            MainPage.Navigate();
+            NavigationService.RemoveBackEntry();
+        }
     }
 }

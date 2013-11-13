@@ -12,10 +12,12 @@
     Background="{StaticResource ApplicationBackgroundColor}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    shell:SystemTray.ForegroundColor="{StaticResource ColorGray}"
+    shell:SystemTray.BackgroundColor="{StaticResource ColorBlack}">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="{StaticResource ApplicationBackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -28,16 +30,52 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Button VerticalAlignment="Center" Click="ClearCachedData_OnClick"
-                        Style="{StaticResource ButtonTiltEffectEnabledStyle}">
-                <Grid Background="{StaticResource ForegroundBlue}" Margin="13,13,0,13" HorizontalAlignment="Left">
-                    <TextBlock Text="Clear Cached Data"
-                                   HorizontalAlignment="Center"
-                                   TextTrimming="WordEllipsis"
-                                   FontSize="16" Margin="15,10"/>
+            <Grid>
+                <Grid.Resources>
+                    <Style x:Key="DescriptionStyle" TargetType="TextBlock">
+                        <Setter Property="FontFamily" Value="{StaticResource OpenSans}"/>
+                        <Setter Property="FontSize" Value="20"/>
+                        <Setter Property="Foreground" Value="{StaticResource ForegroundGray}"/>
+                        <Setter Property="Margin" Value="0,0,0,10"></Setter>
+                    </Style>
+                    <Style x:Key="TitleStyle" TargetType="TextBlock">
+                        <Setter Property="FontFamily" Value="{StaticResource NexaBold}"/>
+                        <Setter Property="FontSize" Value="64"/>
+                        <Setter Property="Foreground" Value="{StaticResource ForegroundGray}"/>
+                        <Setter Property="Margin" Value="0,0,0,15"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="{Binding LocalizedResources.SettingsTitle, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}" 
+                                   Style="{StaticResource TitleStyle}"/>
+
+                <TextBlock Grid.Row="1" Text="{Binding LocalizedResources.SettingsClearAllData, Source={StaticResource LocalizedStrings}}" 
+                                   Style="{StaticResource DescriptionStyle}"/>
+
+
+                <Grid Grid.Row="2" Margin="0,0,0,16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Style="{StaticResource ButtonTiltEffectEnabledStyle}" Click="ClearAllData_OnClick"
+                                    Height="50" VerticalAlignment="Center">
+                        <Grid Background="{StaticResource BackgroundRed}">
+                            <TextBlock FontFamily="{StaticResource OpenSans}" FontSize="22"
+                                            Foreground="{StaticResource ForegroundWhite}"
+                                            VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
+                                        <Run Text="Delete All Dates"/>
+                            </TextBlock>
+                        </Grid>
+                    </Button>
                 </Grid>
-            </Button>
-            
+            </Grid>
+
         </Grid>
     </Grid>
 

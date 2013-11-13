@@ -153,6 +153,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\AppBar\back.png" />
     <Content Include="Assets\Fonts\Nexa Bold.otf" />
     <Content Include="Assets\Fonts\Nexa Light.otf" />
     <Content Include="Assets\Fonts\OpenSans-Regular.ttf" />
@@ -181,6 +182,8 @@
     <Content Include="Assets\Tiles\FlipCycleTileSmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Tiles\IconicMedium.png" />
+    <Content Include="Assets\Tiles\IconicSmall.png" />
     <Content Include="Assets\Tiles\IconicTileMediumLarge.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
