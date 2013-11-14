@@ -47,6 +47,34 @@ namespace HappyBetter.ViewModels
             IsLoading = false;
         }
 
+        public Boolean ClearData()
+        {
+            IsLoading = true;
+
+            if (!DataManager.Instance.ClearDailyEntriesData())
+            {
+                IsLoading = false;
+                return false;
+            }
+
+            Dictionary = DataManager.Instance.GetDailyEntriesData();
+            UpdateDatesList(Dictionary);
+
+            if (!DataManager.Instance.SaveDailyEntriesData(Dictionary))
+            {
+                if (ErrorOccurred != null)
+                {
+                    ErrorOccurred(this, null);
+                }
+
+                IsLoading = false;
+                return false;
+            }
+
+            IsLoading = false;
+            return true;
+        }
+
         public Boolean AddToDatesList(DateTime enterDateTime)
         {
             IsLoading = true;
@@ -67,7 +95,7 @@ namespace HappyBetter.ViewModels
             Dictionary.Add(enterDateTime, dailyEntry);
             UpdateDatesList(Dictionary);
 
-            if (DataManager.Instance.SaveDailyEntriesData(Dictionary))
+            if (!DataManager.Instance.SaveDailyEntriesData(Dictionary))
             {
                 if (ErrorOccurred != null)
                 {
@@ -101,7 +129,7 @@ namespace HappyBetter.ViewModels
             Dictionary.Remove(deleteDateTime);
             UpdateDatesList(Dictionary);
 
-            if (DataManager.Instance.SaveDailyEntriesData(Dictionary))
+            if (!DataManager.Instance.SaveDailyEntriesData(Dictionary))
             {
                 if (ErrorOccurred != null)
                 {

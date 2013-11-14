@@ -26,7 +26,7 @@
                 From="0.0" To="80.0" Duration="0:0:0.3"
                 AutoReverse="False"/>
         </Storyboard>
-        
+
         <Storyboard x:Name="HideDatePickerGrid">
             <DoubleAnimation
                 Storyboard.TargetName="HiddenDatePickerGrid"
@@ -34,7 +34,7 @@
                 From="80.0" To="0.0" Duration="0:0:0.3"
                 AutoReverse="False"/>
         </Storyboard>
-        
+
         <Style x:Key="ThemedButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="{StaticResource ForegroundGray}"/>
@@ -101,40 +101,32 @@
             </StackPanel>
         </ControlTemplate>
 
-        <shell:ApplicationBar x:Key="DatesApplicationBar" IsVisible="True" IsMenuEnabled="False" 
+        <shell:ApplicationBar x:Key="DatesApplicationBar" IsVisible="True" IsMenuEnabled="True" 
                               ForegroundColor="{StaticResource ColorFadedBlack}" 
                               BackgroundColor="{StaticResource ColorGray}">
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/add.png" Text="Add Today" Click="AddTodayAppBar_OnClick"/>
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.calendar.png" Text="Add Date" Click="OpenDatePickerAppBar_OnClick"/>
-            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="Settings" Click="OpenSettingsAppBar_OnClick"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="Delete all dates data" Click="DeleteAllDatesAppBarMenuItem_Click"/>
+            </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
 
-        <shell:ApplicationBar x:Key="DatesNoTodayApplicationBar" IsVisible="True" IsMenuEnabled="False" 
+        <shell:ApplicationBar x:Key="DatesNoTodayApplicationBar" IsVisible="True" IsMenuEnabled="True" 
                               ForegroundColor="{StaticResource ColorFadedBlack}" 
                               BackgroundColor="{StaticResource ColorGray}">
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.calendar.png" Text="Add Date" Click="OpenDatePickerAppBar_OnClick"/>
-            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="Settings" Click="OpenSettingsAppBar_OnClick"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="Delete all dates data" Click="DeleteAllDatesAppBarMenuItem_Click"/>
+            </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
 
-        <shell:ApplicationBar x:Key="NormalApplicationBar" IsVisible="True" IsMenuEnabled="False" 
+        <shell:ApplicationBar x:Key="NormalApplicationBar" IsVisible="True" IsMenuEnabled="True" Mode="Minimized"
                               ForegroundColor="{StaticResource ColorFadedBlack}" 
                               BackgroundColor="{StaticResource ColorGray}">
-            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="Settings" Click="OpenSettingsAppBar_OnClick"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="Delete all dates data" Click="DeleteAllDatesAppBarMenuItem_Click"/>
+            </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
-
-        <Style x:Key="InfoDescriptionStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="FontFamily" Value="{StaticResource OpenSans}"/>
-            <Setter Property="Foreground" Value="{StaticResource ForegroundGray}"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
-            <Setter Property="Margin" Value="0,0,0,16"/>
-        </Style>
-
-        <Style x:Key="InfoBoldedStyle" TargetType="Run">
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="{StaticResource ForegroundBlue}"/>
-        </Style>
     </phone:PhoneApplicationPage.Resources>
 
 
@@ -258,7 +250,7 @@
                         <TextBlock Grid.Row="3" Style="{StaticResource DataStyle}">
                             <Run Text="{Binding NumberOfEntries}"/>
                         </TextBlock>
-                        
+
                         <TextBlock Grid.Row="4" Text="{Binding LocalizedResources.MainStatusHeaderNumberOfCompletedEntries, Source={StaticResource LocalizedStrings}}" 
                                    Style="{StaticResource DescriptionStyle}"/>
                         <TextBlock Grid.Row="5" Style="{StaticResource DataStyle}">
@@ -266,13 +258,13 @@
                             --><Run Text="/" Foreground="{StaticResource ForegroundDarkGray}"/><!--
                             --><Run Text="{Binding NumberOfEntries}" Foreground="{StaticResource ForegroundDarkGray}"/>
                         </TextBlock>
-                        
+
                         <TextBlock Grid.Row="6" Text="{Binding LocalizedResources.MainStatusHeaderNumberOfConsecutiveEntries, Source={StaticResource LocalizedStrings}}" 
                                    Style="{StaticResource DescriptionStyle}"/>
                         <TextBlock Grid.Row="7" Style="{StaticResource DataStyle}">
                             <Run Text="{Binding NumberOfConsecutiveEntries}"/>
                         </TextBlock>
-                        
+
                         <TextBlock Grid.Row="8" Text="{Binding LocalizedResources.MainStatusHeaderNumberOfConsecutiveCompletedEntries, Source={StaticResource LocalizedStrings}}" 
                                    Style="{StaticResource DescriptionStyle}"/>
                         <TextBlock Grid.Row="9" Style="{StaticResource DataStyle}">
@@ -285,95 +277,8 @@
                     <phone:PivotItem.Header>
                         <TextBlock Text="{Binding LocalizedResources.MainAboutHeader, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
                     </phone:PivotItem.Header>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" Text="This app was inspired by Shawn Achor's TEDx Talk, 'The happy secret to better work'." Style="{StaticResource InfoDescriptionStyle}"/>
-                        <TextBlock Grid.Row="1" Style="{StaticResource InfoDescriptionStyle}">
-                            <Run Text="We believe that we should work to be happy, but could that be backwards? Psychologist Shawn Achor argues that actually happiness inspires productivity, and by following his simple steps for just 21 days, you can benefit from the "/><!--
-                            --><Run Text="'happiness advantage'" Foreground="{StaticResource ForegroundBlue}"/><!--
-                            --><Run Text="."/>
-                        </TextBlock>
-                        <TextBlock Grid.Row="2" Text="This app can help in chronicling the 21 day plan to boost your brain's positivity and help you work more successfully." Style="{StaticResource InfoDescriptionStyle}"/>
-                        <TextBlock Grid.Row="3" Text="You can watch Shawn Achor's video here:" Style="{StaticResource InfoDescriptionStyle}"/>
-
-                        <Grid Grid.Row="4" Margin="0,0,0,16">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Button Grid.Column="0" Style="{StaticResource ButtonTiltEffectEnabledStyle}" Click="WatchLocally_OnClick"
-                                    Height="50" VerticalAlignment="Center"
-                                Margin="12,0,6,0">
-                                <Grid Background="{StaticResource BackgroundWhite}">
-                                    <TextBlock FontFamily="{StaticResource OpenSans}" FontSize="22"
-                                            Foreground="{StaticResource ForegroundDarkGray}"
-                                            VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
-                                        <Run Text="Watch Offline"/>
-                                    </TextBlock>
-                                </Grid>
-                            </Button>
-                            <Button Grid.Column="1" Style="{StaticResource ButtonTiltEffectEnabledStyle}" Click="WatchYoutube_OnClick"
-                                    Height="50" VerticalAlignment="Center"
-                                Margin="6,0,12,0">
-                                <Grid Background="{StaticResource BackgroundBlue}">
-                                    <TextBlock FontFamily="{StaticResource OpenSans}" FontSize="22"
-                                            Foreground="{StaticResource ForegroundWhite}"
-                                            VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
-                                        <Run Text="Watch on Youtube"/>
-                                    </TextBlock>
-                                </Grid>
-                            </Button>
-                        </Grid>
-                    </Grid>
-                </phone:PivotItem>
-                <phone:PivotItem Style="{StaticResource PivotItemStyle}">
-                    <phone:PivotItem.Header>
-                        <TextBlock Text="{Binding LocalizedResources.MainHowHeader, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
-                </phone:PivotItem.Header>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Row="0" Text="Reverse the formula for happiness and success." Style="{StaticResource InfoDescriptionStyle}"/>
-                        <TextBlock Grid.Row="1"  Style="{StaticResource InfoDescriptionStyle}">
-                                    <Run Text="If you can raise someone's level of happiness, that someone's brain can experience a '"/><!--
-                                    --><Run Text="happiness advantage" Foreground="{StaticResource ForegroundBlue}"/><!--
-                                    --><Run Text="'."/>
-                        </TextBlock>
-                        <TextBlock Grid.Row="2"  Style="{StaticResource InfoDescriptionStyle}">
-                                    <Run Text="The brain at positive performs significantly better than at negative, neutral or stressed. If we can find a way to become "/><!--
-                                    --><Run Text="more positive" Foreground="{StaticResource ForegroundBlue}"/><!--
-                                    --><Run Text=" in the present, we can work more successfully."/>
-                        </TextBlock>
-                        <TextBlock Grid.Row="3" Text="With these short exercises, we can rewire your brain to work more optimistically and more successfully." Style="{StaticResource InfoDescriptionStyle}"/>
-                    </Grid>
-                </phone:PivotItem>
-                <phone:PivotItem Style="{StaticResource PivotItemStyle}">
-                    <phone:PivotItem.Header>
-                        <TextBlock Text="{Binding LocalizedResources.MainWhatHeader, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
-                    </phone:PivotItem.Header>
                     <ScrollViewer Height="505">
                         <Grid>
-                            <Grid.Resources>
-                                <Style x:Key="WhatHeaderNumberStyle" TargetType="TextBlock">
-                                    <Setter Property="FontFamily" Value="{StaticResource NexaBold}"/>
-                                    <Setter Property="FontSize" Value="48"/>
-                                    <Setter Property="HorizontalAlignment" Value="Center"/>
-                                    <Setter Property="VerticalAlignment" Value="Top"/>
-                                    <Setter Property="Margin" Value="0,0,10,0"/>
-                                    <Setter Property="Foreground" Value="{StaticResource ForegroundWhite}"/>
-                                </Style>
-                            </Grid.Resources>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
@@ -381,68 +286,62 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Text="This app was inspired by Shawn Achor's TEDx Talk, 'The happy secret to better work'." Style="{StaticResource InfoDescriptionStyle}"/>
+                            <TextBlock Grid.Row="1" Style="{StaticResource InfoDescriptionStyle}">
+                                <Run Text="We believe that we should work to be happy, but could that be backwards? Psychologist Shawn Achor argues that actually happiness inspires productivity, and by following his simple steps for just 21 days, you can benefit from the "/><!--
+                                --><Run Text="'happiness advantage'" Foreground="{StaticResource ForegroundBlue}"/><!--
+                                --><Run Text="."/>
+                            </TextBlock>
+                            <TextBlock Grid.Row="2" Text="This app can help in chronicling the 21 day plan to boost your brain's positivity and help you work more successfully." Style="{StaticResource InfoDescriptionStyle}"/>
+                            <TextBlock Grid.Row="3" Text="You can watch Shawn Achor's video here:" Style="{StaticResource InfoDescriptionStyle}"/>
 
-                            <TextBlock Grid.Row="0" Text="For 21 days in a row, take some time each day to follow these 5 steps, and document them in this app. If you enjoy it, keep going!" Style="{StaticResource InfoDescriptionStyle}"/>
-
-                            <Grid Grid.Row="1">
+                            <Grid Grid.Row="4" Margin="0,0,0,16">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="42"/>
+                                    <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="1" Style="{StaticResource WhatHeaderNumberStyle}"/>
-                                <TextBlock Grid.Column="1"  Style="{StaticResource InfoDescriptionStyle}">
-                                    <Run Text="Writing down "/><!--
-                                    --><Run Text="3 new things we're grateful for" Foreground="{StaticResource ForegroundBlue}"/><!--
-                                    --><Run Text=" each day helps the brain retain a pattern of scanning the world not for the negatives, but for the positives."/>
-                                </TextBlock>
-                            </Grid>
-                            <Grid Grid.Row="2">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="42"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="2" Style="{StaticResource WhatHeaderNumberStyle}"/>
-                                <TextBlock Grid.Column="1"  Style="{StaticResource InfoDescriptionStyle}">
-                                    <Run Text="Journalling about one positive experience" Foreground="{StaticResource ForegroundBlue}"/><!--
-                                    --><Run Text=" we've had over the last 24 hours lets our brain relive it."/>
-                                </TextBlock>
-                                <TextBlock Grid.Column="1" Text=" " Style="{StaticResource InfoDescriptionStyle}"/>
-                            </Grid>
-                            <Grid Grid.Row="3">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="42"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="3" Style="{StaticResource WhatHeaderNumberStyle}"/>
-                                <TextBlock Grid.Column="1"  Style="{StaticResource InfoDescriptionStyle}">
-                                    <Run Text="Exercise" Foreground="{StaticResource ForegroundBlue}"/><!--
-                                    --><Run Text=" teaches our brains that our behavior matters."/>
-                                </TextBlock>
-                            </Grid>
-                            <Grid Grid.Row="4">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="42"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="4" Style="{StaticResource WhatHeaderNumberStyle}"/>
-                                <TextBlock Grid.Column="1"  Style="{StaticResource InfoDescriptionStyle}">
-                                    <Run Text="Meditation" Foreground="{StaticResource ForegroundBlue}"/><!--
-                                    --><Run Text=" allows our brains to get over the cultural ADHD we've created by trying to do multiple things at once and allows our brain to focus on the task at hand."/>
-                                </TextBlock>
-                            </Grid>
-                            <Grid Grid.Row="5">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="42"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="5" Style="{StaticResource WhatHeaderNumberStyle}"/>
-                                <TextBlock Grid.Column="1"  Style="{StaticResource InfoDescriptionStyle}">
-                                    <Run Text="Random and conscious acts of kindness" Foreground="{StaticResource ForegroundBlue}"/><!--
-                                    --><Run Text=" tell us we can impact the world, and make the world around us a happier place."/>
-                                </TextBlock>
+                                <Button Grid.Column="0" Style="{StaticResource ButtonTiltEffectEnabledStyle}" Click="WatchLocally_OnClick"
+                                    Height="50" VerticalAlignment="Center"
+                                Margin="12,0,6,0">
+                                    <Grid Background="{StaticResource BackgroundWhite}">
+                                        <TextBlock FontFamily="{StaticResource OpenSans}" FontSize="22"
+                                            Foreground="{StaticResource ForegroundDarkGray}"
+                                            VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
+                                        <Run Text="Watch Offline"/>
+                                        </TextBlock>
+                                    </Grid>
+                                </Button>
+                                <Button Grid.Column="1" Style="{StaticResource ButtonTiltEffectEnabledStyle}" Click="WatchYoutube_OnClick"
+                                    Height="50" VerticalAlignment="Center"
+                                Margin="6,0,12,0">
+                                    <Grid Background="{StaticResource BackgroundBlue}">
+                                        <TextBlock FontFamily="{StaticResource OpenSans}" FontSize="22"
+                                            Foreground="{StaticResource ForegroundWhite}"
+                                            VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
+                                        <Run Text="Watch on Youtube"/>
+                                        </TextBlock>
+                                    </Grid>
+                                </Button>
                             </Grid>
 
+                            <TextBlock Grid.Row="5" Text="Reverse the formula for happiness and success." Style="{StaticResource InfoDescriptionStyle}"/>
+                            <TextBlock Grid.Row="6"  Style="{StaticResource InfoDescriptionStyle}">
+                                    <Run Text="If you can raise someone's level of happiness, that someone's brain can experience a '"/><!--
+                                    --><Run Text="happiness advantage" Foreground="{StaticResource ForegroundBlue}"/><!--
+                                    --><Run Text="'."/>
+                            </TextBlock>
+                            <TextBlock Grid.Row="7"  Style="{StaticResource InfoDescriptionStyle}">
+                                    <Run Text="The brain at positive performs significantly better than at negative, neutral or stressed. If we can find a way to become "/><!--
+                                    --><Run Text="more positive" Foreground="{StaticResource ForegroundBlue}"/><!--
+                                    --><Run Text=" in the present, we can work more successfully."/>
+                            </TextBlock>
+                            <TextBlock Grid.Row="8" Text="With these short exercises, we can rewire your brain to work more optimistically and more successfully." Style="{StaticResource InfoDescriptionStyle}"/>
+                            <TextBlock Grid.Row="9" Text="To start, go to the 'Dates' page and click on any date." Style="{StaticResource InfoDescriptionStyle}"/>
                         </Grid>
                     </ScrollViewer>
                 </phone:PivotItem>

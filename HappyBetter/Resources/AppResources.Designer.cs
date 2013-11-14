@@ -241,7 +241,7 @@ namespace HappyBetter.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Days.
+        ///   Looks up a localized string similar to Days +.
         /// </summary>
         public static string MainTitleEnd {
             get {

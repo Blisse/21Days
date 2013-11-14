@@ -9,6 +9,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 using MyToolkit.Multimedia;
+using HappyBetter.Models;
 
 namespace HappyBetter.Views
 {
@@ -39,6 +40,15 @@ namespace HappyBetter.Views
             App.ViewModelLocator.MainPage.DatesListChanged += DatesListOnCollectionChanged;
 
             App.ViewModelLocator.MainPage.GetData();
+
+            Loaded += delegate
+            {
+                if (!App.StorageManager.ContainsKey(StorageKeys.NotFirstTimeOpened))
+                {
+                    App.StorageManager.AddOrUpdateValue(StorageKeys.NotFirstTimeOpened, true);
+                    MainPagePivot.SelectedIndex = 2;
+                }
+            };
         }
 
         public static Boolean Navigate()
@@ -180,9 +190,20 @@ namespace HappyBetter.Views
             });
         }
 
-        private void OpenSettingsAppBar_OnClick(object sender, EventArgs e)
+        private void DeleteAllDatesAppBarMenuItem_Click(object sender, EventArgs e)
         {
-            SettingsPage.Navigate();
+            var result =
+                MessageBox.Show(
+                    "Are you sure you want to delete all the data in this app? This action cannot be undone.", "Confirm Delete",
+                    MessageBoxButton.OKCancel);
+
+            switch (result)
+            {
+                case MessageBoxResult.OK:
+                    App.ViewModelLocator.MainPage.ClearData();
+                    break;
+            }
+            
         }
     }
 }

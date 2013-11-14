@@ -28,17 +28,26 @@
             <Setter Property="Margin" Value="0,5,0,10"/>
         </Style>
 
+        <Style x:Key="WhatHeaderNumberStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource NexaBold}"/>
+            <Setter Property="FontSize" Value="48"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Margin" Value="0,0,10,0"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundWhite}"/>
+        </Style>
+        
         <shell:ApplicationBar x:Key="NormalApplicationBar"  IsVisible="True" IsMenuEnabled="False" 
                               ForegroundColor="{StaticResource ColorFadedBlack}" 
                               BackgroundColor="{StaticResource ColorGray}">
-            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/back.png" Text="Discard" Click="DiscardAppBar_OnClick"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/cancel.png" Text="Discard" Click="DiscardAppBar_OnClick"/>
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/save.png" Text="Save" Click="SaveAppBar_OnClick"/>
         </shell:ApplicationBar>
         
         <shell:ApplicationBar x:Key="GratitudesApplicationBar" IsVisible="True" IsMenuEnabled="False" 
                               ForegroundColor="{StaticResource ColorFadedBlack}" 
                               BackgroundColor="{StaticResource ColorGray}">
-            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/back.png" Text="Discard" Click="DiscardAppBar_OnClick"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/cancel.png" Text="Discard" Click="DiscardAppBar_OnClick"/>
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/save.png" Text="Save" Click="SaveAppBar_OnClick"/>
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/add.png" Text="Add Thanks" Click="AppThanksAppBar_OnClick"/>
         </shell:ApplicationBar>
@@ -71,9 +80,26 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Row="0" Text="{Binding LocalizedResources.EntryGratitudeInstructions, Source={StaticResource LocalizedStrings}}" 
+                        <toolkit:ExpanderView Grid.Row="0">
+                            <toolkit:ExpanderView.Header>
+                                    <TextBlock Text="{Binding LocalizedResources.EntryGratitudeInstructions, Source={StaticResource LocalizedStrings}}" 
                                    Style="{StaticResource EntryInstructionsStyle}"/>
+                            </toolkit:ExpanderView.Header>
+                            <toolkit:ExpanderView.Items>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="42"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="1" Style="{StaticResource WhatHeaderNumberStyle}"/>
+                                        <TextBlock Grid.Column="1"  Style="{StaticResource InfoDescriptionStyle}">
+                                    <Run Text="Writing down "/><!--
+                                    --><Run Text="3 new things we're grateful for" Foreground="{StaticResource ForegroundBlue}"/><!--
+                                    --><Run Text=" each day helps the brain retain a pattern of scanning the world not for the negatives, but for the positives."/>
+                                        </TextBlock>
+                                    </Grid>
+                            </toolkit:ExpanderView.Items>   
+                        </toolkit:ExpanderView>
                         <phone:LongListSelector Grid.Row="1" x:Name="GratitudesEntriesLongListSelector" 
                                                 ItemsSource="{Binding GratitudeEntriesList}">
                             <phone:LongListSelector.ItemTemplate>
@@ -101,12 +127,30 @@
                     </phone:PivotItem.Header>
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>                            
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Row="0" Text="{Binding LocalizedResources.EntryJournalInstructions, Source={StaticResource LocalizedStrings}}" 
+                        
+                        <toolkit:ExpanderView Grid.Row="0">
+                            <toolkit:ExpanderView.Header>
+                                    <TextBlock Text="{Binding LocalizedResources.EntryJournalInstructions, Source={StaticResource LocalizedStrings}}" 
                                    Style="{StaticResource EntryInstructionsStyle}"/>
+                            </toolkit:ExpanderView.Header>
+                            <toolkit:ExpanderView.Items>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="42"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="2" Style="{StaticResource WhatHeaderNumberStyle}"/>
+                                        <TextBlock Grid.Column="1"  Style="{StaticResource InfoDescriptionStyle}">
+                                    <Run Text="Journalling about one positive experience" Foreground="{StaticResource ForegroundBlue}"/><!--
+                                    --><Run Text=" we've had over the last 24 hours lets our brain relive it."/>
+                                        </TextBlock>
+                                        <TextBlock Grid.Column="1" Text=" " Style="{StaticResource InfoDescriptionStyle}"/>
+                                    </Grid>
+                            </toolkit:ExpanderView.Items>
+                        </toolkit:ExpanderView>
                         <Grid Grid.Row="1" Background="{Binding JournalEntry, Converter={StaticResource EntryItemTextToBackgroundColorConverter}}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
@@ -128,8 +172,25 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Grid.Row="0" Text="{Binding LocalizedResources.EntryMeditationInstructions, Source={StaticResource LocalizedStrings}}" 
+                        <toolkit:ExpanderView Grid.Row="0">
+                            <toolkit:ExpanderView.Header>
+                                <TextBlock Text="{Binding LocalizedResources.EntryMeditationInstructions, Source={StaticResource LocalizedStrings}}" 
                                    Style="{StaticResource EntryInstructionsStyle}"/>
+                            </toolkit:ExpanderView.Header>
+                            <toolkit:ExpanderView.Items>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="42"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="3" Style="{StaticResource WhatHeaderNumberStyle}"/>
+                                    <TextBlock Grid.Column="1"  Style="{StaticResource InfoDescriptionStyle}">
+                                    <Run Text="Meditation" Foreground="{StaticResource ForegroundBlue}"/><!--
+                                    --><Run Text=" allows our brains to get over the cultural ADHD we've created by trying to do multiple things at once and allows our brain to focus on the task at hand."/>
+                                    </TextBlock>
+                                </Grid>
+                            </toolkit:ExpanderView.Items>
+                        </toolkit:ExpanderView>
                         <Grid Grid.Row="1" Background="{Binding Path=MeditationEntry, Converter={StaticResource EntryItemTextToBackgroundColorConverter}}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -153,9 +214,27 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        
-                        <TextBlock Grid.Row="0" Text="{Binding LocalizedResources.EntryExerciseInstructions, Source={StaticResource LocalizedStrings}}" 
+
+                        <toolkit:ExpanderView Grid.Row="0">
+                            <toolkit:ExpanderView.Header>
+                                <TextBlock Text="{Binding LocalizedResources.EntryExerciseInstructions, Source={StaticResource LocalizedStrings}}" 
                                    Style="{StaticResource EntryInstructionsStyle}"/>
+                            </toolkit:ExpanderView.Header>
+                            <toolkit:ExpanderView.Items>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="42"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="4" Style="{StaticResource WhatHeaderNumberStyle}"/>
+                                    <TextBlock Grid.Column="1"  Style="{StaticResource InfoDescriptionStyle}">
+                                    <Run Text="Exercise" Foreground="{StaticResource ForegroundBlue}"/><!--
+                                    --><Run Text=" teaches our brains that our behavior matters."/>
+                                    </TextBlock>
+                                </Grid>
+                            </toolkit:ExpanderView.Items>
+                        </toolkit:ExpanderView>
+                        
                         <Grid Grid.Row="1" Background="{Binding Path=ExerciseEntry, Converter={StaticResource EntryItemTextToBackgroundColorConverter}}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -180,8 +259,25 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Grid.Row="0" Text="{Binding LocalizedResources.EntryRAOKInstructions, Source={StaticResource LocalizedStrings}}" 
+                        <toolkit:ExpanderView Grid.Row="0">
+                            <toolkit:ExpanderView.Header>
+                                <TextBlock Text="{Binding LocalizedResources.EntryRAOKInstructions, Source={StaticResource LocalizedStrings}}" 
                                    Style="{StaticResource EntryInstructionsStyle}"/>
+                            </toolkit:ExpanderView.Header>
+                            <toolkit:ExpanderView.Items>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="42"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="5" Style="{StaticResource WhatHeaderNumberStyle}"/>
+                                    <TextBlock Grid.Column="1"  Style="{StaticResource InfoDescriptionStyle}">
+                                    <Run Text="Random and conscious acts of kindness" Foreground="{StaticResource ForegroundBlue}"/><!--
+                                    --><Run Text=" tell us we can impact the world, and make the world around us a happier place."/>
+                                    </TextBlock>
+                                </Grid>
+                            </toolkit:ExpanderView.Items>
+                        </toolkit:ExpanderView>
                         <Grid Grid.Row="1" Background="{Binding Path=ActOfKindnessEntry, Converter={StaticResource EntryItemTextToBackgroundColorConverter}}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>

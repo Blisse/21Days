@@ -4,7 +4,7 @@
   <Languages xmlns="">
     <Language code="en" />
   </Languages>
-  <App xmlns="" ProductID="{baec25f5-f153-4999-8e4c-703fd20ab26f}" Title="21 Days" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Blisse" Description="Inspired by Shawn Achor's TEDX Talk, 'The happy secret to better work'. Reverse the formula for happiness and success by following Shawn Achor's 'Happiness Advantage' and 21 day plan to boosting your brain's positivity and working more successfully." Publisher="Blisse" PublisherID="{663ea81a-a35e-45f5-b7d0-bcf3dac14a85}">
+  <App xmlns="" ProductID="{baec25f5-f153-4999-8e4c-703fd20ab26f}" Title="21 Day Advantage" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Blisse" Description="Inspired by Shawn Achor's TEDX Talk, 'The happy secret to better work'. Reverse the formula for happiness and success by following Shawn Achor's 'happiness advantage' and his 21 day plan to boosting your brain's positivity and working more successfully." Publisher="Blisse" PublisherID="{663ea81a-a35e-45f5-b7d0-bcf3dac14a85}">
     <IconPath IsRelative="true" IsResource="false">Assets\Tiles\IconicMedium.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
@@ -22,7 +22,7 @@
           <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\IconicSmall.png</SmallImageURI>
           <Count>0</Count>
           <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\IconicMedium.png</BackgroundImageURI>
-          <Title>21 Days</Title>
+          <Title>21 Day Advantage</Title>
           <BackContent>
           </BackContent>
           <BackBackgroundImageURI>
