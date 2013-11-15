@@ -23,7 +23,7 @@
             <DoubleAnimation
                 Storyboard.TargetName="HiddenDatePickerGrid"
                 Storyboard.TargetProperty="Height"
-                From="0.0" To="80.0" Duration="0:0:0.3"
+                From="0.0" To="80.0" Duration="0:0:0.1"
                 AutoReverse="False"/>
         </Storyboard>
 
@@ -31,7 +31,7 @@
             <DoubleAnimation
                 Storyboard.TargetName="HiddenDatePickerGrid"
                 Storyboard.TargetProperty="Height"
-                From="80.0" To="0.0" Duration="0:0:0.3"
+                From="80.0" To="0.0" Duration="0:0:0.1"
                 AutoReverse="False"/>
         </Storyboard>
 
@@ -159,30 +159,28 @@
                         </Grid.RowDefinitions>
 
                         <Grid Grid.Row="0">
-                            <ScrollViewer>
-                                <phone:LongListSelector ItemsSource="{Binding DatesList, Mode=OneWay, UpdateSourceTrigger=Default}" >
-                                    <phone:LongListSelector.ItemTemplate>
-                                        <DataTemplate>
-                                            <Button Style="{StaticResource ButtonTiltEffectEnabledStyle}" Margin="0,0,0,20" Click="OpenEntryButton_OnClick"
-                                                    Height="75">
-                                                <Grid Background="{Binding Converter={StaticResource MainPageDateTimeToBackgroundColorConverter}}">
-                                                    <TextBlock DataContext="{Binding Converter={StaticResource DateStringToStringConverter}, ConverterParameter=D}"
-                                                               FontFamily="{StaticResource OpenSans}" FontSize="24"
-                                                               VerticalAlignment="Center" Margin="10,5,10,5">
-                                                        <Run Text="{Binding Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
-                                                    </TextBlock>
-                                                </Grid>
-                                                <toolkit:ContextMenuService.ContextMenu>
-                                                    <toolkit:ContextMenu>
-                                                        <toolkit:MenuItem Header="View Entry" Click="ViewEntryMenuItem_OnClick" />
-                                                        <toolkit:MenuItem Header="Delete Entry" Click="DeleteEntryMenuItem_OnClick" />
-                                                    </toolkit:ContextMenu>
-                                                </toolkit:ContextMenuService.ContextMenu>
-                                            </Button>
-                                        </DataTemplate>
-                                    </phone:LongListSelector.ItemTemplate>
-                                </phone:LongListSelector>
-                            </ScrollViewer>
+                            <phone:LongListSelector ItemsSource="{Binding DatesList, Mode=OneWay, UpdateSourceTrigger=Default}" >
+                                <phone:LongListSelector.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button Style="{StaticResource ButtonTiltEffectEnabledStyle}" Margin="0,0,0,20" Click="OpenEntryButton_OnClick"
+                                                Height="75">
+                                            <Grid Background="{Binding Converter={StaticResource MainPageDateTimeToBackgroundColorConverter}}">
+                                                <TextBlock DataContext="{Binding Converter={StaticResource DateStringToStringConverter}, ConverterParameter=D}"
+                                                            FontFamily="{StaticResource OpenSans}" FontSize="24"
+                                                            VerticalAlignment="Center" Margin="10,5,10,5">
+                                                    <Run Text="{Binding Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
+                                                </TextBlock>
+                                            </Grid>
+                                            <toolkit:ContextMenuService.ContextMenu>
+                                                <toolkit:ContextMenu>
+                                                    <toolkit:MenuItem Header="View Entry" Click="ViewEntryMenuItem_OnClick" />
+                                                    <toolkit:MenuItem Header="Delete Entry" Click="DeleteEntryMenuItem_OnClick" />
+                                                </toolkit:ContextMenu>
+                                            </toolkit:ContextMenuService.ContextMenu>
+                                        </Button>
+                                    </DataTemplate>
+                                </phone:LongListSelector.ItemTemplate>
+                            </phone:LongListSelector>
                         </Grid>
                         <Grid Grid.Row="1" x:Name="HiddenDatePickerGrid" Height="0" Background="{StaticResource BackgroundBlack}">
                             <Grid HorizontalAlignment="Center">
@@ -277,7 +275,7 @@
                     <phone:PivotItem.Header>
                         <TextBlock Text="{Binding LocalizedResources.MainAboutHeader, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
                     </phone:PivotItem.Header>
-                    <ScrollViewer Height="505">
+                    <ScrollViewer Height="Auto">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>

@@ -22,7 +22,7 @@
           <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\IconicSmall.png</SmallImageURI>
           <Count>0</Count>
           <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\IconicMedium.png</BackgroundImageURI>
-          <Title>21 Day Advantage</Title>
+          <Title>21 Day +</Title>
           <BackContent>
           </BackContent>
           <BackBackgroundImageURI>
