@@ -301,23 +301,11 @@
                             <Grid Grid.Row="4" Margin="0,0,0,16">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <Button Grid.Column="0" Style="{StaticResource ButtonTiltEffectEnabledStyle}" Click="WatchLocally_OnClick"
-                                    Height="50" VerticalAlignment="Center"
-                                Margin="12,0,6,0">
-                                    <Grid Background="{StaticResource BackgroundWhite}">
-                                        <TextBlock FontFamily="{StaticResource OpenSans}" FontSize="22"
-                                            Foreground="{StaticResource ForegroundDarkGray}"
-                                            VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
-                                        <Run Text="Watch Offline"/>
-                                        </TextBlock>
-                                    </Grid>
-                                </Button>
                                 <Button Grid.Column="1" Style="{StaticResource ButtonTiltEffectEnabledStyle}" Click="WatchYoutube_OnClick"
-                                    Height="50" VerticalAlignment="Center"
+                                    Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"
                                 Margin="6,0,12,0">
-                                    <Grid Background="{StaticResource BackgroundBlue}">
+                                    <Grid Background="{StaticResource BackgroundRed}">
                                         <TextBlock FontFamily="{StaticResource OpenSans}" FontSize="22"
                                             Foreground="{StaticResource ForegroundWhite}"
                                             VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
