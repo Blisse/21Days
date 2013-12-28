@@ -13,19 +13,20 @@ namespace HappyBetter.Views
     public partial class EntryPage : PhoneApplicationPage
     {
         private static DateTime? _dataDateTimeKey;
-        private EventHandler<DailyEntry> _entryUpdated;
+        private readonly EventHandler<DailyEntry> _entryUpdated;
         private Boolean _discardChanges;
         
 
         public EntryPage()
         {
             InitializeComponent();
+
+            _entryUpdated += EntryUpdated;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            _entryUpdated += EntryUpdated;
             if (_dataDateTimeKey != null)
             {
                 App.ViewModelLocator.EntryPage.IsLoading = true;
@@ -40,7 +41,6 @@ namespace HappyBetter.Views
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
-            _entryUpdated -= EntryUpdated;
             _dataDateTimeKey = null;
             if (!_discardChanges)
             {

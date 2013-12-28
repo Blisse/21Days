@@ -6,7 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"  
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -183,13 +183,13 @@
                             </phone:LongListSelector>
                         </Grid>
                         <Grid Grid.Row="1" x:Name="HiddenDatePickerGrid" Height="0" Background="{StaticResource BackgroundBlack}">
-                            <Grid HorizontalAlignment="Center">
+                            <Grid HorizontalAlignment="Left">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <toolkit:DatePicker x:Name="HiddenDatePicker" Grid.Column="0" Template="{StaticResource CleanDatePickerControlTemplate}"
-                                                VerticalAlignment="Center"/>
+                                                VerticalAlignment="Center" Margin="5,0,0,0"/>
                                 <Button Grid.Column="1" Style="{StaticResource ButtonTiltEffectEnabledStyle}" Click="AddDate_OnClick" 
                                     Height="50" VerticalAlignment="Center"
                                     Margin="0,0,12,0">
@@ -303,13 +303,13 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Button Grid.Column="1" Style="{StaticResource ButtonTiltEffectEnabledStyle}" Click="WatchYoutube_OnClick"
-                                    Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                    Height="50" VerticalAlignment="Center" HorizontalAlignment="Left"
                                 Margin="6,0,12,0">
                                     <Grid Background="{StaticResource BackgroundRed}">
                                         <TextBlock FontFamily="{StaticResource OpenSans}" FontSize="22"
                                             Foreground="{StaticResource ForegroundWhite}"
-                                            VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
-                                        <Run Text="Watch on Youtube"/>
+                                            VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" Padding="5,0">
+                                                <Run Text="Launch Youtube"/>
                                         </TextBlock>
                                     </Grid>
                                 </Button>
@@ -317,14 +317,16 @@
 
                             <TextBlock Grid.Row="5" Text="Reverse the formula for happiness and success." Style="{StaticResource InfoDescriptionStyle}"/>
                             <TextBlock Grid.Row="6"  Style="{StaticResource InfoDescriptionStyle}">
-                                    <Run Text="If you can raise someone's level of happiness, that someone's brain can experience a '"/><!--
-                                    --><Run Text="happiness advantage" Foreground="{StaticResource ForegroundBlue}"/><!--
-                                    --><Run Text="'."/>
+                                    <Run Text="If you can raise someone's level of happiness, that someone's brain can experience a "/><!--
+                                    --><Run Text="'happiness advantage'" Foreground="{StaticResource ForegroundBlue}"/><!--
+                                    --><Run Text="."/>
                             </TextBlock>
                             <TextBlock Grid.Row="7"  Style="{StaticResource InfoDescriptionStyle}">
                                     <Run Text="The brain at positive performs significantly better than at negative, neutral or stressed. If we can find a way to become "/><!--
                                     --><Run Text="more positive" Foreground="{StaticResource ForegroundBlue}"/><!--
-                                    --><Run Text=" in the present, we can work more successfully."/>
+                                    --><Run Text=" in the present, we can work "/><!--
+                                    --><Run Text="more successfully" Foreground="{StaticResource ForegroundBlue}"/><!--
+                                    --><Run Text="."/>
                             </TextBlock>
                             <TextBlock Grid.Row="8" Text="With these short exercises, we can rewire your brain to work more optimistically and more successfully." Style="{StaticResource InfoDescriptionStyle}"/>
                             <TextBlock Grid.Row="9" Text="To start, go to the 'Dates' page and click on any date." Style="{StaticResource InfoDescriptionStyle}"/>

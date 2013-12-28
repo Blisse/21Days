@@ -165,7 +165,7 @@
     <value>21</value>
   </data>
   <data name="MainTitleEnd" xml:space="preserve">
-    <value>Days +</value>
+    <value>Days+</value>
   </data>
   <data name="MainStatusHeaderNumberOfCompletedEntries" xml:space="preserve">
     <value>Completed Entries</value>

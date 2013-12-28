@@ -166,19 +166,6 @@ namespace HappyBetter.Views
             }
         }
 
-        private void WatchLocally_OnClick(object sender, RoutedEventArgs e)
-        {
-            var mediaPlayerLauncher = new MediaPlayerLauncher
-            {
-                Media = new Uri(Uri.EscapeUriString(@"Assets/Videos/ShawnAchor.mp4"), UriKind.Relative),
-                Location = MediaLocationType.Install,
-                Controls = MediaPlaybackControls.All,
-                Orientation = MediaPlayerOrientation.Landscape
-            };
-
-            mediaPlayerLauncher.Show();
-        }
-
         private void WatchYoutube_OnClick(object sender, RoutedEventArgs e)
         {
             YouTube.Play("fLJsdqxnZb0", false, YouTubeQuality.Quality720P, (ex) =>
