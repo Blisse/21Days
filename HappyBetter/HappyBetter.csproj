@@ -127,6 +127,9 @@
     <Compile Include="Views\EntryPage.xaml.cs">
       <DependentUpon>EntryPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -149,6 +152,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\SettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\AppBar\back.png" />
@@ -156,6 +163,7 @@
     <Content Include="Assets\Fonts\Nexa Bold.otf" />
     <Content Include="Assets\Fonts\Nexa Light.otf" />
     <Content Include="Assets\Fonts\OpenSans-Regular.ttf" />
+    <None Include="Assets\Fonts\OpenSans-Bold.ttf" />
     <None Include="HappyBetter_2013_11_15_01_17_59.sap" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
