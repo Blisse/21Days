@@ -160,8 +160,6 @@
   <ItemGroup>
     <Content Include="Assets\AppBar\back.png" />
     <Content Include="Assets\AppBar\cancel.png" />
-    <Content Include="Assets\Fonts\Nexa Bold.otf" />
-    <Content Include="Assets\Fonts\Nexa Light.otf" />
     <Content Include="Assets\Fonts\OpenSans-Regular.ttf" />
     <None Include="Assets\Fonts\OpenSans-Bold.ttf" />
     <None Include="HappyBetter_2013_11_15_01_17_59.sap" />

@@ -11,6 +11,8 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
+    shell:SystemTray.ForegroundColor="{StaticResource ColorBlue}"
+    shell:SystemTray.BackgroundColor="{StaticResource ColorBlack}"
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->

@@ -47,11 +47,8 @@
 
         <SolidColorBrush x:Key="ApplicationBackgroundColor" Color="{StaticResource ColorBlack}"/>
 
-
-
         <FontFamily x:Key="OpenSans">/Assets/Fonts/OpenSans-Regular.ttf#Open Sans</FontFamily>
-        <FontFamily x:Key="NexaLight">/Assets/Fonts/Nexa Light.otf#Nexa Light</FontFamily>
-        <FontFamily x:Key="NexaBold">/Assets/Fonts/OpenSans-Bold.ttf#Open Sans</FontFamily>
+        <FontFamily x:Key="OpenSansBold">/Assets/Fonts/OpenSans-Bold.ttf#Open Sans</FontFamily>
 
         <converters:DateStringToStringConverter x:Key="DateStringToStringConverter"/>
         <converters:ObjectToBooleanConverter x:Key="ObjectToBooleanConverter"/>
@@ -301,7 +298,7 @@
                                     </VisualState>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            <ContentControl x:Name="contentPresenter" FontSize="48" FontFamily="{StaticResource NexaBold}" 
+                            <ContentControl x:Name="contentPresenter" FontSize="48" FontFamily="{StaticResource OpenSansBold}" 
                                             Foreground="{StaticResource ForegroundDarkGray}" 
                                             ContentTemplate="{TemplateBinding ContentTemplate}" 
                                             Content="{TemplateBinding Content}" 

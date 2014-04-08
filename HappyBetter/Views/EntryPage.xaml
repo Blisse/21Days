@@ -29,7 +29,7 @@
         </Style>
 
         <Style x:Key="WhatHeaderNumberStyle" TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="{StaticResource NexaBold}"/>
+            <Setter Property="FontFamily" Value="{StaticResource OpenSansBold}"/>
             <Setter Property="FontSize" Value="48"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
@@ -67,7 +67,7 @@
 
             <TextBlock Grid.Row="0" x:Name="EntryDateTimeKeyTextBlock" DataContext="{Binding EntryDateTimeKey, Converter={StaticResource DateStringToStringConverter}, ConverterParameter=D}"
                        Text="{Binding Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"
-                       FontFamily="{StaticResource NexaBold}" FontSize="28"/>
+                       FontFamily="{StaticResource OpenSansBold}" FontSize="28"/>
 
             <phone:Pivot x:Name="EntryPagePivot" Grid.Row="1" Style="{StaticResource LightGrayPivotStyle}"
                          SelectionChanged="EntryPagePivot_OnSelectionChanged">

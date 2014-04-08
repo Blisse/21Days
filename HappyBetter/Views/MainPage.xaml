@@ -140,7 +140,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <TextBlock FontFamily="{StaticResource NexaBold}" FontSize="88" Margin="-1,0,0,-24">
+            <TextBlock FontFamily="{StaticResource OpenSansBold}" FontSize="88" Margin="-1,0,0,-24">
                 <Run Text="{Binding LocalizedResources.MainTitleBegin, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"
                        Foreground="{StaticResource ForegroundWhite}"/><!--
                 --><Run Text="{Binding LocalizedResources.MainTitleEnd, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"
@@ -148,6 +148,8 @@
             </TextBlock>
 
             <phone:Pivot x:Name="MainPagePivot" Grid.Row="1" Style="{StaticResource LightGrayPivotStyle}" SelectionChanged="MainPagePivot_OnSelectionChanged">
+
+                
                 <phone:PivotItem Style="{StaticResource PivotItemStyle}">
                     <phone:PivotItem.Header>
                         <TextBlock Text="{Binding LocalizedResources.MainDatesHeader, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
@@ -217,7 +219,7 @@
                                 <Setter Property="Foreground" Value="{StaticResource ForegroundGray}"/>
                             </Style>
                             <Style x:Key="DataStyle" TargetType="TextBlock">
-                                <Setter Property="FontFamily" Value="{StaticResource NexaBold}"/>
+                                <Setter Property="FontFamily" Value="{StaticResource OpenSansBold}"/>
                                 <Setter Property="FontSize" Value="48"/>
                                 <Setter Property="Foreground" Value="{StaticResource ForegroundWhite}"/>
                             </Style>
@@ -332,6 +334,14 @@
                             <TextBlock Grid.Row="9" Text="To start, go to the 'Dates' page and click on any date." Style="{StaticResource InfoDescriptionStyle}"/>
                         </Grid>
                     </ScrollViewer>
+                </phone:PivotItem>
+                
+                <phone:PivotItem Style="{StaticResource PivotItemStyle}">
+                    <phone:PivotItem.Header>
+                        <TextBlock Text="{Binding LocalizedResources.MainDatesHeader, Source={StaticResource LocalizedStrings}, Converter={StaticResource TextCaseConverter}, ConverterParameter=Upper}"/>
+                    </phone:PivotItem.Header>
+                    <Grid>
+                    </Grid>
                 </phone:PivotItem>
             </phone:Pivot>
         </Grid>
