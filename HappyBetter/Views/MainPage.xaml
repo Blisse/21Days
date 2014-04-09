@@ -291,7 +291,11 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" Text="This app was inspired by Shawn Achor's TEDx Talk, 'The happy secret to better work'." Style="{StaticResource InfoDescriptionStyle}"/>
+                            <TextBlock Grid.Row="0" Style="{StaticResource InfoDescriptionStyle}">
+                                <Run Text="This app was inspired by Shawn Achor's TEDx Talk, "/><!--
+                                --><Run Text="'The happy secret to better work'" Foreground="{StaticResource ForegroundBlue}"/><!--
+                                --><Run Text="."/>
+                            </TextBlock>
                             <TextBlock Grid.Row="1" Style="{StaticResource InfoDescriptionStyle}">
                                 <Run Text="We believe that we should work to be happy, but could that be backwards? Psychologist Shawn Achor argues that actually happiness inspires productivity, and by following his simple steps for just 21 days, you can benefit from the "/><!--
                                 --><Run Text="'happiness advantage'" Foreground="{StaticResource ForegroundBlue}"/><!--
@@ -304,7 +308,7 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <Button Grid.Column="1" Style="{StaticResource ButtonTiltEffectEnabledStyle}" Click="WatchYoutube_OnClick"
+                                <Button Grid.Column="0" Style="{StaticResource ButtonTiltEffectEnabledStyle}" Click="WatchYoutube_OnClick"
                                     Height="50" VerticalAlignment="Center" HorizontalAlignment="Left"
                                 Margin="6,0,12,0">
                                     <Grid Background="{StaticResource BackgroundRed}">
@@ -331,7 +335,7 @@
                                     --><Run Text="."/>
                             </TextBlock>
                             <TextBlock Grid.Row="8" Text="With these short exercises, we can rewire your brain to work more optimistically and more successfully." Style="{StaticResource InfoDescriptionStyle}"/>
-                            <TextBlock Grid.Row="9" Text="To start, go to the 'Dates' page and click on any date." Style="{StaticResource InfoDescriptionStyle}"/>
+                            <TextBlock Grid.Row="9" Text="To start, swipe to the right to go to the Dates page, press the + button and click on the date." Style="{StaticResource InfoDescriptionStyle}"/>
                         </Grid>
                     </ScrollViewer>
                 </phone:PivotItem>
