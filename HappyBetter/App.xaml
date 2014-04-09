@@ -303,7 +303,7 @@
                                             ContentTemplate="{TemplateBinding ContentTemplate}" 
                                             Content="{TemplateBinding Content}" 
                                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                            Margin="{TemplateBinding Padding}"/>
+                                            Margin="{TemplateBinding Padding}" FontWeight="Bold"/>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
