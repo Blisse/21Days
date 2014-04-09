@@ -10,6 +10,7 @@ using Microsoft.Phone.Tasks;
 using MyToolkit.Multimedia;
 using HappyBetter.Models;
 
+
 namespace HappyBetter.Views
 {
     public partial class MainPage : PhoneApplicationPage

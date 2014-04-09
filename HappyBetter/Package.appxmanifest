@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
+
+  <Identity Name="5acbabf9-9975-4b26-9336-9087c190b4e5"
+            Publisher="CN=Victor"
+            Version="1.0.0.0" />
+
+  <mp:PhoneIdentity PhoneProductId="baec25f5-f153-4999-8e4c-703fd20ab26f" PhonePublisherId="663ea81a-a35e-45f5-b7d0-bcf3dac14a85"/>
+
+  <Properties>
+    <DisplayName>HappyBetter</DisplayName>
+    <PublisherDisplayName>Victor</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+
+  <Prerequisites>
+    <OSMinVersion>6.3.1</OSMinVersion>
+    <OSMaxVersionTested>6.3.1</OSMaxVersionTested>
+  </Prerequisites>
+
+  <Resources>
+    <Resource Language="x-generate"/>
+  </Resources>
+
+  <Applications>
+    <Application Id="xbaec25f5yf153y4999y8e4cy703fd20ab26fx"
+        Executable="AGHost.exe"
+        EntryPoint="/Views/MainPage.xaml">
+      <m3:VisualElements
+          DisplayName="HappyBetter"
+          Square150x150Logo="Assets\SquareTile150x150.png"
+          Square44x44Logo="Assets\Logo.png"
+          Description="HappyBetter"
+          ForegroundText="light"
+          BackgroundColor="#464646">
+        <m3:DefaultTile Square71x71Logo="Assets\SquareTile71x71.png"/>
+        <m3:SplashScreen Image="Assets\Splashscreen.png" />
+        <m3:ApplicationView MinWidth="width320"/> <!--Used in XAML Designer. DO NOT REMOVE-->
+      </m3:VisualElements>
+      <Extensions>
+        <Extension Category="windows.backgroundTasks" EntryPoint="AgHost.BackgroundTask">
+          <BackgroundTasks>
+          <Task Type="systemEvent" />
+          </BackgroundTasks>
+        </Extension>
+      </Extensions>
+    </Application>
+  </Applications>
+  <Capabilities>
+  </Capabilities>
+  <Extensions>
+    <Extension Category="windows.activatableClass.inProcessServer">
+      <InProcessServer>
+        <Path>AgHostSvcs.dll</Path>
+        <ActivatableClass ActivatableClassId="AgHost.BackgroundTask" ThreadingModel="both" />
+      </InProcessServer>
+    </Extension>
+  </Extensions>
+</Package>
