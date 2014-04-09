@@ -44,6 +44,7 @@ namespace HappyBetter.ViewModels
 
             SimpleIoc.Default.Register<EntryPageViewModel>();
             SimpleIoc.Default.Register<MainPageViewModel>();
+            SimpleIoc.Default.Register<SettingsPageViewModel>();
         }
 
         public MainPageViewModel MainPage
@@ -59,6 +60,14 @@ namespace HappyBetter.ViewModels
             get
             {
                 return ServiceLocator.Current.GetInstance<EntryPageViewModel>();
+            }
+        }
+
+        public SettingsPageViewModel SettingsPage
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<SettingsPageViewModel>();
             }
         }
         
