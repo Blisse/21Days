@@ -1,0 +1,10 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HappyBetterWP81.Resources">
+
+    <!-- Fonts -->
+    <FontFamily x:Key="OpenSansRegular">/Assets/Fonts/OpenSans-Regular.ttf#Open Sans</FontFamily>
+    <FontFamily x:Key="OpenSansBold">/Assets/Fonts/OpenSans-Bold.ttf#Open Sans</FontFamily>
+
+</ResourceDictionary>
