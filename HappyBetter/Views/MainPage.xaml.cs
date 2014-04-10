@@ -7,7 +7,6 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
-using MyToolkit.Multimedia;
 using HappyBetter.Models;
 
 
@@ -20,21 +19,10 @@ namespace HappyBetter.Views
         {
             InitializeComponent();
         }
-
-        protected override void OnBackKeyPress(CancelEventArgs e)
-        {
-            if (YouTube.CancelPlay())
-            {
-                // used to abort current youtube download
-                e.Cancel = true;
-            }
-            base.OnBackKeyPress(e);
-        }
-
+        
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            YouTube.CancelPlay();
             base.OnNavigatedTo(e);
             App.ViewModelLocator.MainPage.AddAlreadyAddedDate += OnAddAlreadyAddedDate;
             App.ViewModelLocator.MainPage.DatesListChanged += DatesListOnCollectionChanged;
@@ -164,17 +152,6 @@ namespace HappyBetter.Views
                     ApplicationBar = Resources["NormalApplicationBar"] as ApplicationBar;
                     break;
             }
-        }
-
-        private void WatchYoutube_OnClick(object sender, RoutedEventArgs e)
-        {
-            YouTube.Play("fLJsdqxnZb0", false, YouTubeQuality.Quality720P, (ex) =>
-            {
-                if (ex != null)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            });
         }
 
         private void DeleteAllDatesAppBarMenuItem_Click(object sender, EventArgs e)
