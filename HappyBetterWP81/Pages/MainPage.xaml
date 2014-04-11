@@ -7,6 +7,20 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Background="{StaticResource ApplicationBackgroundColor}"
     mc:Ignorable="d">
+<!---->
+<!--    <Page.BottomAppBar>-->
+<!--        <CommandBar>-->
+<!--            <CommandBar.PrimaryCommands>-->
+<!--                <AppBarButton Label="Settings">-->
+<!--                    <PathIcon HorizontalAlignment="Center" VerticalAlignment="Center"></PathIcon>-->
+<!--                </AppBarButton>-->
+<!--            </CommandBar.PrimaryCommands>-->
+<!--            <CommandBar.SecondaryCommands>-->
+<!--                <AppBarButton Label="Notifications"></AppBarButton>-->
+<!--            </CommandBar.SecondaryCommands>-->
+<!--        </CommandBar>-->
+<!--    </Page.BottomAppBar>-->
+<!--    -->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -38,20 +52,22 @@
                         <Run Text="DATES"></Run>
                     </TextBlock>
                 </PivotItem.Header>
-                <Grid>
-                    <SemanticZoom>
-                        <SemanticZoom.ZoomedOutView>
-                            <Hub>
-                                
-                            </Hub>
-                        </SemanticZoom.ZoomedOutView>
-                        <SemanticZoom.ZoomedInView>
-                            <ListView>
-                                
-                            </ListView>
-                        </SemanticZoom.ZoomedInView>
-                    </SemanticZoom>
-                </Grid>
+                <SemanticZoom>
+                    <SemanticZoom.ZoomedOutView>
+                        <GridView>
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsWrapGrid ItemWidth="75" ItemHeight="75" MaximumRowsOrColumns="2"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                        </GridView>
+                    </SemanticZoom.ZoomedOutView>
+                    <SemanticZoom.ZoomedInView>
+                        <ListView>
+
+                        </ListView>
+                    </SemanticZoom.ZoomedInView>
+                </SemanticZoom>
             </PivotItem>
             <PivotItem>
                 <PivotItem.Header>
