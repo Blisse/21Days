@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 using HappyBetterWP81.Pages;
+using HappyBetterWP81.ViewModels;
 
 namespace HappyBetterWP81
 {
@@ -27,6 +28,7 @@ namespace HappyBetterWP81
     public sealed partial class App : Application
     {
         private TransitionCollection transitions;
+        public static ViewModelLocator Locator;
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -52,6 +54,8 @@ namespace HappyBetterWP81
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
+
+            Locator = (ViewModelLocator)Current.Resources["Locator"];
 
             Frame rootFrame = Window.Current.Content as Frame;
 

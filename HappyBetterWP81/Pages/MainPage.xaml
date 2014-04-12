@@ -6,7 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Background="{StaticResource ApplicationBackgroundColor}"
+    DataContext="{Binding MainPage, Source={StaticResource Locator}}"
     mc:Ignorable="d">
+    
 <!---->
 <!--    <Page.BottomAppBar>-->
 <!--        <CommandBar>-->
@@ -21,6 +23,7 @@
 <!--        </CommandBar>-->
 <!--    </Page.BottomAppBar>-->
 <!--    -->
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -52,20 +55,34 @@
                         <Run Text="DATES"></Run>
                     </TextBlock>
                 </PivotItem.Header>
-                <SemanticZoom>
+                <SemanticZoom CanChangeViews="True" IsZoomedInViewActive="False">
                     <SemanticZoom.ZoomedOutView>
-                        <GridView>
+                        <GridView ItemsSource="{Binding DatesList}">
                             <GridView.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <ItemsWrapGrid ItemWidth="75" ItemHeight="75" MaximumRowsOrColumns="2"/>
                                 </ItemsPanelTemplate>
                             </GridView.ItemsPanel>
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}"></TextBlock>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
                         </GridView>
                     </SemanticZoom.ZoomedOutView>
                     <SemanticZoom.ZoomedInView>
-                        <ListView>
-
-                        </ListView>
+                        <GridView ItemsSource="{Binding DatesList}">
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsWrapGrid ItemWidth="75" ItemHeight="75" MaximumRowsOrColumns="2"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}"></TextBlock>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
                     </SemanticZoom.ZoomedInView>
                 </SemanticZoom>
             </PivotItem>
