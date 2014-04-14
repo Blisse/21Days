@@ -6,9 +6,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Windows.Storage;
 
-namespace HappyBetterWP81.Common
+namespace HappyBetterWP81.Managers
 {
-    public class StorageUtility
+    public class StorageManager
     {
         private readonly ApplicationDataContainer _localSettings = ApplicationData.Current.LocalSettings;
         private readonly SemaphoreSlim _semaphoreSlim = new SemaphoreSlim(1);
@@ -18,7 +18,7 @@ namespace HappyBetterWP81.Common
             get { return _localSettings; }
         }
 
-        public void AddOrUpdateKey<T>(string key, T data)
+        public void AddOrUpdateValue<T>(string key, T data)
         {
             _semaphoreSlim.Wait();
 
@@ -56,29 +56,26 @@ namespace HappyBetterWP81.Common
             }
         }
 
-        public bool TryGetData<T>(string key, out T value)
+        public T GetValueOrDefault<T>(string key, T other)
         {
             _semaphoreSlim.Wait();
-            object data;
-            bool gotData;
 
             try
             {
-                gotData = LocalSettings.Values.TryGetValue(key, out data);
+                object data;
+                bool gotData = LocalSettings.Values.TryGetValue(key, out data);
+
+                if (gotData)
+                {
+                    other = (T)data;
+                }
             }
             finally
             {
                 _semaphoreSlim.Release();
             }
 
-            if (gotData)
-            {
-                value = (T) data;
-                return true;
-            }
-
-            value = default(T);
-            return false;
+            return other;
         }
     }
 }

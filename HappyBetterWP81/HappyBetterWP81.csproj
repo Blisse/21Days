@@ -80,14 +80,16 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <Folder Include="Managers\" />
+    <Folder Include="Common\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Common\StorageUtility.cs" />
+    <Compile Include="Managers\StorageManager.cs" />
     <Compile Include="Models\DailyEntry.cs" />
+    <Compile Include="Managers\DataManager.cs" />
+    <Compile Include="Models\StorageKeys.cs" />
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
