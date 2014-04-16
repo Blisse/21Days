@@ -8,22 +8,29 @@
     Background="{StaticResource ApplicationBackgroundColor}"
     DataContext="{Binding MainPage, Source={StaticResource Locator}}"
     mc:Ignorable="d">
-    
-<!---->
-<!--    <Page.BottomAppBar>-->
-<!--        <CommandBar>-->
-<!--            <CommandBar.PrimaryCommands>-->
-<!--                <AppBarButton Label="Settings">-->
-<!--                    <PathIcon HorizontalAlignment="Center" VerticalAlignment="Center"></PathIcon>-->
-<!--                </AppBarButton>-->
-<!--            </CommandBar.PrimaryCommands>-->
-<!--            <CommandBar.SecondaryCommands>-->
-<!--                <AppBarButton Label="Notifications"></AppBarButton>-->
-<!--            </CommandBar.SecondaryCommands>-->
-<!--        </CommandBar>-->
-<!--    </Page.BottomAppBar>-->
-<!--    -->
-    
+
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.Resources>
+                <Style TargetType="AppBarButton">
+                    <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                </Style>
+            </CommandBar.Resources>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Label="Add Today" Icon="Add" Click="AddTodayAppBarButton_OnClick">
+                </AppBarButton>
+                <AppBarButton Label="Add Date" Icon="Calendar"
+                      Click="AddDateAppBarButton_OnClick">
+                    <AppBarButton.Flyout>
+                        <DatePickerFlyout DatePicked="AddDatePickerFlyout_OnDatePicked">
+                        </DatePickerFlyout>
+                    </AppBarButton.Flyout>
+                </AppBarButton>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -34,84 +41,50 @@
                 <Style TargetType="TextBlock">
                     <Setter Property="FontFamily" Value="{StaticResource OpenSansBold}"></Setter>
                     <Setter Property="FontWeight" Value="Bold"></Setter>
-                    <Setter Property="FontSize" Value="72"></Setter>
+                    <Setter Property="FontSize" Value="90"></Setter>
                     <Setter Property="Margin" Value="15,-10,0,-5"></Setter>
                 </Style>
             </TextBlock.Style>
             <Run Text="21"></Run>
             <Run Text="DAY+" Foreground="{StaticResource ForegroundBlue}"></Run>
         </TextBlock>
-        <Pivot Grid.Row="1">
-            <Pivot.Resources>
-                <Style TargetType="TextBlock" x:Key="PivotItemHeaderStyle">
-                    <Setter Property="FontFamily" Value="{StaticResource OpenSansBold}"></Setter>
-                    <Setter Property="FontWeight" Value="Bold"></Setter>
-                    <Setter Property="FontSize" Value="32"></Setter>
-                </Style>
-            </Pivot.Resources>
-            <PivotItem>
-                <PivotItem.Header>
-                    <TextBlock Style="{StaticResource PivotItemHeaderStyle}">
-                        <Run Text="DATES"></Run>
+        <Pivot Grid.Row="1" SelectionChanged="MainPagePivot_OnSelectionChanged">
+            <Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="FontFamily" Value="{StaticResource OpenSansBold}"></Setter>
+                                <Setter Property="FontWeight" Value="Bold"></Setter>
+                                <Setter Property="FontSize" Value="40"></Setter>
+                            </Style>
+                        </TextBlock.Style>
                     </TextBlock>
-                </PivotItem.Header>
+                </DataTemplate>
+            </Pivot.HeaderTemplate>
+            <PivotItem Header="DATES">
                 <SemanticZoom CanChangeViews="True" IsZoomedInViewActive="False">
                     <SemanticZoom.ZoomedOutView>
                         <GridView ItemsSource="{Binding DatesList}">
-                            <GridView.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <ItemsWrapGrid ItemWidth="75" ItemHeight="75" MaximumRowsOrColumns="2"/>
-                                </ItemsPanelTemplate>
-                            </GridView.ItemsPanel>
-                            <GridView.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding}"></TextBlock>
-                                </DataTemplate>
-                            </GridView.ItemTemplate>
                         </GridView>
                     </SemanticZoom.ZoomedOutView>
                     <SemanticZoom.ZoomedInView>
                         <GridView ItemsSource="{Binding DatesList}">
-                            <GridView.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <ItemsWrapGrid ItemWidth="75" ItemHeight="75" MaximumRowsOrColumns="2"/>
-                                </ItemsPanelTemplate>
-                            </GridView.ItemsPanel>
-                            <GridView.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding}"></TextBlock>
-                                </DataTemplate>
-                            </GridView.ItemTemplate>
                         </GridView>
                     </SemanticZoom.ZoomedInView>
                 </SemanticZoom>
             </PivotItem>
-            <PivotItem>
-                <PivotItem.Header>
-                    <TextBlock Style="{StaticResource PivotItemHeaderStyle}">
-                        <Run Text="STATUS"></Run>
-                    </TextBlock>
-                </PivotItem.Header>
+            <PivotItem Header="STATUS">
                 <Grid>
 
                 </Grid>
             </PivotItem>
-            <PivotItem>
-                <PivotItem.Header>
-                    <TextBlock Style="{StaticResource PivotItemHeaderStyle}">
-                        <Run Text="SETTINGS"></Run>
-                    </TextBlock>
-                </PivotItem.Header>
+            <PivotItem Header="SETTINGS">
                 <Grid>
 
                 </Grid>
             </PivotItem>
-            <PivotItem>
-                <PivotItem.Header>
-                    <TextBlock Style="{StaticResource PivotItemHeaderStyle}">
-                        <Run Text="ABOUT"></Run>
-                    </TextBlock>
-                </PivotItem.Header>
+            <PivotItem Header="ABOUT">
                 <Grid>
 
                 </Grid>
