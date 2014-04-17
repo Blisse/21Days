@@ -18,39 +18,41 @@ namespace HappyBetterWP81.Pages
 {
     public sealed partial class MainPage : Page
     {
-        private readonly CommandBar _addTodayAppBar = new CommandBar();
-        private readonly CommandBar _addDateOnlyAppBar = new CommandBar();
-
         public MainPage()
         {
             this.InitializeComponent();
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
-
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-
+            App.Locator.MainPage.GetData();
         }
 
         private void MainPagePivot_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var pivot = sender as Pivot;
-            if (pivot != null)
-            {
 
-            }
         }
 
         private void AddTodayAppBarButton_OnClick(object sender, RoutedEventArgs e)
         {
-
+            App.Locator.MainPage.AddToDatesList(DateTime.Now.Date);
         }
 
         private void AddDatePickerFlyout_OnDatePicked(DatePickerFlyout sender, DatePickedEventArgs args)
         {
+            App.Locator.MainPage.AddToDatesList(sender.Date.DateTime);
+        }
 
+        private void DateListView_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DatesSemanticZoom.IsZoomedInViewActive = !DatesSemanticZoom.IsZoomedInViewActive;
+        }
+
+        private void MonthGridView_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DatesSemanticZoom.IsZoomedInViewActive = !DatesSemanticZoom.IsZoomedInViewActive;
         }
     }
 }

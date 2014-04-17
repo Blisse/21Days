@@ -24,108 +24,92 @@ namespace HappyBetterWP81.ViewModels.Pages
             IsLoading = false;
         }
 
-        public Boolean ClearData()
+        public void ClearData()
         {
             IsLoading = true;
 
-            if (!DataManager.Instance.ClearDailyEntriesData())
+            if (DataManager.Instance.ClearDailyEntriesData())
             {
-                IsLoading = false;
-                return false;
-            }
+                Dictionary = DataManager.Instance.GetDailyEntriesData();
+                UpdateDatesList(Dictionary);
 
-            Dictionary = DataManager.Instance.GetDailyEntriesData();
-            UpdateDatesList(Dictionary);
-
-            if (!DataManager.Instance.SaveDailyEntriesData(Dictionary))
-            {
-                if (ErrorOccurred != null)
+                if (!DataManager.Instance.SaveDailyEntriesData(Dictionary))
                 {
-                    ErrorOccurred(this, null);
+                    if (ErrorOccurred != null)
+                    {
+                        ErrorOccurred(this, null);
+                    }
                 }
-
-                IsLoading = false;
-                return false;
             }
 
             IsLoading = false;
-            return true;
         }
 
-        public Boolean AddToDatesList(DateTime enterDateTime)
+        public void AddToDatesList(DateTime enterDateTime)
         {
             IsLoading = true;
             Dictionary = DataManager.Instance.GetDailyEntriesData();
 
-            if (Dictionary.ContainsKey(enterDateTime))
+            if (!Dictionary.ContainsKey(enterDateTime))
+            {
+                var dailyEntry = new DailyEntry(enterDateTime);
+                Dictionary.Add(enterDateTime, dailyEntry);
+                UpdateDatesList(Dictionary);
+
+                if (!DataManager.Instance.SaveDailyEntriesData(Dictionary))
+                {
+                    if (ErrorOccurred != null)
+                    {
+                        ErrorOccurred(this, null);
+                    }
+                }
+
+            }
+            else
             {
                 if (AddAlreadyAddedDate != null)
                 {
                     AddAlreadyAddedDate(this, enterDateTime);
                 }
-
-                IsLoading = false;
-                return false;
-            }
-
-            var dailyEntry = new DailyEntry(enterDateTime);
-            Dictionary.Add(enterDateTime, dailyEntry);
-            UpdateDatesList(Dictionary);
-
-            if (!DataManager.Instance.SaveDailyEntriesData(Dictionary))
-            {
-                if (ErrorOccurred != null)
-                {
-                    ErrorOccurred(this, null);
-                }
-
-                IsLoading = false;
-                return false;
             }
 
             IsLoading = false;
-            return true;
         }
 
-        public Boolean DeleteFromDatesList(DateTime deleteDateTime)
+        public void DeleteFromDatesList(DateTime deleteDateTime)
         {
             IsLoading = true;
             Dictionary = DataManager.Instance.GetDailyEntriesData();
 
-            if (!Dictionary.ContainsKey(deleteDateTime))
+            if (Dictionary.ContainsKey(deleteDateTime))
+            {
+                Dictionary.Remove(deleteDateTime);
+                UpdateDatesList(Dictionary);
+
+                if (!DataManager.Instance.SaveDailyEntriesData(Dictionary))
+                {
+                    if (ErrorOccurred != null)
+                    {
+                        ErrorOccurred(this, null);
+                    }
+                }
+            }
+            else
             {
                 if (DeleteNotExistingDate != null)
                 {
                     DeleteNotExistingDate(this, deleteDateTime);
                 }
-
-                IsLoading = false;
-                return false;
-            }
-
-            Dictionary.Remove(deleteDateTime);
-            UpdateDatesList(Dictionary);
-
-            if (!DataManager.Instance.SaveDailyEntriesData(Dictionary))
-            {
-                if (ErrorOccurred != null)
-                {
-                    ErrorOccurred(this, null);
-                }
-
-                IsLoading = false;
-                return false;
             }
 
             IsLoading = false;
-            return true;
         }
 
         #endregion
 
         #region Private Methods
 
-        private Boolean UpdateDatesList(Dictionary<DateTime, DailyEntry> dailyEntries)
+        private void UpdateDatesList(Dictionary<DateTime, DailyEntry> dailyEntries)
         {
             if (dailyEntries != null)
             {
@@ -136,10 +120,7 @@ namespace HappyBetterWP81.ViewModels.Pages
                 {
                     DatesListChanged(this, null);
                 }
-                return true;
             }
-
-            return false;
         }
 
         #endregion

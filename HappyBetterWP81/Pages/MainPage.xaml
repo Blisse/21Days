@@ -20,8 +20,7 @@
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="Add Today" Icon="Add" Click="AddTodayAppBarButton_OnClick">
                 </AppBarButton>
-                <AppBarButton Label="Add Date" Icon="Calendar"
-                      Click="AddDateAppBarButton_OnClick">
+                <AppBarButton Label="Add Date" Icon="Calendar">
                     <AppBarButton.Flyout>
                         <DatePickerFlyout DatePicked="AddDatePickerFlyout_OnDatePicked">
                         </DatePickerFlyout>
@@ -42,11 +41,11 @@
                     <Setter Property="FontFamily" Value="{StaticResource OpenSansBold}"></Setter>
                     <Setter Property="FontWeight" Value="Bold"></Setter>
                     <Setter Property="FontSize" Value="90"></Setter>
-                    <Setter Property="Margin" Value="15,-10,0,-5"></Setter>
+                    <Setter Property="Margin" Value="15,-15,0,-5"></Setter>
                 </Style>
             </TextBlock.Style>
-            <Run Text="21"></Run>
-            <Run Text="DAY+" Foreground="{StaticResource ForegroundBlue}"></Run>
+            <Run Text="21"/><!--
+            --><Run Text="DAY+" Foreground="{StaticResource ForegroundBlue}"/>
         </TextBlock>
         <Pivot Grid.Row="1" SelectionChanged="MainPagePivot_OnSelectionChanged">
             <Pivot.HeaderTemplate>
@@ -56,21 +55,35 @@
                             <Style TargetType="TextBlock">
                                 <Setter Property="FontFamily" Value="{StaticResource OpenSansBold}"></Setter>
                                 <Setter Property="FontWeight" Value="Bold"></Setter>
-                                <Setter Property="FontSize" Value="40"></Setter>
+                                <Setter Property="FontSize" Value="32"></Setter>
                             </Style>
                         </TextBlock.Style>
                     </TextBlock>
                 </DataTemplate>
             </Pivot.HeaderTemplate>
             <PivotItem Header="DATES">
-                <SemanticZoom CanChangeViews="True" IsZoomedInViewActive="False">
+                <SemanticZoom x:Name="DatesSemanticZoom" CanChangeViews="True" IsZoomedInViewActive="False" IsZoomOutButtonEnabled="True">
                     <SemanticZoom.ZoomedOutView>
                         <GridView ItemsSource="{Binding DatesList}">
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Background="{StaticResource BackgroundWhite}">
+                                        <TextBlock FontSize="24" VerticalAlignment="Center" Margin="10,5,10,5">
+                                            <Run Text="{Binding}"/>
+                                        </TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
                         </GridView>
                     </SemanticZoom.ZoomedOutView>
                     <SemanticZoom.ZoomedInView>
-                        <GridView ItemsSource="{Binding DatesList}">
-                        </GridView>
+                        <ListView ItemsSource="{Binding DatesList}" SelectionChanged="DateListView_OnSelectionChanged">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}"/>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
                     </SemanticZoom.ZoomedInView>
                 </SemanticZoom>
             </PivotItem>

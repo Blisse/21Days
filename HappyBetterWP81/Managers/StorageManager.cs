@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.Storage;
+using HappyBetterWP81.Common;
 
 namespace HappyBetterWP81.Managers
 {
@@ -26,11 +27,11 @@ namespace HappyBetterWP81.Managers
             {
                 if (LocalSettings.Values.ContainsKey(key))
                 {
-                    LocalSettings.Values[key] = data;
+                    LocalSettings.Values[key] = JsonUtility.SerializeObject(data);
                 }
                 else
                 {
-                    LocalSettings.Values.Add(key, data);
+                    LocalSettings.Values.Add(key, JsonUtility.SerializeObject(data));
                 }
             }
             finally
@@ -67,7 +68,7 @@ namespace HappyBetterWP81.Managers
 
                 if (gotData)
                 {
-                    other = (T)data;
+                    other = JsonUtility.DeserializeObject<T>((string)data);
                 }
             }
             finally
