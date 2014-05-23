@@ -43,14 +43,14 @@ namespace HappyBetterWP81.ViewModels
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
 
-            SimpleIoc.Default.Register<MainPageViewModel>();
+            SimpleIoc.Default.Register<HomePageViewModel>();
         }
 
-        public MainPageViewModel MainPage
+        public HomePageViewModel HomePage
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<MainPageViewModel>();
+                return ServiceLocator.Current.GetInstance<HomePageViewModel>();
             }
         }
         

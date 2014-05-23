@@ -8,10 +8,5 @@ namespace HappyBetterWP81.Models
         {
             get { return "DailyEntriesDataStorageKey"; }
         }
-
-        public static String NotFirstTimeOpened
-        {
-            get { return "NotFirstTimeOpenedStorageKey"; }
-        }
     }
 }
