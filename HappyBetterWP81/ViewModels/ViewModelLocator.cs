@@ -44,6 +44,8 @@ namespace HappyBetterWP81.ViewModels
             ////}
 
             SimpleIoc.Default.Register<HomePageViewModel>();
+            SimpleIoc.Default.Register<SelectDatePageViewModel>();
+            SimpleIoc.Default.Register<DayEntryPageViewModel>();
         }
 
         public HomePageViewModel HomePage
@@ -51,6 +53,22 @@ namespace HappyBetterWP81.ViewModels
             get
             {
                 return ServiceLocator.Current.GetInstance<HomePageViewModel>();
+            }
+        }
+
+        public SelectDatePageViewModel SelectDatePage
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<SelectDatePageViewModel>();
+            }
+        }
+
+        public DayEntryPageViewModel DayEntryPage
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<DayEntryPageViewModel>();                
             }
         }
         
