@@ -23,11 +23,12 @@ namespace HappyBetterWP81.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class DayEntryPage : Page
+    public sealed partial class SelectDatePage : Page
     {
-        private readonly NavigationHelper navigationHelper;
-        
-        public DayEntryPage()
+        private NavigationHelper navigationHelper;
+        private ObservableDictionary defaultViewModel = new ObservableDictionary();
+
+        public SelectDatePage()
         {
             this.InitializeComponent();
 
@@ -45,6 +46,15 @@ namespace HappyBetterWP81.Pages
         }
 
         /// <summary>
+        /// Gets the view model for this <see cref="Page"/>.
+        /// This can be changed to a strongly typed view model.
+        /// </summary>
+        public ObservableDictionary DefaultViewModel
+        {
+            get { return this.defaultViewModel; }
+        }
+
+        /// <summary>
         /// Populates the page with content passed during navigation.  Any saved state is also
         /// provided when recreating a page from a prior session.
         /// </summary>
@@ -57,7 +67,6 @@ namespace HappyBetterWP81.Pages
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            
         }
 
         /// <summary>
@@ -70,7 +79,6 @@ namespace HappyBetterWP81.Pages
         /// serializable state.</param>
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
-
         }
 
         #region NavigationHelper registration

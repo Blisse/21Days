@@ -26,8 +26,7 @@ namespace HappyBetterWP81.Pages
     public sealed partial class HomePage : Page
     {
         private NavigationHelper navigationHelper;
-        private ObservableDictionary defaultViewModel = new ObservableDictionary();
-
+        
         public HomePage()
         {
             this.InitializeComponent();
@@ -43,15 +42,6 @@ namespace HappyBetterWP81.Pages
         public NavigationHelper NavigationHelper
         {
             get { return this.navigationHelper; }
-        }
-
-        /// <summary>
-        /// Gets the view model for this <see cref="Page"/>.
-        /// This can be changed to a strongly typed view model.
-        /// </summary>
-        public ObservableDictionary DefaultViewModel
-        {
-            get { return this.defaultViewModel; }
         }
 
         /// <summary>
@@ -107,5 +97,15 @@ namespace HappyBetterWP81.Pages
         }
 
         #endregion
+
+        private void AddTodayButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof (DayEntryPage), DateTime.UtcNow);
+        }
+
+        private void ChooseDateButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof (SelectDatePage));
+        }
     }
 }

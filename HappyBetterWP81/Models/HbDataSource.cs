@@ -13,62 +13,80 @@ namespace HappyBetterWP81.Models
 
         public bool InsertDayEntry(DayEntry entry)
         {
-            var dayEntries = GetDayEntries();
-            if (!dayEntries.Select(x => x.EntryDay).Contains(entry.EntryDay))
+            lock (this)
             {
-                dayEntries.Add(entry);
+                var dayEntries = GetDayEntries();
+                if (!dayEntries.Select(x => x.EntryDay).Contains(entry.EntryDay))
+                {
+                    dayEntries.Add(entry);
 
-                SaveDayEntries(dayEntries);
-                return true;
+                    SaveDayEntries(dayEntries);
+                    return true;
+                }
+                return false;   
             }
-            return false;
         }
 
         public bool DeleteDayEntry(DateTime day)
         {
-            var dayEntries = GetDayEntries();
-            if (dayEntries.Select(x => x.EntryDay).Contains(day))
+            lock (this)
             {
-                var entry = dayEntries.Single(x => x.EntryDay == day);
-                dayEntries.Remove(entry);
+                var dayEntries = GetDayEntries();
+                if (dayEntries.Select(x => x.EntryDay).Contains(day))
+                {
+                    var entry = dayEntries.Single(x => x.EntryDay == day);
+                    dayEntries.Remove(entry);
 
-                SaveDayEntries(dayEntries);
-                return true;
+                    SaveDayEntries(dayEntries);
+                    return true;
+                }
+                return false;
             }
-            return false;
         }
 
         public bool UpdateDayEntry(DayEntry entry)
         {
-            var dayEntries = GetDayEntries();
-            if (dayEntries.Select(x => x.EntryDay).Contains(entry.EntryDay))
+            lock (this)
             {
-                var day = dayEntries.Single(x => x.EntryDay == entry.EntryDay);
-                dayEntries.Remove(day);
-                dayEntries.Add(entry);
-                
-                SaveDayEntries(dayEntries);
-                return true;
+                var dayEntries = GetDayEntries();
+                if (dayEntries.Select(x => x.EntryDay).Contains(entry.EntryDay))
+                {
+                    var day = dayEntries.Single(x => x.EntryDay == entry.EntryDay);
+                    dayEntries.Remove(day);
+                    dayEntries.Add(entry);
+
+                    SaveDayEntries(dayEntries);
+                    return true;
+                }
+                return false;
             }
-            return false;
         }
 
         public List<DayEntry> GetDayEntries()
         {
-            var entries = _storageManager.GetValueOrDefault(StorageKeys.DailyEntriesDataStorageKey,
-                new List<DayEntry>());
-            return entries;
+            lock (this)
+            {
+                var entries = _storageManager.GetValueOrDefault(StorageKeys.DailyEntriesDataStorageKey,
+                    new List<DayEntry>());
+                return entries;   
+            }
         }
 
         public List<DayEntry> GetDayEntriesSorted()
         {
-            var entries = GetDayEntries().OrderBy(o => o.EntryDay).ToList();
-            return entries;
+            lock (this)
+            {
+                var entries = GetDayEntries().OrderBy(o => o.EntryDay).ToList();
+                return entries;   
+            }
         } 
 
         public void SaveDayEntries(List<DayEntry> dayEntries)
         {
-            _storageManager.AddOrUpdateValue(StorageKeys.DailyEntriesDataStorageKey, dayEntries);
+            lock (this)
+            {
+                _storageManager.AddOrUpdateValue(StorageKeys.DailyEntriesDataStorageKey, dayEntries);   
+            }
         }
     }
 }
