@@ -5,6 +5,7 @@
     xmlns:local="using:HappyBetterWP81.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     DataContext="{Binding SelectDatePage, Source={StaticResource Locator}}">
@@ -18,10 +19,11 @@
         </Grid.ChildrenTransitions>
 
         <Grid>
-            <FlyoutPresenter>
-                <DatePickerFlyout MaxYear="{Binding MaximumYearOffset}"
-                                  MinYear="{Binding MinimumYearOffset}">
-
+            <FlyoutPresenter Loaded="FlyoutPresenter_Loaded">
+                <DatePickerFlyout x:Name="DatePickerFlyout"
+                                  MaxYear="{Binding MaximumYearOffset}"
+                                  MinYear="{Binding MinimumYearOffset}"
+                                  DatePicked="DatePickerFlyout_OnDatePicked">
                 </DatePickerFlyout>
             </FlyoutPresenter>
         </Grid>

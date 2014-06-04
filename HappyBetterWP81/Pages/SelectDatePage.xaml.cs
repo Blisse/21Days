@@ -1,4 +1,6 @@
-﻿using HappyBetterWP81.Common;
+﻿using Windows.Phone.UI.Input;
+using Windows.UI.Xaml;
+using HappyBetterWP81.Common;
 using System;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -77,13 +79,37 @@ namespace HappyBetterWP81.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.navigationHelper.OnNavigatedTo(e);
+
+            HardwareButtons.BackPressed += HardwareButtonsOnBackPressed;
+        }
+
+        private void HardwareButtonsOnBackPressed(object sender, BackPressedEventArgs backPressedEventArgs)
+        {
+            DatePickerFlyout.Hide();
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             this.navigationHelper.OnNavigatedFrom(e);
+
+            HardwareButtons.BackPressed -= HardwareButtonsOnBackPressed;
         }
 
         #endregion
+
+        private async void FlyoutPresenter_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (sender is FlyoutPresenter)
+            {
+                await DatePickerFlyout.ShowAtAsync(sender as FlyoutPresenter);
+            }
+        }
+
+        private void DatePickerFlyout_OnDatePicked(DatePickerFlyout sender, DatePickedEventArgs args)
+        {
+            var dateTimeOffset = args.NewDate;
+            var dateTime = dateTimeOffset.DateTime;
+            Frame.Navigate(typeof(DayEntryPage), dateTime);
+        }
     }
 }
